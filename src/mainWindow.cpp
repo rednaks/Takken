@@ -69,6 +69,7 @@ MainWindow::MainWindow(){
 
   //Assicier la barre de menu à la fenetre
   setMenuBar(menuBar);
+  this->resize(800, 600);
 }
 
 MainWindow::~MainWindow(){ 

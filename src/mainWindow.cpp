@@ -31,8 +31,8 @@ MainWindow::MainWindow(){
   fileMenu = menuBar->addMenu(tr("&File"));
   editMenu = menuBar->addMenu(tr("&Edit"));
   filtresMenu = menuBar->addMenu(tr("&Filtres"));
-  caracterisationMenu = menuBar->addMenu(tr("&Caractérisation"));
-  morphMathMenu = menuBar->addMenu(tr("&Morph. Mathématique"));
+  caracterisationMenu = menuBar->addMenu(QString::fromUtf8("&Caractérisation"));
+  morphMathMenu = menuBar->addMenu(QString::fromUtf8("&Morph. Mathématique"));
   segMenu = menuBar->addMenu(tr("&Segmentation"));
   helpMenu = menuBar->addMenu(tr("&Help"));
 
@@ -67,8 +67,10 @@ MainWindow::MainWindow(){
   //Ajout des action du menu Help
   aboutHelpAction = helpMenu->addAction("About");
 
-  //Assicier la barre de menu à la fenetre
+  //Associer la barre de menu à la fenetre
   setMenuBar(menuBar);
+
+  //
   this->resize(800, 600);
 }
 

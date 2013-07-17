@@ -70,6 +70,18 @@ MainWindow::MainWindow(){
   //Associer la barre de menu à la fenetre
   setMenuBar(menuBar);
 
+  QImage img;
+  img.load("lena.jpg");
+  imageDispLabel = new QLabel;
+  imageDispLabel->setAlignment(Qt::AlignCenter);
+  imageDispLabel->setPixmap(QPixmap::fromImage(img));
+  imageDispLabel->setMinimumWidth(600);
+
+  splitter = new QSplitter;
+  splitter->setOrientation(Qt::Horizontal);
+  splitter->addWidget(imageDispLabel);
+
+  setCentralWidget(splitter);
   //
   this->resize(800, 600);
 }

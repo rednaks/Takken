@@ -76,6 +76,10 @@ private:
     //Les actions pour le menu "Help"
     QAction *aboutHelpAction;
 
+    QSplitter *splitter;
+
+    QLabel *imageDispLabel; // Image container
+
 };
 
 #endif

@@ -23,6 +23,9 @@
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 #include <QtGui>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 
 class MainWindow : public QMainWindow {
   Q_OBJECT
@@ -80,6 +83,9 @@ private:
 
     QLabel *imageDispLabel; // Image container
 
+
+private:
+    QImage const Mat2QImage(const cv::Mat&);
 };
 
 #endif

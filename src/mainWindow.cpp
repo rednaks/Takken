@@ -70,8 +70,8 @@ MainWindow::MainWindow(){
   //Associer la barre de menu à la fenetre
   setMenuBar(menuBar);
 
-  QImage img;
-  img.load("lena.jpg");
+  cv::Mat src = cv::imread("lena.jpg");
+  QImage img(Mat2QImage(src));
   imageDispLabel = new QLabel;
   imageDispLabel->setAlignment(Qt::AlignCenter);
   imageDispLabel->setPixmap(QPixmap::fromImage(img));
@@ -89,4 +89,9 @@ MainWindow::MainWindow(){
 MainWindow::~MainWindow(){ 
   delete menuBar;
 
+}
+
+QImage const MainWindow::Mat2QImage(const cv::Mat& src){
+  return (QImage(src.data, src.cols, src.rows, src.step, QImage::Format_RGB888)).rgbSwapped();
+                                
 }

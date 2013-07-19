@@ -22,6 +22,9 @@
 
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
+
+#define EROSION_WIDGET 9
+
 #include <QtGui>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -89,17 +92,20 @@ private:
 
 public:
     Morphologie *m;
+    morphologie::ErosionWidget *ew;
 
 
 
 private:
     QImage const Mat2QImage(const cv::Mat&);
+    void loadWidget(int);
     
 public:
     void updateImage();
 
 public slots:
   void openImage();
+  void erosionClicked();
 };
 
 #endif

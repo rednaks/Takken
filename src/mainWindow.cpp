@@ -62,6 +62,9 @@ MainWindow::MainWindow(){
   ouvertureMorphAction = morphMathMenu->addAction("Ouverture");
   fermetureMorphAction = morphMathMenu->addAction("Fermeture");
 
+  //Les connexions
+  connect(erosionMorphAction, SIGNAL(triggered()), this, SLOT(erosionClicked()));
+
   //Ajout des action du menu Segmentation
   splitAndMergeSegAction = segMenu->addAction("Split And Merge");
   growinRegionSegAction = segMenu->addAction("Growing Region");
@@ -112,3 +115,35 @@ void MainWindow::openImage(){
   QImage img(Mat2QImage(src));
   imageDispLabel->setPixmap(QPixmap::fromImage(img));
 }
+
+void MainWindow::loadWidget(int widget){
+
+  switch(widget){
+  
+    case EROSION_WIDGET:
+      if(!ew)
+        ew = new morphologie::ErosionWidget(this);
+      splitter->insertWidget(1, ew);
+      break;
+
+  }
+
+}
+
+void MainWindow::erosionClicked(){
+  if(src.empty()){
+    int res = QMessageBox::warning(this, "mVision", "Vous devez ouvrir une image tout d'abord, \nvoulez vous le faire maintemant ?",
+        QMessageBox::Yes,  QMessageBox::No);
+   if(res == QMessageBox::Yes){
+     openImage();
+   }
+   else
+     return;
+  }
+  if(m->src.empty())
+    m->src = this->src;
+
+  loadWidget(EROSION_WIDGET);
+
+}
+

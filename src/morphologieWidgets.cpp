@@ -27,6 +27,7 @@
 
 using namespace morphologie;
 
+/************************ Erosion Widget BEGIN **************************/
 ErosionWidget::ErosionWidget(MainWindow *parent){
 
   this->parent = parent;
@@ -63,3 +64,14 @@ void ErosionWidget::updateVal(int v){
   this->parent->updateImage();
 
 }
+
+/*********************** Erosion Widget END ******************************/
+
+/*********************** Dilataion Widget BEGIN *************************/
+/*********************** Dilataion Widget END   *************************/
+
+/*********************** Ouverture Widget BEGIN *************************/
+/*********************** Ouverture Widget END *************************/
+
+/*********************** Fermeture Widget BEGIN *************************/
+/*********************** Fermeture Widget END *************************/

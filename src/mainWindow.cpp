@@ -43,6 +43,9 @@ MainWindow::MainWindow(){
   saveAsFileAction = fileMenu->addAction("Save As");
   quitFileAction = fileMenu->addAction("Quit");
 
+  //Les connexion
+  connect(openFileAction, SIGNAL(triggered()), this, SLOT(openImage()));
+
   //Ajout des action du menu Filtres
   gaussienFiltreAction = filtresMenu->addAction("Gaussien");
   medianFiltreAction = filtresMenu->addAction("Median");
@@ -70,11 +73,8 @@ MainWindow::MainWindow(){
   //Associer la barre de menu à la fenetre
   setMenuBar(menuBar);
 
-  cv::Mat src = cv::imread("image.jpg");
-  QImage img(Mat2QImage(src));
   imageDispLabel = new QLabel;
   imageDispLabel->setAlignment(Qt::AlignCenter);
-  imageDispLabel->setPixmap(QPixmap::fromImage(img));
   imageDispLabel->setMinimumWidth(600);
 
   m = new Morphologie;
@@ -101,5 +101,14 @@ QImage const MainWindow::Mat2QImage(const cv::Mat& src){
 void MainWindow::updateImage(){
 
   QImage img(Mat2QImage(m->dst));
+  imageDispLabel->setPixmap(QPixmap::fromImage(img));
+}
+
+void MainWindow::openImage(){
+  QString fname = QFileDialog::getOpenFileName(this, "Open File", "", tr("Images (*.jpg *.png)"));
+  if(fname.length() == 0)
+    return;
+  src = cv::imread(fname.toStdString());
+  QImage img(Mat2QImage(src));
   imageDispLabel->setPixmap(QPixmap::fromImage(img));
 }

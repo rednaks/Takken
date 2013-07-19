@@ -83,6 +83,7 @@ private:
 
     QSplitter *splitter;
 
+    cv::Mat src;
     QLabel *imageDispLabel; // Image container
 
 
@@ -97,6 +98,8 @@ private:
 public:
     void updateImage();
 
+public slots:
+  void openImage();
 };
 
 #endif

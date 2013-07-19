@@ -26,6 +26,8 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
+#include "morphologieWidgets.h"
+#include "Morphologie.h"
 
 class MainWindow : public QMainWindow {
   Q_OBJECT
@@ -84,8 +86,17 @@ private:
     QLabel *imageDispLabel; // Image container
 
 
+public:
+    Morphologie *m;
+
+
+
 private:
     QImage const Mat2QImage(const cv::Mat&);
+    
+public:
+    void updateImage();
+
 };
 
 #endif

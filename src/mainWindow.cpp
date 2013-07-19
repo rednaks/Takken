@@ -70,12 +70,14 @@ MainWindow::MainWindow(){
   //Associer la barre de menu à la fenetre
   setMenuBar(menuBar);
 
-  cv::Mat src = cv::imread("lena.jpg");
+  cv::Mat src = cv::imread("image.jpg");
   QImage img(Mat2QImage(src));
   imageDispLabel = new QLabel;
   imageDispLabel->setAlignment(Qt::AlignCenter);
   imageDispLabel->setPixmap(QPixmap::fromImage(img));
   imageDispLabel->setMinimumWidth(600);
+
+  m = new Morphologie;
 
   splitter = new QSplitter;
   splitter->setOrientation(Qt::Horizontal);
@@ -94,4 +96,10 @@ MainWindow::~MainWindow(){
 QImage const MainWindow::Mat2QImage(const cv::Mat& src){
   return (QImage(src.data, src.cols, src.rows, src.step, QImage::Format_RGB888)).rgbSwapped();
                                 
+}
+
+void MainWindow::updateImage(){
+
+  QImage img(Mat2QImage(m->dst));
+  imageDispLabel->setPixmap(QPixmap::fromImage(img));
 }

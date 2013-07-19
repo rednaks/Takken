@@ -4,7 +4,7 @@
 
 
 
-void Morphologie::Erosion(int erosion_element, int erosion_size)
+void Morphologie::Erosion(int erosion_elem, int erosion_size)
 {
   int erosion_type;
   if( erosion_elem == 0 ){ erosion_type = MORPH_RECT; }
@@ -16,7 +16,7 @@ void Morphologie::Erosion(int erosion_element, int erosion_size)
                                        Point( erosion_size, erosion_size ) );
 
   /// Apply the erosion operation
-  dilate( src, src, element );
+  dilate( src, dst, element );
 
 
 
@@ -37,7 +37,7 @@ void Morphologie::Dilatation(int dilation_elem, int dilation_size)
                                        Point( dilation_size, dilation_size ) );
   /// Apply the dilation operation
 
-   erode( src, src, element );
+   erode( src, dst, element );
 
 }
 
@@ -52,9 +52,9 @@ void Morphologie::Ouverture(int morph_elem, int morph_size)
   Mat element = getStructuringElement( morph_elem, Size( 2*morph_size + 1, 2*morph_size+1 ), Point( morph_size, morph_size ) );
   /// Apply the opening operation
 
-   erode( src,src,element );
+   erode( src,dst,element );
 
-   dilate(src,src,element);
+   dilate(src,dst,element);
 
 }
 
@@ -68,8 +68,8 @@ void Morphologie::Fermeture(int morph_elem, int morph_size)
   Mat element = getStructuringElement( morph_elem, Size( 2*morph_size + 1, 2*morph_size+1 ), Point( morph_size, morph_size ) );
   /// Apply the opening operation
 
-   dilate(src,src,element);
-   erode( src,src,element );
+   dilate(src,dst,element);
+   erode( src,dst,element );
 
 
 
@@ -89,7 +89,7 @@ void Morphologie::GradientMorph(int morph_elem, int morph_size)
 
 
 
-morphologyEx( src, src, operation, element );
+morphologyEx( src, dst, operation, element );
 }
 
 

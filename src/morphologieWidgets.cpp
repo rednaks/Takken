@@ -52,6 +52,7 @@ ErosionWidget::ErosionWidget(MainWindow *parent){
 
 
   this->setLayout(formLayout);
+  this->hide();
 
 }
 
@@ -92,9 +93,11 @@ DilatationWidget::DilatationWidget(MainWindow *parent){
 
 
   this->setLayout(formLayout);
+  this->hide();
 
 }
 
+DilatationWidget::~DilatationWidget(){ }
 
 void DilatationWidget::updateVal(int v){
   elemLabel->setText(QString("Element : %1").arg(elemSlider->value()));
@@ -131,9 +134,11 @@ OuvertureWidget::OuvertureWidget(MainWindow *parent){
 
 
   this->setLayout(formLayout);
+  this->hide();
 
 }
 
+OuvertureWidget::~OuvertureWidget(){ }
 
 void OuvertureWidget::updateVal(int v){
   elemLabel->setText(QString("Element : %1").arg(elemSlider->value()));
@@ -170,19 +175,22 @@ FermetureWidget::FermetureWidget(MainWindow *parent){
 
 
   this->setLayout(formLayout);
+  this->hide();
 
 }
 
+FermetureWidget::~FermetureWidget(){ }
 
 void FermetureWidget::updateVal(int v){
   elemLabel->setText(QString("Element : %1").arg(elemSlider->value()));
   sizeLabel->setText(QString("Taille : %1").arg(sizeSlider->value()));
   this->parent->m->Fermeture(elemSlider->value(), sizeSlider->value());
   this->parent->updateImage();
+}
 /*********************** Fermeture Widget END *************************/
 
 
-FermetureWidget::FermetureWidget(MainWindow *parent){
+GradientWidget::GradientWidget(MainWindow *parent){
 
   this->parent = parent;
   elemSlider = new QSlider;
@@ -206,11 +214,13 @@ FermetureWidget::FermetureWidget(MainWindow *parent){
 
 
   this->setLayout(formLayout);
+  this->hide();
 
 }
 
+GradientWidget::~GradientWidget() { }
 
-void FermetureWidget::updateVal(int v){
+void GradientWidget::updateVal(int v){
   elemLabel->setText(QString("Element : %1").arg(elemSlider->value()));
   sizeLabel->setText(QString("Taille : %1").arg(sizeSlider->value()));
   this->parent->m->GradientMorph(elemSlider->value(), sizeSlider->value());

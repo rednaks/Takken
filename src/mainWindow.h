@@ -23,12 +23,17 @@
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 
-#define EROSION_WIDGET 9
+#define EROSION_WIDGET          0x09
+#define DILATATION_WIDGET       0x0A
+#define OUVERTURE_WIDGET        0x0B
+#define FERMETURE_WIDGET        0x0C
+#define GRADIENT_WIDGET         0x0D
 
 #include <QtGui>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
+#include <vector>
 #include "morphologieWidgets.h"
 #include "Morphologie.h"
 
@@ -75,6 +80,7 @@ private:
     QAction *dilatationMorphAction;
     QAction *ouvertureMorphAction;
     QAction *fermetureMorphAction;
+    QAction *gradientMorphAction;
 
     //Les actions pour le menu "Segmentation"
     QAction *splitAndMergeSegAction;
@@ -92,20 +98,33 @@ private:
 
 public:
     Morphologie *m;
-    morphologie::ErosionWidget *ew;
+    morphologie::ErosionWidget *erosionWidget;
+    morphologie::DilatationWidget *dilatationWidget;
+    morphologie::OuvertureWidget *ouvertureWidget;
+    morphologie::FermetureWidget *fermetureWidget;
+    morphologie::GradientWidget *gradientWidget;
 
 
 
 private:
     QImage const Mat2QImage(const cv::Mat&);
     void loadWidget(int);
+    bool checkImageLoaded();
+    void hideAllSideBarWidgets();
+    std::vector<QWidget *> sideBarWidgets;
     
 public:
     void updateImage();
 
 public slots:
-  void openImage();
-  void erosionClicked();
+    void openImage();
+
+    //Slots pour la morphologie
+    void erosionClicked();
+    void dilatationClicked();
+    void ouvertureClicked();
+    void fermetureClicked();
+    void gradientClicked();
 };
 
 #endif

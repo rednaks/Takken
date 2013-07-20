@@ -61,9 +61,14 @@ MainWindow::MainWindow(){
   dilatationMorphAction = morphMathMenu->addAction("Dilatation");
   ouvertureMorphAction = morphMathMenu->addAction("Ouverture");
   fermetureMorphAction = morphMathMenu->addAction("Fermeture");
+  gradientMorphAction = morphMathMenu->addAction("Gradient");
 
   //Les connexions
   connect(erosionMorphAction, SIGNAL(triggered()), this, SLOT(erosionClicked()));
+  connect(dilatationMorphAction, SIGNAL(triggered()), this, SLOT(dilatationClicked()));
+  connect(ouvertureMorphAction, SIGNAL(triggered()), this, SLOT(ouvertureClicked()));
+  connect(fermetureMorphAction, SIGNAL(triggered()), this, SLOT(fermetureClicked()));
+  connect(gradientMorphAction, SIGNAL(triggered()), this, SLOT(gradientClicked()));
 
   //Ajout des action du menu Segmentation
   splitAndMergeSegAction = segMenu->addAction("Split And Merge");
@@ -81,10 +86,22 @@ MainWindow::MainWindow(){
   imageDispLabel->setMinimumWidth(600);
 
   m = new Morphologie;
+  erosionWidget = new morphologie::ErosionWidget(this);
+  sideBarWidgets.push_back(erosionWidget);
+  dilatationWidget = new morphologie::DilatationWidget(this);
+  sideBarWidgets.push_back(dilatationWidget);
+  ouvertureWidget  = new morphologie::OuvertureWidget(this);
+  sideBarWidgets.push_back(ouvertureWidget);
+  fermetureWidget  = new morphologie::FermetureWidget(this);
+  sideBarWidgets.push_back(fermetureWidget);
+  gradientWidget   = new morphologie::GradientWidget(this);
+  sideBarWidgets.push_back(gradientWidget);
 
   splitter = new QSplitter;
   splitter->setOrientation(Qt::Horizontal);
   splitter->addWidget(imageDispLabel);
+  for(std::vector<QWidget*>::iterator iter = sideBarWidgets.begin(); iter != sideBarWidgets.end(); iter++)
+    splitter->addWidget(*iter);
 
   setCentralWidget(splitter);
   //
@@ -118,32 +135,107 @@ void MainWindow::openImage(){
 
 void MainWindow::loadWidget(int widget){
 
+  hideAllSideBarWidgets();
+
   switch(widget){
-  
+
     case EROSION_WIDGET:
-      if(!ew)
-        ew = new morphologie::ErosionWidget(this);
-      splitter->insertWidget(1, ew);
+      erosionWidget->show();
+      break;
+    case DILATATION_WIDGET:
+      dilatationWidget->show();
+      break;
+    case OUVERTURE_WIDGET:
+      ouvertureWidget->show();
+      break;
+    case FERMETURE_WIDGET:
+      fermetureWidget->show();
+      break;
+    case GRADIENT_WIDGET:
+      gradientWidget->show();
       break;
 
   }
 
 }
 
-void MainWindow::erosionClicked(){
+bool MainWindow::checkImageLoaded(){
   if(src.empty()){
     int res = QMessageBox::warning(this, "mVision", "Vous devez ouvrir une image tout d'abord, \nvoulez vous le faire maintemant ?",
         QMessageBox::Yes,  QMessageBox::No);
+
    if(res == QMessageBox::Yes){
      openImage();
+     return true;
    }
    else
-     return;
+     return false;
   }
+
+  return true;
+
+}
+
+void MainWindow::erosionClicked(){
+  if(!checkImageLoaded())
+    return;
+
   if(m->src.empty())
     m->src = this->src;
 
+  if(!erosionWidget)
+    printf("N'est pas encore alloué\n");
+  else
+    printf("Allocated !\n");
   loadWidget(EROSION_WIDGET);
 
 }
 
+void MainWindow::dilatationClicked(){
+  if(!checkImageLoaded())
+    return;
+
+  if(m->src.empty())
+    m->src = this->src;
+
+  loadWidget(DILATATION_WIDGET);
+
+}
+
+void MainWindow::ouvertureClicked(){
+  if(!checkImageLoaded())
+    return;
+
+  if(m->src.empty())
+    m->src = this->src;
+
+  loadWidget(OUVERTURE_WIDGET);
+
+}
+
+void MainWindow::fermetureClicked(){
+  if(!checkImageLoaded())
+    return;
+
+  if(m->src.empty())
+    m->src = this->src;
+
+  loadWidget(FERMETURE_WIDGET);
+
+}
+
+void MainWindow::gradientClicked(){
+  if(!checkImageLoaded())
+    return;
+
+  if(m->src.empty())
+    m->src = this->src;
+
+  loadWidget(GRADIENT_WIDGET);
+
+}
+
+void MainWindow::hideAllSideBarWidgets(){
+  for(std::vector<QWidget *>::iterator iter = sideBarWidgets.begin(); iter != sideBarWidgets.end(); iter++)
+    (*iter)->hide();
+}

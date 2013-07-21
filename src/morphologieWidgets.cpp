@@ -31,13 +31,12 @@ using namespace morphologie;
 ErosionWidget::ErosionWidget(MainWindow *parent){
 
   this->parent = parent;
-  elemSlider = new QSlider;
-  elemSlider->setOrientation(Qt::Horizontal);
-  elemSlider->setMinimum(0);
-  elemSlider->setMaximum(2);
-  elemSlider->setValue(0);
-  elemLabel = new QLabel(QString("Element : %1").arg(elemSlider->value()));
-  connect(elemSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
+  elemComboBox = new QComboBox;
+  elemComboBox->addItem(QString("Rectangle"));
+  elemComboBox->addItem(QString("Croix"));
+  elemComboBox->addItem(QString::fromUtf8("Éllipse"));
+  elemLabel = new QLabel(QString("Element : "));
+  connect(elemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateVal(int)));
 
   sizeSlider = new QSlider;
   sizeSlider->setOrientation(Qt::Horizontal);
@@ -47,7 +46,7 @@ ErosionWidget::ErosionWidget(MainWindow *parent){
   connect(sizeSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
   QFormLayout *formLayout = new QFormLayout;
-  formLayout->addRow(elemSlider, elemLabel);
+  formLayout->addRow(elemLabel, elemComboBox);
   formLayout->addRow(sizeSlider, sizeLabel);
 
 
@@ -59,9 +58,8 @@ ErosionWidget::ErosionWidget(MainWindow *parent){
 ErosionWidget::~ErosionWidget() {}
 
 void ErosionWidget::updateVal(int v){
-  elemLabel->setText(QString("Element : %1").arg(elemSlider->value()));
   sizeLabel->setText(QString("Taille : %1").arg(sizeSlider->value()));
-  this->parent->m->Erosion(elemSlider->value(), sizeSlider->value());
+  this->parent->m->Erosion(elemComboBox->currentIndex(), sizeSlider->value());
   this->parent->updateImage();
 
 }
@@ -72,13 +70,12 @@ void ErosionWidget::updateVal(int v){
 DilatationWidget::DilatationWidget(MainWindow *parent){
 
   this->parent = parent;
-  elemSlider = new QSlider;
-  elemSlider->setOrientation(Qt::Horizontal);
-  elemSlider->setMinimum(0);
-  elemSlider->setMaximum(2);
-  elemSlider->setValue(0);
-  elemLabel = new QLabel(QString("Element : %1").arg(elemSlider->value()));
-  connect(elemSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
+  elemComboBox = new QComboBox;
+  elemComboBox->addItem(QString("Rectangle"));
+  elemComboBox->addItem(QString("Croix"));
+  elemComboBox->addItem(QString::fromUtf8("Éllipse"));
+  elemLabel = new QLabel(QString("Element : "));
+  connect(elemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateVal(int)));
 
   sizeSlider = new QSlider;
   sizeSlider->setOrientation(Qt::Horizontal);
@@ -88,7 +85,7 @@ DilatationWidget::DilatationWidget(MainWindow *parent){
   connect(sizeSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
   QFormLayout *formLayout = new QFormLayout;
-  formLayout->addRow(elemSlider, elemLabel);
+  formLayout->addRow(elemLabel, elemComboBox);
   formLayout->addRow(sizeSlider, sizeLabel);
 
 
@@ -100,9 +97,8 @@ DilatationWidget::DilatationWidget(MainWindow *parent){
 DilatationWidget::~DilatationWidget(){ }
 
 void DilatationWidget::updateVal(int v){
-  elemLabel->setText(QString("Element : %1").arg(elemSlider->value()));
   sizeLabel->setText(QString("Taille : %1").arg(sizeSlider->value()));
-  this->parent->m->Dilatation(elemSlider->value(), sizeSlider->value());
+  this->parent->m->Dilatation(elemComboBox->currentIndex(), sizeSlider->value());
   this->parent->updateImage();
 
 }
@@ -113,13 +109,12 @@ void DilatationWidget::updateVal(int v){
 OuvertureWidget::OuvertureWidget(MainWindow *parent){
 
   this->parent = parent;
-  elemSlider = new QSlider;
-  elemSlider->setOrientation(Qt::Horizontal);
-  elemSlider->setMinimum(0);
-  elemSlider->setMaximum(2);
-  elemSlider->setValue(0);
-  elemLabel = new QLabel(QString("Element : %1").arg(elemSlider->value()));
-  connect(elemSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
+  elemComboBox = new QComboBox;
+  elemComboBox->addItem(QString("Rectangle"));
+  elemComboBox->addItem(QString("Croix"));
+  elemComboBox->addItem(QString::fromUtf8("Éllipse"));
+  elemLabel = new QLabel(QString("Element : "));
+  connect(elemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateVal(int)));
 
   sizeSlider = new QSlider;
   sizeSlider->setOrientation(Qt::Horizontal);
@@ -129,7 +124,7 @@ OuvertureWidget::OuvertureWidget(MainWindow *parent){
   connect(sizeSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
   QFormLayout *formLayout = new QFormLayout;
-  formLayout->addRow(elemSlider, elemLabel);
+  formLayout->addRow(elemLabel, elemComboBox);
   formLayout->addRow(sizeSlider, sizeLabel);
 
 
@@ -141,9 +136,8 @@ OuvertureWidget::OuvertureWidget(MainWindow *parent){
 OuvertureWidget::~OuvertureWidget(){ }
 
 void OuvertureWidget::updateVal(int v){
-  elemLabel->setText(QString("Element : %1").arg(elemSlider->value()));
   sizeLabel->setText(QString("Taille : %1").arg(sizeSlider->value()));
-  this->parent->m->Ouverture(elemSlider->value(), sizeSlider->value());
+  this->parent->m->Ouverture(elemComboBox->currentIndex(), sizeSlider->value());
   this->parent->updateImage();
 
 }
@@ -154,13 +148,12 @@ void OuvertureWidget::updateVal(int v){
 FermetureWidget::FermetureWidget(MainWindow *parent){
 
   this->parent = parent;
-  elemSlider = new QSlider;
-  elemSlider->setOrientation(Qt::Horizontal);
-  elemSlider->setMinimum(0);
-  elemSlider->setMaximum(2);
-  elemSlider->setValue(0);
-  elemLabel = new QLabel(QString("Element : %1").arg(elemSlider->value()));
-  connect(elemSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
+  elemComboBox = new QComboBox;
+  elemComboBox->addItem(QString("Rectangle"));
+  elemComboBox->addItem(QString("Croix"));
+  elemComboBox->addItem(QString::fromUtf8("Éllipse"));
+  elemLabel = new QLabel(QString("Element : "));
+  connect(elemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateVal(int)));
 
   sizeSlider = new QSlider;
   sizeSlider->setOrientation(Qt::Horizontal);
@@ -170,7 +163,7 @@ FermetureWidget::FermetureWidget(MainWindow *parent){
   connect(sizeSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
   QFormLayout *formLayout = new QFormLayout;
-  formLayout->addRow(elemSlider, elemLabel);
+  formLayout->addRow(elemLabel, elemComboBox);
   formLayout->addRow(sizeSlider, sizeLabel);
 
 
@@ -182,9 +175,8 @@ FermetureWidget::FermetureWidget(MainWindow *parent){
 FermetureWidget::~FermetureWidget(){ }
 
 void FermetureWidget::updateVal(int v){
-  elemLabel->setText(QString("Element : %1").arg(elemSlider->value()));
   sizeLabel->setText(QString("Taille : %1").arg(sizeSlider->value()));
-  this->parent->m->Fermeture(elemSlider->value(), sizeSlider->value());
+  this->parent->m->Fermeture(elemComboBox->currentIndex(), sizeSlider->value());
   this->parent->updateImage();
 }
 /*********************** Fermeture Widget END *************************/
@@ -193,13 +185,12 @@ void FermetureWidget::updateVal(int v){
 GradientWidget::GradientWidget(MainWindow *parent){
 
   this->parent = parent;
-  elemSlider = new QSlider;
-  elemSlider->setOrientation(Qt::Horizontal);
-  elemSlider->setMinimum(0);
-  elemSlider->setMaximum(2);
-  elemSlider->setValue(0);
-  elemLabel = new QLabel(QString("Element : %1").arg(elemSlider->value()));
-  connect(elemSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
+  elemComboBox = new QComboBox;
+  elemComboBox->addItem(QString("Rectangle"));
+  elemComboBox->addItem(QString("Croix"));
+  elemComboBox->addItem(QString::fromUtf8("Éllipse"));
+  elemLabel = new QLabel(QString("Element : "));
+  connect(elemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateVal(int)));
 
   sizeSlider = new QSlider;
   sizeSlider->setOrientation(Qt::Horizontal);
@@ -209,7 +200,7 @@ GradientWidget::GradientWidget(MainWindow *parent){
   connect(sizeSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
   QFormLayout *formLayout = new QFormLayout;
-  formLayout->addRow(elemSlider, elemLabel);
+  formLayout->addRow(elemLabel, elemComboBox);
   formLayout->addRow(sizeSlider, sizeLabel);
 
 
@@ -221,9 +212,8 @@ GradientWidget::GradientWidget(MainWindow *parent){
 GradientWidget::~GradientWidget() { }
 
 void GradientWidget::updateVal(int v){
-  elemLabel->setText(QString("Element : %1").arg(elemSlider->value()));
   sizeLabel->setText(QString("Taille : %1").arg(sizeSlider->value()));
-  this->parent->m->GradientMorph(elemSlider->value(), sizeSlider->value());
+  this->parent->m->GradientMorph(elemComboBox->currentIndex(), sizeSlider->value());
   this->parent->updateImage();
 }
 /*********************** GradientWidget END   *************************/

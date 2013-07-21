@@ -38,7 +38,7 @@ namespace morphologie {
       void updateVal(int);
 
     private:
-      QSlider *elemSlider;
+      QComboBox *elemComboBox;
       QLabel *elemLabel;
 
       QSlider *sizeSlider;
@@ -59,7 +59,7 @@ namespace morphologie {
       void updateVal(int);
 
     private:
-      QSlider *elemSlider;
+      QComboBox *elemComboBox;
       QLabel *elemLabel;
 
       QSlider *sizeSlider;
@@ -80,7 +80,7 @@ namespace morphologie {
       void updateVal(int);
 
     private:
-      QSlider *elemSlider;
+      QComboBox *elemComboBox;
       QLabel *elemLabel;
 
       QSlider *sizeSlider;
@@ -101,7 +101,7 @@ namespace morphologie {
       void updateVal(int);
 
     private:
-      QSlider *elemSlider;
+      QComboBox *elemComboBox;
       QLabel *elemLabel;
 
       QSlider *sizeSlider;
@@ -122,7 +122,7 @@ namespace morphologie {
       void updateVal(int);
 
     private:
-      QSlider *elemSlider;
+      QComboBox *elemComboBox;
       QLabel *elemLabel;
 
       QSlider *sizeSlider;

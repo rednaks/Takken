@@ -84,6 +84,7 @@ MainWindow::MainWindow(){
   imageDispLabel = new QLabel;
   imageDispLabel->setAlignment(Qt::AlignCenter);
   imageDispLabel->setMinimumWidth(600);
+  imageDispLabel->setStyleSheet(QString("QLabel { background: #687074}"));
 
   m = new Morphologie;
   erosionWidget = new morphologie::ErosionWidget(this);
@@ -183,10 +184,6 @@ void MainWindow::erosionClicked(){
   if(m->src.empty())
     m->src = this->src;
 
-  if(!erosionWidget)
-    printf("N'est pas encore alloué\n");
-  else
-    printf("Allocated !\n");
   loadWidget(EROSION_WIDGET);
 
 }

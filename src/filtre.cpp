@@ -7,6 +7,7 @@
 using namespace std;
 using namespace cv;
 
+Filtre::Filtre() {}
 Filtre::Filtre(Mat img,Mat outt){
 image=img;
 out=outt;
@@ -56,8 +57,9 @@ convertScaleAbs(image,image);
 
 void Filtre::bruit_sel_poivre(int n){
 
+out = image;
 int x,y;
-IplImage ima=image;
+IplImage ima=image.clone();
 IplImage *img=&ima;
 
 CvScalar pixelb,pixeln;
@@ -83,6 +85,6 @@ y=rand()%img->width;
 
 cvSet2D(img,y,x,pixeln);
 }
-image=img;
+out=img;
 }
 

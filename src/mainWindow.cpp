@@ -47,6 +47,7 @@ MainWindow::MainWindow(){
   connect(openFileAction, SIGNAL(triggered()), this, SLOT(openImage()));
 
   //Ajout des action du menu Filtres
+  bruitFiltreAction = filtresMenu->addAction("Bruit: set et poivre");
   gaussienFiltreAction = filtresMenu->addAction("Gaussien");
   medianFiltreAction = filtresMenu->addAction("Median");
   blurFiltreAction = filtresMenu->addAction("Blur");
@@ -55,6 +56,9 @@ MainWindow::MainWindow(){
   laplacienFiltreAction = filtresMenu->addAction("Laplacien");
   filtre2DFiltreAction = filtresMenu->addAction("Filtre 2D");
   bilateralFiltreAction = filtresMenu->addAction("Bilateral");
+
+  //Les connexion filtres
+  connect(bruitFiltreAction, SIGNAL(triggered()), this, SLOT(bruitClicked()));
 
   //Ajout des action du menu Morphologie Mathématique 
   erosionMorphAction = morphMathMenu->addAction("Erosion");
@@ -85,6 +89,11 @@ MainWindow::MainWindow(){
   imageDispLabel->setAlignment(Qt::AlignCenter);
   imageDispLabel->setMinimumWidth(600);
   imageDispLabel->setStyleSheet(QString("QLabel { background: #687074}"));
+
+
+  mFiltre = new Filtre;
+  bruitWidget = new filtre::BruitageWidget(this);
+  sideBarWidgets.push_back(bruitWidget);
 
   m = new Morphologie;
   erosionWidget = new morphologie::ErosionWidget(this);
@@ -121,9 +130,14 @@ QImage const MainWindow::Mat2QImage(const cv::Mat& src){
 
 void MainWindow::updateImage(){
 
-  QImage img(Mat2QImage(m->dst));
-  imageDispLabel->setPixmap(QPixmap::fromImage(img));
-}
+  QImage *img;
+  if(this->widget == BRUIT_WIDGET)
+    img = new QImage(Mat2QImage(mFiltre->out));
+  else if(this->widget >= EROSION_WIDGET && this->widget <= GRADIENT_WIDGET)
+    img = new QImage(Mat2QImage(m->dst));
+
+  imageDispLabel->setPixmap(QPixmap::fromImage(*img));
+  }
 
 void MainWindow::openImage(){
   QString fname = QFileDialog::getOpenFileName(this, "Open File", "", tr("Images (*.jpg *.png)"));
@@ -136,10 +150,14 @@ void MainWindow::openImage(){
 
 void MainWindow::loadWidget(int widget){
 
+  this->widget = widget;
   hideAllSideBarWidgets();
 
   switch(widget){
 
+    case BRUIT_WIDGET:
+      bruitWidget->show();
+      break;
     case EROSION_WIDGET:
       erosionWidget->show();
       break;
@@ -177,6 +195,15 @@ bool MainWindow::checkImageLoaded(){
 
 }
 
+void MainWindow::bruitClicked(){
+  if(!checkImageLoaded())
+    return;
+  if(mFiltre->image.empty())
+    mFiltre->image = this->src;
+
+  loadWidget(BRUIT_WIDGET);
+
+}
 void MainWindow::erosionClicked(){
   if(!checkImageLoaded())
     return;

@@ -23,6 +23,7 @@
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 
+#define BRUIT_WIDGET            0x01
 #define EROSION_WIDGET          0x09
 #define DILATATION_WIDGET       0x0A
 #define OUVERTURE_WIDGET        0x0B
@@ -34,6 +35,8 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <vector>
+#include "filtre.h"
+#include "filtreWidgets.h"
 #include "morphologieWidgets.h"
 #include "Morphologie.h"
 
@@ -65,6 +68,7 @@ private:
 
     //Les actions pour le menu "Edit"
     //Les actions pour le menu "Filtres"
+    QAction *bruitFiltreAction;
     QAction *gaussienFiltreAction;
     QAction *medianFiltreAction;
     QAction *blurFiltreAction;
@@ -94,9 +98,13 @@ private:
 
     cv::Mat src;
     QLabel *imageDispLabel; // Image container
+    unsigned int widget;
 
 
 public:
+    Filtre *mFiltre;
+    filtre::BruitageWidget *bruitWidget;
+
     Morphologie *m;
     morphologie::ErosionWidget *erosionWidget;
     morphologie::DilatationWidget *dilatationWidget;
@@ -118,6 +126,9 @@ public:
 
 public slots:
     void openImage();
+
+    //Slits pour les filtres
+    void bruitClicked();
 
     //Slots pour la morphologie
     void erosionClicked();

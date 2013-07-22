@@ -76,14 +76,14 @@ for(int k=0;k<n;k++){
 x=rand()%img->height;
 y=rand()%img->width;
 
-cvSet2D(img,y,x,pixelb);
+cvSet2D(img,x,y,pixelb);
 }
 
 for(int k=0;k<n;k++){
 x=rand()%img->height;
 y=rand()%img->width;
 
-cvSet2D(img,y,x,pixeln);
+cvSet2D(img,x,y,pixeln);
 }
 out=img;
 }

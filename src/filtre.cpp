@@ -54,7 +54,7 @@ Laplacian(image,image,-1,taille_noyau,1,0,BORDER_DEFAULT);
 convertScaleAbs(image,image);
 }
 
-void Filtre::buit_sel_poivre(int n){
+void Filtre::bruit_sel_poivre(int n){
 
 int x,y;
 IplImage ima=image;

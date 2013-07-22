@@ -23,7 +23,7 @@ void gaussienFiltre(Size ksize,double sigmaX,double sigmaY);
 void LaplacienFiltre(Size noyau_gaussien,int taille_noyau);
 void filter2DFiltre(int kernel);
 void sepFilter2DFiltre(int noyau_lignes,int noyau_colonnes);
-void buit_sel_poivre(int n);
+void bruit_sel_poivre(int n);
 };
 
 #endif // FILTRE_H_INCLUDED

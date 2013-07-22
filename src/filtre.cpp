@@ -7,54 +7,54 @@
 using namespace std;
 using namespace cv;
 
-filtre::filtre(Mat img,Mat outt){
+Filtre::Filtre(Mat img,Mat outt){
 image=img;
 out=outt;
 }
 
-void filtre::bilateralFiltre(int diametre, double sigmaColor,double sigmaSpace){
+void Filtre::bilateralFiltre(int diametre, double sigmaColor,double sigmaSpace){
 
   bilateralFilter(image,out,diametre,sigmaColor,sigmaSpace);
   image = out;
 }
 
-void filtre::blurFiltre(Size ksize){
+void Filtre::blurFiltre(Size ksize){
 
   blur(image,image,ksize,Point(-1, -1));
 
 }
 
-void filtre::boxFiltre(cv::Size ksize){
+void Filtre::boxFiltre(cv::Size ksize){
 
     boxFilter(image,image,-1,ksize,Point(-1, -1),true);
 }
 
-void filtre::medianFiltre(int noyau){
+void Filtre::medianFiltre(int noyau){
 
     medianBlur(image,image,noyau);
 
 }
 
-void filtre::gaussienFiltre(Size ksize,double sigmaX,double sigmaY){
+void Filtre::gaussienFiltre(Size ksize,double sigmaX,double sigmaY){
     GaussianBlur(image,image,ksize,sigmaX,sigmaY);
 }
 
-void filtre::sepFilter2DFiltre(int noyau_lignes,int noyau_colonnes){
+void Filtre::sepFilter2DFiltre(int noyau_lignes,int noyau_colonnes){
     sepFilter2D(image,image,-1,noyau_lignes,noyau_colonnes,Point(-1,-1), 0);
 }
 
-void filtre::filter2DFiltre(int kernel){
+void Filtre::filter2DFiltre(int kernel){
 filter2D(image, image, -1, kernel, Point(-1,-1), 0, BORDER_DEFAULT );
 }
 
-void filtre::LaplacienFiltre(Size noyau_gaussien,int taille_noyau){
+void Filtre::LaplacienFiltre(Size noyau_gaussien,int taille_noyau){
 GaussianBlur(image,image,noyau_gaussien,0,0,BORDER_DEFAULT);
 cvtColor(image,image,CV_RGB2GRAY);
 Laplacian(image,image,-1,taille_noyau,1,0,BORDER_DEFAULT);
 convertScaleAbs(image,image);
 }
 
-void filtre::buit_sel_poivre(int n){
+void Filtre::buit_sel_poivre(int n){
 
 int x,y;
 IplImage ima=image;

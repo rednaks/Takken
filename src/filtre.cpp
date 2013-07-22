@@ -57,6 +57,7 @@ convertScaleAbs(image,image);
 void Filtre::bruit_sel_poivre(int n){
 
 int x,y;
+int m=n*1000;
 IplImage ima=image;
 IplImage *img=&ima;
 
@@ -70,14 +71,14 @@ pixeln.val[1]=0;
 pixeln.val[2]=0;
 pixeln.val[0]=0;
 
-for(int k=0;k<n;k++){
+for(int k=0;k<m;k++){
 x=rand()%img->height;
 y=rand()%img->width;
 
 cvSet2D(img,y,x,pixelb);
 }
 
-for(int k=0;k<n;k++){
+for(int k=0;k<m;k++){
 x=rand()%img->height;
 y=rand()%img->width;
 

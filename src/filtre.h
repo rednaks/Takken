@@ -4,13 +4,13 @@
 using namespace std;
 using namespace cv;
 
-class filtre{
+class Filtre{
 
 public:
 Mat image;
 Mat out;
-filtre();
-filtre(Mat,Mat);
+Filtre();
+Filtre(Mat,Mat);
 Mat getImage(){return image;};
 Mat getOut(){return out;};
 void setImage(Mat img){image=img;};

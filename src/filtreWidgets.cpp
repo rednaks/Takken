@@ -31,12 +31,12 @@ BruitageWidget::BruitageWidget(MainWindow* parent){
   densiteSlider = new QSlider;
   densiteSlider->setOrientation(Qt::Horizontal);
   densiteSlider->setMinimum(0);
-  densiteSlider->setMaximum(50000);
+  densiteSlider->setMaximum(50);
   connect(densiteSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
   densiteSpinBox = new QSpinBox;
   densiteSpinBox->setMinimum(0);
-  densiteSpinBox->setMaximum(50000);
+  densiteSpinBox->setMaximum(50);
   connect(densiteSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
   densiteLabel = new QLabel(QString::fromUtf8("Densité :"));

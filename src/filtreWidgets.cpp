@@ -254,7 +254,7 @@ sigmaYSlider->setMinimum(0);
 sigmaYSlider->setMaximum(10);
 connect(sigmaYSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal()));
 
-SigmaYLabel = new QLabel(QString::fromUtf8("Deviation par rapport a y :"));
+sigmaYLabel = new QLabel(QString::fromUtf8("Deviation par rapport a y :"));
 
 QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(noyauLabel, new QLabel(""));

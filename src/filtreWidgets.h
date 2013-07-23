@@ -83,7 +83,7 @@ namespace filtre {
         QSpinBox *noyauSpinBox;
         QLabel *noyauLabel;
         MainWindow *parent;
-  }
+  };
 
 /************************************************************************/
 /******************** BoxFilter Widget  ***********************************/
@@ -102,7 +102,7 @@ namespace filtre {
         QSpinBox *noyauSpinBox;
         QLabel *noyauLabel;
         MainWindow *parent;
-  }
+  };
 
 /************************************************************************/
 /******************** Filter2D Widget  ***********************************/
@@ -121,7 +121,7 @@ namespace filtre {
         QSpinBox *noyauSpinBox;
         QLabel *noyauLabel;
         MainWindow *parent;
-  }
+  };
 /************************************************************************/
 /******************** sepFilter2D Widget  ***********************************/
  class  sepFilter2DWidget :public QWidget{
@@ -157,7 +157,7 @@ class MedianWidget:public QWidget {
         QSlider *noyauSlider;
         QLabel *noyauLabel;
         MainWindow *parent;
-  }
+  };
 /************************************************************************/
 /******************** Gaussien Widget  ***********************************/
  class  GaussienWidget :public QWidget{

@@ -109,7 +109,7 @@ BilateralWidget::~BilateralWidget(){}
 
 void BilateralWidget::updateVal(int v){
     printf("Val : %d\n",v);
-    this->parent->mFiltre->bilateralFilre(diametreSlider->value(),SigmaColorSlider->value(),SigmaSpaceSlider->value());
+    this->parent->mFiltre->bilateralFiltre(diametreSlider->value(),SigmaColorSlider->value(),SigmaSpaceSlider->value());
     this->parent->updateImage();
 }
 /******************** END Bilateral Widget  ***********************************/
@@ -168,7 +168,7 @@ noyauLabel =new QLabel(QString::fromUtf8("Noyau:"));
 
   QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(noyauLabel, new QLabel(""));
-  formLayout->addRow(noyauSlider, noyauSpinBox);
+  formLayout->addRow(noyauSlider);
 
 
   this->setLayout(formLayout);

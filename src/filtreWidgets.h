@@ -57,7 +57,7 @@ namespace filtre {
             ~BilateralWidget();
 
         public slots:
-            void updateVal();
+            void updateVal(int);
         private:
             QSlider *diametreSlider;
             QLabel *diametreLabel;
@@ -133,7 +133,7 @@ namespace filtre {
             ~sepFilter2DWidget();
 
         public slots:
-            void updateVal();
+            void updateVal(int);
         private:
             QSlider *noyauLigneSlider;
             QLabel *noyauLigneLabel;
@@ -169,7 +169,7 @@ class MedianWidget:public QWidget {
             ~GaussienWidget();
 
         public slots:
-            void updateVal();
+            void updateVal(int);
         private:
             QSlider *noyauSlider;
             QLabel *noyauLabel;
@@ -191,7 +191,7 @@ class MedianWidget:public QWidget {
             ~LaplacienWidget();
 
         public slots:
-            void updateVal();
+            void updateVal(int);
         private:
             QSlider *noyauGaussSlider;
             QLabel *noyauGaussLabel;

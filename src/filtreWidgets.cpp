@@ -107,7 +107,7 @@ QFormLayout *formLayout = new QFormLayout;
 
 BilateralWidget::~BilateralWidget(){}
 
-void BilateralWidget::updateVal(){
+void BilateralWidget::updateVal(int v){
     printf("Val : %d\n",v);
     this->parent->mFiltre->bilateralFilre(diametreSlider->value(),SigmaColorSlider->value(),SigmaSpaceSlider->value());
     this->parent->updateImage();
@@ -272,7 +272,7 @@ QFormLayout *formLayout = new QFormLayout;
 
 GaussienWidget::~GaussienWidget(){}
 
-void GaussienWidget::updateVal(){
+void GaussienWidget::updateVal(int v){
     printf("Val : %d\n",v);
     this->parent->mFiltre->gaussienFiltre(Size (noyauSlider->value(),noyauSlider->value()),SigmaXSlider->value(),SigmaYSlider->value());
     this->parent->updateImage();
@@ -315,7 +315,8 @@ QFormLayout *formLayout = new QFormLayout;
 
 LaplacienWidget::~LaplacienWidget(){}
 
-void LaplacienWidget::updateVal(){
+void LaplacienWidget::updateVal(int v){
+    printf("Val : %d\n",v);
     this->parent->mFiltre->LaplacienFiltre(noyauGaussSlider->value(),noyauLaplaceSlider->value());
     this->parent->updateImage();
 
@@ -393,7 +394,7 @@ QFormLayout *formLayout = new QFormLayout;
 
 sepFilter2DWidget::~Filter2DWidget(){}
 
-void sepFilter2DWidget::updateVal(){
+void sepFilter2DWidget::updateVal(int v){
     printf("Val : %d\n",v);
     this->parent->mFiltre->sepFilter2DFiltre(noyauLigneSlider->value(),noyauColonneSlider->value());
     this->parent->updateImage();

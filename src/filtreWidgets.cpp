@@ -74,22 +74,22 @@ connect(diametreSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 diametreLabel = new QLabel (QString::fromUtf8("Diametre :"));
 
-SigmaColorSlider = new QSlider;
-SigmaColorSlider->setOrientation(Qt::Horizontal);
-SigmaColorSlider->setMinimum(0);
-SigmaColorSlider->setMaximum(100);
-connect(SigmaColorSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
+sigmaColorSlider = new QSlider;
+sigmaColorSlider->setOrientation(Qt::Horizontal);
+sigmaColorSlider->setMinimum(0);
+sigmaColorSlider->setMaximum(100);
+connect(sigmaColorSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
-SigmaColorLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
+sigmaColorLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
 
 
-SigmaSpaceSlider = new QSlider;
-SigmaSpaceSlider->setOrientation(Qt::Horizontal);
-SigmaSpaceSlider->setMinimum(0);
-SigmaSpaceSlider->setMaximum(100);
-connect(SigmaSpaceSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
+sigmaSpaceSlider = new QSlider;
+sigmaSpaceSlider->setOrientation(Qt::Horizontal);
+sigmaSpaceSlider->setMinimum(0);
+sigmaSpaceSlider->setMaximum(100);
+connect(sigmaSpaceSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
-SigmaSpaceLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
+sigmaSpaceLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
 
 QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(diametreLabel, new QLabel(""));
@@ -109,7 +109,7 @@ BilateralWidget::~BilateralWidget(){}
 
 void BilateralWidget::updateVal(int v){
     printf("Val : %d\n",v);
-    this->parent->mFiltre->bilateralFiltre(diametreSlider->value(),SigmaColorSlider->value(),SigmaSpaceSlider->value());
+    this->parent->mFiltre->bilateralFiltre(diametreSlider->value(),sigmaColorSlider->value(),sigmaSpaceSlider->value());
     this->parent->updateImage();
 }
 /******************** END Bilateral Widget  ***********************************/
@@ -239,20 +239,20 @@ connect(noyauSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 noyauLabel = new QLabel (QString::fromUtf8("taille du noyau :"));
 
-SigmaXSlider = new QSlider;
-SigmaXSlider->setOrientation(Qt::Horizontal);
-SigmaXSlider->setMinimum(0);
-SigmaXSlider->setMaximum(10);
-connect(SigmaXSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
+sigmaXSlider = new QSlider;
+sigmaXSlider->setOrientation(Qt::Horizontal);
+sigmaXSlider->setMinimum(0);
+sigmaXSlider->setMaximum(10);
+connect(sigmaXSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
-SigmaXLabel = new QLabel(QString::fromUtf8("Deviation par rapport a x :"));
+sigmaXLabel = new QLabel(QString::fromUtf8("Deviation par rapport a x :"));
 
 
-SigmaYSlider = new QSlider;
-SigmaYSlider->setOrientation(Qt::Horizontal);
-SigmaYSlider->setMinimum(0);
-SigmaYSlider->setMaximum(10);
-connect(SigmaYSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal()));
+sigmaYSlider = new QSlider;
+sigmaYSlider->setOrientation(Qt::Horizontal);
+sigmaYSlider->setMinimum(0);
+sigmaYSlider->setMaximum(10);
+connect(sigmaYSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal()));
 
 SigmaYLabel = new QLabel(QString::fromUtf8("Deviation par rapport a y :"));
 
@@ -274,7 +274,7 @@ GaussienWidget::~GaussienWidget(){}
 
 void GaussienWidget::updateVal(int v){
     printf("Val : %d\n",v);
-    this->parent->mFiltre->gaussienFiltre(Size (noyauSlider->value(),noyauSlider->value()),SigmaXSlider->value(),SigmaYSlider->value());
+    this->parent->mFiltre->gaussienFiltre(Size (noyauSlider->value(),noyauSlider->value()),sigmaXSlider->value(),sigmaYSlider->value());
     this->parent->updateImage();
 }
 

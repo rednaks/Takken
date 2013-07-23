@@ -61,10 +61,10 @@ namespace filtre {
         private:
             QSlider *diametreSlider;
             QLabel *diametreLabel;
-            QSlider *SigmaColorSlider;
-            QLabel *SigmaColorLabel;
-            QSlider *SigmaSpaceSlider;
-            QLabel *SigmaSpaceLabel;
+            QSlider *sigmaColorSlider;
+            QLabel *sigmaColorLabel;
+            QSlider *sigmaSpaceSlider;
+            QLabel *sigmaSpaceLabel;
             MainWindow *parent;
     };
 /************************************************************************/
@@ -173,10 +173,10 @@ class MedianWidget:public QWidget {
         private:
             QSlider *noyauSlider;
             QLabel *noyauLabel;
-            QSlider *SigmaXSlider;
-            QLabel *SigmaXLabel;
-            QSlider *SigmaYSlider;
-            QLabel *SigmaYLabel;
+            QSlider *sigmaXSlider;
+            QLabel *sigmaXLabel;
+            QSlider *sigmaYSlider;
+            QLabel *sigmaYLabel;
             MainWindow *parent;
     };
 /************************************************************************/

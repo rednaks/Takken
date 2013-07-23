@@ -59,6 +59,15 @@ MainWindow::MainWindow(){
 
   //Les connexion filtres
   connect(bruitFiltreAction, SIGNAL(triggered()), this, SLOT(bruitClicked()));
+  connect(gaussienFiltreAction, SIGNAL(triggered()), this, SLOT(gaussienClicked()));
+  connect(medianFiltreAction, SIGNAL(triggered()), this, SLOT(medianClicked()));
+  connect(blurFiltreAction, SIGNAL(triggered()), this, SLOT(blurClicked()));
+  connect(boxFiltreAction, SIGNAL(triggered()), this, SLOT(boxClicked()));
+  connect(sep2DFiltreAction, SIGNAL(triggered()), this, SLOT(sep2DClicked()));
+  connect(laplacienFiltreAction, SIGNAL(triggered()), this, SLOT(laplacienClicked()));
+  connect(filtre2DFiltreAction, SIGNAL(triggered()), this, SLOT(filtre2DClicked()));
+  connect(bilateralFiltreAction, SIGNAL(triggered()), this, SLOT(bilateralClicked()));
+
 
   //Ajout des action du menu Morphologie Mathématique 
   erosionMorphAction = morphMathMenu->addAction("Erosion");
@@ -108,6 +117,21 @@ MainWindow::MainWindow(){
   mFiltre = new Filtre;
   bruitWidget = new filtre::BruitageWidget(this);
   sideBarWidgets.push_back(bruitWidget);
+  gaussienWidget = new filtre::GaussienWidget(this);
+  sideBarWidgets.push_back(gaussienWidget);
+  medianWidget = new filtre::MedianWidget(this);
+  sideBarWidgets.push_back(medianWidget);
+  blurWidget = new filtre::BlurWidget(this);
+  sideBarWidgets.push_back(blurWidget);
+  boxFiltreWidget = new filtre::BoxFiltreWidget(this);
+  sideBarWidgets.push_back(boxFiltreWidget);
+  sepFilter2DWidget = new filtre::SepFilter2DWidget(this);
+  sideBarWidgets.push_back(sepFilter2DWidget);
+  laplacientWidget = new filtre::LaplacienWidget(this);
+  sideBarWidgets.push_back(laplacientWidget);
+  bilateralWidget = new filtre::BilateralWidget(this);
+  sideBarWidgets.push_back(bilateralWidget);
+
 
   mFeature = new Features;
   featureDetectWidget = new feature::FeatureDetectWidget(this);
@@ -153,7 +177,7 @@ QImage const MainWindow::Mat2QImage(const cv::Mat& src){
 void MainWindow::updateImage(){
 
   QImage *img;
-  if(this->currentWidget == BRUIT_WIDGET)
+  if(this->currentWidget >= BRUIT_WIDGET && this->currentWidget <= BILATERAL_WIDGET)
     img = new QImage(Mat2QImage(mFiltre->out));
   else if(this->currentWidget >= FEATURE_DETECT_WIDGET && this->currentWidget <= FEATURE_FIND_WIDGET)
     img = new QImage(Mat2QImage(mFiltre->out));
@@ -183,6 +207,27 @@ void MainWindow::loadWidget(int widget){
 
     case BRUIT_WIDGET:
       bruitWidget->show();
+      break;
+    case GAUSSIEN_WIDGET:
+      gaussienWidget->show();
+      break;
+    case MEDIAN_WIDGET:
+      medianWidget->show();
+      break;
+    case BLUR_WIDGET:
+      blurWidget->show();
+      break;
+    case BOX_WIDGET:
+      boxFiltreWidget->show();
+      break;
+    case SEP_2D_WIDGET:
+      sepFilter2DWidget->show();
+      break;
+    case LAPLACIEN_WIDGET:
+      laplacientWidget->show();
+      break;
+    case BILATERAL_WIDGET:
+      bilateralWidget->show();
       break;
     case FEATURE_DETECT_WIDGET:
       featureDetectWidget->show();
@@ -235,6 +280,75 @@ void MainWindow::bruitClicked(){
 
   loadWidget(BRUIT_WIDGET);
 
+}
+
+void MainWindow::gaussienClicked(){
+  if(!checkImageLoaded())
+    return;
+  if(mFiltre->image.empty())
+    mFiltre->image = this->src;
+
+  loadWidget(GAUSSIEN_WIDGET);
+}
+
+void MainWindow::medianClicked(){
+  if(!checkImageLoaded())
+    return;
+  if(mFiltre->image.empty())
+    mFiltre->image = this->src;
+  
+  loadWidget(MEDIAN_WIDGET);
+}
+
+void MainWindow::blurClicked(){
+  if(!checkImageLoaded())
+    return;
+  if(mFiltre->image.empty())
+    mFiltre->image = this->src;
+  
+  loadWidget(BLUR_WIDGET);
+}
+
+void MainWindow::boxClicked(){
+  if(!checkImageLoaded())
+    return;
+  if(mFiltre->image.empty())
+    mFiltre->image = this->src;
+
+  loadWidget(BOX_WIDGET);
+}
+
+void MainWindow::sep2DClicked(){
+  if(!checkImageLoaded())
+    return;
+  if(mFiltre->image.empty())
+    mFiltre->image = this->src;
+
+  loadWidget(SEP_2D_WIDGET);
+}
+
+void MainWindow::laplacienClicked(){
+  if(!checkImageLoaded())
+    return;
+  if(mFiltre->image.empty())
+    mFiltre->image = this->src;
+
+  loadWidget(LAPLACIEN_WIDGET);
+}
+
+void MainWindow::filtre2DClicked(){
+  if(!checkImageLoaded())
+    return;
+  if(mFiltre->image.empty())
+    mFiltre->image = this->src;
+}
+void MainWindow::bilateralClicked(){
+  if(!checkImageLoaded())
+    return;
+  if(mFiltre->image.empty())
+    mFiltre->image = this->src;
+
+  loadWidget(BILATERAL_WIDGET);
 }
 
 void MainWindow::featureDetectClicked(){

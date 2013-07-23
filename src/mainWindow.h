@@ -24,14 +24,17 @@
 #define MAIN_WINDOW_H
 
 #define BRUIT_WIDGET            0x01
-#define EROSION_WIDGET          0x09
-#define DILATATION_WIDGET       0x0A
-#define OUVERTURE_WIDGET        0x0B
-#define FERMETURE_WIDGET        0x0C
-#define GRADIENT_WIDGET         0x0D
-#define SPLIT_AND_MERGE_WIDGET  0x10
-#define GROWING_REGION_WIDGET   0x11
-#define THRESHOLDING_WIDGET     0x12
+#define FEATURE_DETECT_WIDGET   0x0A
+#define FACE_DETECT_WIDGET      0x0B
+#define FEATURE_FIND_WIDGET     0x0C
+#define EROSION_WIDGET          0x0D
+#define DILATATION_WIDGET       0x10
+#define OUVERTURE_WIDGET        0x11
+#define FERMETURE_WIDGET        0x12
+#define GRADIENT_WIDGET         0x13
+#define SPLIT_AND_MERGE_WIDGET  0x14
+#define GROWING_REGION_WIDGET   0x15
+#define THRESHOLDING_WIDGET     0x16
 
 #include <QtGui>
 #include <opencv2/core/core.hpp>
@@ -44,6 +47,8 @@
 #include "Morphologie.h"
 #include "segmentationWidgets.h"
 #include "segmentation.h"
+#include "Features.h"
+#include "featureWidgets.h"
 
 class MainWindow : public QMainWindow {
   Q_OBJECT
@@ -84,6 +89,10 @@ private:
     QAction *bilateralFiltreAction;
 
     //Les actions pour le menu "Caractérisation"
+    QAction *featureDetectAction;
+    QAction *faceDetectAction;
+    QAction *featureFindAction;
+
     //Les actions pour le menu "Morphologie mathématique"
     QAction *erosionMorphAction;
     QAction *dilatationMorphAction;
@@ -109,6 +118,9 @@ private:
 public:
     Filtre *mFiltre;
     filtre::BruitageWidget *bruitWidget;
+
+    Features *mFeature;
+    feature::FeatureDetectWidget *featureDetectWidget;
 
     Morphologie *m;
     morphologie::ErosionWidget *erosionWidget;
@@ -138,6 +150,9 @@ public slots:
     //Slits pour les filtres
     void bruitClicked();
 
+    //Slots pour la caractérisation
+    void featureDetectClicked();
+
     //Slots pour la morphologie
     void erosionClicked();
     void dilatationClicked();
@@ -147,6 +162,7 @@ public slots:
 
     //Slots pour la segmentation
     void thresholdingClicked();
+
 };
 
 #endif

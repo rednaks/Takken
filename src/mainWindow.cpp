@@ -74,6 +74,14 @@ MainWindow::MainWindow(){
   connect(fermetureMorphAction, SIGNAL(triggered()), this, SLOT(fermetureClicked()));
   connect(gradientMorphAction, SIGNAL(triggered()), this, SLOT(gradientClicked()));
 
+  //Ajout des actions du menu Caractérisation 
+  featureDetectAction = caracterisationMenu->addAction("Feature Detect");
+  faceDetectAction = caracterisationMenu->addAction("Face Detect");
+  featureFindAction = caracterisationMenu->addAction("Feature Find");
+
+  //Les connexion pour le menu caractérisation 
+  connect(featureDetectAction, SIGNAL(triggered()), this, SLOT(featureDetectClicked()));
+
   //Ajout des action du menu Segmentation
   splitAndMergeSegAction = segMenu->addAction("Split And Merge");
   growinRegionSegAction = segMenu->addAction("Growing Region");
@@ -81,6 +89,9 @@ MainWindow::MainWindow(){
 
   //Les connexion menu segmentation
   connect(thresholdingSegAction, SIGNAL(triggered()), this, SLOT(thresholdingClicked()));
+
+
+  
 
   //Ajout des action du menu Help
   aboutHelpAction = helpMenu->addAction("About");
@@ -97,6 +108,10 @@ MainWindow::MainWindow(){
   mFiltre = new Filtre;
   bruitWidget = new filtre::BruitageWidget(this);
   sideBarWidgets.push_back(bruitWidget);
+
+  mFeature = new Features;
+  featureDetectWidget = new feature::FeatureDetectWidget(this);
+  sideBarWidgets.push_back(featureDetectWidget);
 
   m = new Morphologie;
   erosionWidget = new morphologie::ErosionWidget(this);
@@ -140,6 +155,8 @@ void MainWindow::updateImage(){
   QImage *img;
   if(this->currentWidget == BRUIT_WIDGET)
     img = new QImage(Mat2QImage(mFiltre->out));
+  else if(this->currentWidget >= FEATURE_DETECT_WIDGET && this->currentWidget <= FEATURE_FIND_WIDGET)
+    img = new QImage(Mat2QImage(mFiltre->out));
   else if(this->currentWidget >= EROSION_WIDGET && this->currentWidget <= GRADIENT_WIDGET)
     img = new QImage(Mat2QImage(m->dst));
   else if(this->currentWidget >= SPLIT_AND_MERGE_WIDGET && this->currentWidget <= THRESHOLDING_WIDGET)
@@ -166,6 +183,9 @@ void MainWindow::loadWidget(int widget){
 
     case BRUIT_WIDGET:
       bruitWidget->show();
+      break;
+    case FEATURE_DETECT_WIDGET:
+      featureDetectWidget->show();
       break;
     case EROSION_WIDGET:
       erosionWidget->show();
@@ -216,6 +236,17 @@ void MainWindow::bruitClicked(){
   loadWidget(BRUIT_WIDGET);
 
 }
+
+void MainWindow::featureDetectClicked(){
+  if(!checkImageLoaded())
+    return;
+  if(mFeature->img.empty())
+    mFeature->img = this->src;
+  
+  loadWidget(FEATURE_DETECT_WIDGET);
+
+}
+
 void MainWindow::erosionClicked(){
   if(!checkImageLoaded())
     return;

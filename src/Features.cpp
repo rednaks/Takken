@@ -134,7 +134,7 @@ void Features::featureFind(Mat img2,int alg,int mhess){
 
    case 1 :
 
-        detector=new SiftFeatureDetector( minHessian );
+        detector=new SiftFeatureDetector();
         break;
    case 2 :
         detector=new SurfFeatureDetector( minHessian );

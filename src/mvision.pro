@@ -7,7 +7,11 @@ DEPENDPATH += .
 INCLUDEPATH += .
 
 win32 {
-  TARGET = mvision.exe
+  TARGET = mvision
+  INCLUDEPATH += C:/opencv/build/include/
+  LIBS += -LC:/opencv/build/x86/mingw/lib/ \
+            -lopencv_core243.dll -lopencv_imgproc243.dll -lopencv_highgui243.dll -lopencv_ml243.dll -lopencv_video243.dll -lopencv_features2d243.dll -lopencv_calib3d243.dll \
+            -lopencv_objdetect243.dll -lopencv_contrib243.dll -lopencv_legacy243.dll -lopencv_flann243.dll
 }
 
 unix {
@@ -16,5 +20,5 @@ unix {
   LIBS += -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml -lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect -lopencv_contrib -lopencv_legacy -lopencv_flann
 } 
 # Input
-SOURCES += main.cpp mainWindow.cpp filtre.cpp filtreWidgets.cpp Morphologie.cpp morphologieWidgets.cpp  segmentation.cpp segmentationWidgets.cpp
-HEADERS += mainWindow.h filtre.h filtreWidgets.h Morphologie.h morphologieWidgets.h filtre.h filtreWidgets.cpp segmentation.h segmentationWidgets.h
+SOURCES += main.cpp mainWindow.cpp filtre.cpp filtreWidgets.cpp Features.cpp featureWidgets.cpp Morphologie.cpp morphologieWidgets.cpp  segmentation.cpp segmentationWidgets.cpp
+HEADERS += mainWindow.h filtre.h filtreWidgets.h Features.h featureWidgets.h Morphologie.h morphologieWidgets.h segmentation.h segmentationWidgets.h

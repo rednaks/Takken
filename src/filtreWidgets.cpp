@@ -67,7 +67,7 @@ void BruitageWidget::updateVal(int v){
 BilateralWidget::BilateralWidget(MainWindow* parent){
 this->parent=parent;
 diametreSlider= new QSlider;
-diametreSlider->setOrientation(QT::Horizontal);
+diametreSlider->setOrientation(Qt::Horizontal);
 diametreSlider->setMinimum(1);
 diametreSlider->setMaximum(10);
 connect(diametreSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
@@ -231,7 +231,7 @@ printf("Val : %d\n",v);
 GaussienWidget::GaussienWidget(MainWindow* parent){
 this->parent=parent;
 noyauSlider= new QSlider;
-noyauSlider->setOrientation(QT::Horizontal);
+noyauSlider->setOrientation(Qt::Horizontal);
 noyauSlider->setMinimum(1);
 noyauSlider->setMaximum(41);
 noyauSlider->setSingleStep(2);
@@ -284,7 +284,7 @@ void GaussienWidget::updateVal(int v){
 LaplacienWidget::LaplacienWidget(MainWindow* parent){
 this->parent=parent;
 noyauGaussSlider= new QSlider;
-noyauGaussSlider->setOrientation(QT::Horizontal);
+noyauGaussSlider->setOrientation(Qt::Horizontal);
 noyauGaussSlider->setMinimum(1);
 noyauGaussSlider->setMaximum(41);
 noyauGaussSlider->setSingleStep(2);
@@ -365,7 +365,7 @@ printf("Val : %d\n",v);
 sepFilter2DWidget::sepFilter2DWidget(MainWindow* parent){
 this->parent=parent;
 noyauLigneSlider= new QSlider;
-noyauLigneSlider->setOrientation(QT::Horizontal);
+noyauLigneSlider->setOrientation(Qt::Horizontal);
 noyauLigneSlider->setMinimum(1);
 noyauLigneSlider->setMaximum(20);
 connect(noyauLigneSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));

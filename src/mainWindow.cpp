@@ -79,6 +79,9 @@ MainWindow::MainWindow(){
   growinRegionSegAction = segMenu->addAction("Growing Region");
   thresholdingSegAction = segMenu->addAction("Thresholding");
 
+  //Les connexion menu segmentation
+  connect(thresholdingSegAction, SIGNAL(triggered()), this, SLOT(thresholdingClicked()));
+
   //Ajout des action du menu Help
   aboutHelpAction = helpMenu->addAction("About");
 
@@ -107,6 +110,10 @@ MainWindow::MainWindow(){
   gradientWidget   = new morphologie::GradientWidget(this);
   sideBarWidgets.push_back(gradientWidget);
 
+  mSegmentation = new Segmentation;
+  thresholdingWidget = new segmentation::ThresholdingWidget(this);
+  sideBarWidgets.push_back(thresholdingWidget);
+
   splitter = new QSplitter;
   splitter->setOrientation(Qt::Horizontal);
   splitter->addWidget(imageDispLabel);
@@ -131,10 +138,12 @@ QImage const MainWindow::Mat2QImage(const cv::Mat& src){
 void MainWindow::updateImage(){
 
   QImage *img;
-  if(this->widget == BRUIT_WIDGET)
+  if(this->currentWidget == BRUIT_WIDGET)
     img = new QImage(Mat2QImage(mFiltre->out));
-  else if(this->widget >= EROSION_WIDGET && this->widget <= GRADIENT_WIDGET)
+  else if(this->currentWidget >= EROSION_WIDGET && this->currentWidget <= GRADIENT_WIDGET)
     img = new QImage(Mat2QImage(m->dst));
+  else if(this->currentWidget >= SPLIT_AND_MERGE_WIDGET && this->currentWidget <= THRESHOLDING_WIDGET)
+    img = new QImage(Mat2QImage(mSegmentation->dst));
 
   imageDispLabel->setPixmap(QPixmap::fromImage(*img));
   }
@@ -150,7 +159,7 @@ void MainWindow::openImage(){
 
 void MainWindow::loadWidget(int widget){
 
-  this->widget = widget;
+  this->currentWidget = widget;
   hideAllSideBarWidgets();
 
   switch(widget){
@@ -172,6 +181,9 @@ void MainWindow::loadWidget(int widget){
       break;
     case GRADIENT_WIDGET:
       gradientWidget->show();
+      break;
+    case THRESHOLDING_WIDGET:
+      thresholdingWidget->show();
       break;
 
   }
@@ -257,6 +269,16 @@ void MainWindow::gradientClicked(){
 
   loadWidget(GRADIENT_WIDGET);
 
+}
+
+void MainWindow::thresholdingClicked(){
+  if(!checkImageLoaded())
+    return;
+
+  if(mSegmentation->src.empty())
+    mSegmentation->src = this->src;
+
+  loadWidget(THRESHOLDING_WIDGET);
 }
 
 void MainWindow::hideAllSideBarWidgets(){

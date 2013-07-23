@@ -23,22 +23,22 @@ void Features::featureDetect(int alg,int mhess){
 
 
  switch (alg){
+   case 0 :
+
+         detector=new GoodFeaturesToTrackDetector( minHessian,0.01,1,3,true,0.04 );
+        break;
+
+
    case 1 :
 
-         detector=new GoodFeaturesToTrackDetector( minHessian );
+        detector=new SiftFeatureDetector(  );
         break;
-
-
    case 2 :
-
-        detector=new SiftFeatureDetector( minHessian );
-        break;
-   case 3 :
         detector=new SurfFeatureDetector( minHessian );
         break;
-     case 4 :
-          detector=new DenseFeatureDetector( minHessian );
-        break;
+   //  case 4 :
+   //       detector=new DenseFeatureDetector( );
+   //     break;
 
  }
 
@@ -52,7 +52,7 @@ void Features::featureDetect(int alg,int mhess){
   ///-- Draw keypoints
   Mat img_keypoints;
 
-  drawKeypoints( img, keypoints, img, Scalar::all(-1), DrawMatchesFlags::DEFAULT );
+  drawKeypoints( img, keypoints, out, Scalar::all(-1), DrawMatchesFlags::DEFAULT );
 
 
   //-- Show detected (drawn) keypoints
@@ -62,8 +62,9 @@ void Features::featureDetect(int alg,int mhess){
 }
 
 
-string face_cascade_name = "haarcascade_frontalface_alt.xml";
-string eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
+
+string face_cascade_name = "features/haarcascade_frontalface_alt.xml";
+string eyes_cascade_name = "features/haarcascade_eye_tree_eyeglasses.xml";
 CascadeClassifier face_cascade;
 CascadeClassifier eyes_cascade;
 string window_name = "Capture - Face detection";
@@ -112,7 +113,7 @@ void Features::faceDetect(){
   if( !face_cascade.load( face_cascade_name ) ){ printf("--(!)Error loading\n");  };
   if( !eyes_cascade.load( eyes_cascade_name ) ){ printf("--(!)Error loading\n");  };
   detectAndDisplay( img );
-
+  out=img;
 
 }
 
@@ -133,22 +134,22 @@ void Features::featureFind(Mat img2,int alg,int mhess){
 
 
  switch (alg){
-   case 1 :
+   case 0 :
 
          detector=new GoodFeaturesToTrackDetector( minHessian );
         break;
 
 
-   case 2 :
+   case 1 :
 
         detector=new SiftFeatureDetector( minHessian );
         break;
-   case 3 :
+   case 2 :
         detector=new SurfFeatureDetector( minHessian );
         break;
-     case 4 :
-          detector=new DenseFeatureDetector( minHessian );
-        break;
+     //case 4 :
+      //    detector=new DenseFeatureDetector( minHessian );
+       // break;
 
  }
 
@@ -223,7 +224,7 @@ void Features::featureFind(Mat img2,int alg,int mhess){
   line( img_matches, scene_corners[3] + Point2f( img_object.cols, 0), scene_corners[0] + Point2f( img_object.cols, 0), Scalar( 0, 255, 0), 4 );
 
 
-  img=img_matches;
+  out=img_matches;
 
 }
 
@@ -232,9 +233,9 @@ void Features::featureFind(Mat img2,int alg,int mhess){
 
 
 
-Features::Features(String img)
+Features::Features()
 {
-    this->img=imread(img);
+
 }
 
 Features::~Features()

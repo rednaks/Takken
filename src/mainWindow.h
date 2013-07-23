@@ -29,6 +29,9 @@
 #define OUVERTURE_WIDGET        0x0B
 #define FERMETURE_WIDGET        0x0C
 #define GRADIENT_WIDGET         0x0D
+#define SPLIT_AND_MERGE_WIDGET  0x10
+#define GROWING_REGION_WIDGET   0x11
+#define THRESHOLDING_WIDGET     0x12
 
 #include <QtGui>
 #include <opencv2/core/core.hpp>
@@ -39,6 +42,8 @@
 #include "filtreWidgets.h"
 #include "morphologieWidgets.h"
 #include "Morphologie.h"
+#include "segmentationWidgets.h"
+#include "segmentation.h"
 
 class MainWindow : public QMainWindow {
   Q_OBJECT
@@ -98,7 +103,7 @@ private:
 
     cv::Mat src;
     QLabel *imageDispLabel; // Image container
-    unsigned int widget;
+    unsigned int currentWidget;
 
 
 public:
@@ -111,6 +116,9 @@ public:
     morphologie::OuvertureWidget *ouvertureWidget;
     morphologie::FermetureWidget *fermetureWidget;
     morphologie::GradientWidget *gradientWidget;
+
+    Segmentation *mSegmentation;
+    segmentation::ThresholdingWidget *thresholdingWidget;
 
 
 
@@ -136,6 +144,9 @@ public slots:
     void ouvertureClicked();
     void fermetureClicked();
     void gradientClicked();
+
+    //Slots pour la segmentation
+    void thresholdingClicked();
 };
 
 #endif

@@ -64,13 +64,13 @@ void BruitageWidget::updateVal(int v){
 /******************** END Bruitage Widget *****************************/
 
 /******************** BEGIN Bilateral Widget ***********************************/
-BilateralWidget::BilateralWidget(Mainwindow* parent){
+BilateralWidget::BilateralWidget(MainWindow* parent){
 this->parent=parent;
 diametreSlider= new QSlider;
 diametreSlider->setOrientation(QT::Horizontal);
 diametreSlider->setMinimum(1);
 diametreSlider->setMaximum(10);
-connect(diametreSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal()));
+connect(diametreSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 diametreLabel = new QLabel (QString::fromUtf8("Diametre :"));
 
@@ -78,7 +78,7 @@ SigmaColorSlider = new QSlider;
 SigmaColorSlider->setOrientation(Qt::Horizontal);
 SigmaColorSlider->setMinimum(0);
 SigmaColorSlider->setMaximum(100);
-connect(SigmaColorSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal()));
+connect(SigmaColorSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 SigmaColorLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
 
@@ -87,7 +87,7 @@ SigmaSpaceSlider = new QSlider;
 SigmaSpaceSlider->setOrientation(Qt::Horizontal);
 SigmaSpaceSlider->setMinimum(0);
 SigmaSpaceSlider->setMaximum(100);
-connect(SigmaSpaceSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal()));
+connect(SigmaSpaceSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 SigmaSpaceLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
 
@@ -228,14 +228,14 @@ printf("Val : %d\n",v);
 
 /******************** BEGIN Gaussien Widget ***********************************/
 
-GaussienWidget::GaussienWidget(Mainwindow* parent){
+GaussienWidget::GaussienWidget(MainWindow* parent){
 this->parent=parent;
 noyauSlider= new QSlider;
 noyauSlider->setOrientation(QT::Horizontal);
 noyauSlider->setMinimum(1);
 noyauSlider->setMaximum(41);
 noyauSlider->setSingleStep(2);
-connect(noyauSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal()));
+connect(noyauSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 noyauLabel = new QLabel (QString::fromUtf8("taille du noyau :"));
 
@@ -243,7 +243,7 @@ SigmaXSlider = new QSlider;
 SigmaXSlider->setOrientation(Qt::Horizontal);
 SigmaXSlider->setMinimum(0);
 SigmaXSlider->setMaximum(10);
-connect(SigmaXSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal()));
+connect(SigmaXSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 SigmaXLabel = new QLabel(QString::fromUtf8("Deviation par rapport a x :"));
 
@@ -281,14 +281,14 @@ void GaussienWidget::updateVal(int v){
 /******************** END Gaussien Widget  ***********************************/
 
 /******************** BEGIN Laplacien Widget ***********************************/
-LaplacienWidget::LaplacienWidget(Mainwindow* parent){
+LaplacienWidget::LaplacienWidget(MainWindow* parent){
 this->parent=parent;
 noyauGaussSlider= new QSlider;
 noyauGaussSlider->setOrientation(QT::Horizontal);
 noyauGaussSlider->setMinimum(1);
 noyauGaussSlider->setMaximum(41);
 noyauGaussSlider->setSingleStep(2);
-connect(noyauGaussSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal()));
+connect(noyauGaussSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 noyauGaussLabel = new QLabel (QString::fromUtf8("noyau gaussien :"));
 
@@ -297,7 +297,7 @@ noyauLaplaceSlider->setOrientation(Qt::Horizontal);
 noyauLaplaceSlider->setMinimum(1);
 noyauLaplaceSlider->setMaximum(9);
 noyauLaplaceSlider->setSingleStep(2);
-connect(noyauLaplaceSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal()));
+connect(noyauLaplaceSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 noyauLaplaceLabel = new QLabel(QString::fromUtf8("noyau laplacien :"));
 
@@ -317,7 +317,7 @@ LaplacienWidget::~LaplacienWidget(){}
 
 void LaplacienWidget::updateVal(int v){
     printf("Val : %d\n",v);
-    this->parent->mFiltre->LaplacienFiltre(noyauGaussSlider->value(),noyauLaplaceSlider->value());
+    this->parent->mFiltre->LaplacienFiltre(Size(noyauGaussSlider->value(),noyauGaussSlider->value()),noyauLaplaceSlider->value());
     this->parent->updateImage();
 
 }
@@ -362,13 +362,13 @@ printf("Val : %d\n",v);
 
 /******************** END Filtre2D Widget  ***********************************/
 /******************** BEGIN SepFilter Widget ***********************************/
-sepFilter2DWidget::sepFilter2DWidget(Mainwindow* parent){
+sepFilter2DWidget::sepFilter2DWidget(MainWindow* parent){
 this->parent=parent;
 noyauLigneSlider= new QSlider;
 noyauLigneSlider->setOrientation(QT::Horizontal);
 noyauLigneSlider->setMinimum(1);
 noyauLigneSlider->setMaximum(20);
-connect(noyauLigneSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal()));
+connect(noyauLigneSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 noyauLigneLabel = new QLabel (QString::fromUtf8("noyau des lignes :"));
 
@@ -376,7 +376,7 @@ noyauColonneSlider = new QSlider;
 noyauColonneSlider->setOrientation(Qt::Horizontal);
 noyauColonneSlider->setMinimum(0);
 noyauColonneSlider->setMaximum(100);
-connect(noyauColonneSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal()));
+connect(noyauColonneSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 noyauColonneLabel = new QLabel(QString::fromUtf8("noyau des colonnes :"));
 
@@ -392,7 +392,7 @@ QFormLayout *formLayout = new QFormLayout;
 
 }
 
-sepFilter2DWidget::~Filter2DWidget(){}
+sepFilter2DWidget::~sepFilter2DWidget(){}
 
 void sepFilter2DWidget::updateVal(int v){
     printf("Val : %d\n",v);

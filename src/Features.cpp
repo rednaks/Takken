@@ -23,17 +23,17 @@ void Features::featureDetect(int alg,int mhess){
 
 
  switch (alg){
-   case 1 :
+   case 0 :
 
          detector=new GoodFeaturesToTrackDetector( minHessian,0.01,1,3,true,0.04 );
         break;
 
 
-   case 2 :
+   case 1 :
 
         detector=new SiftFeatureDetector(  );
         break;
-   case 3 :
+   case 2 :
         detector=new SurfFeatureDetector( minHessian );
         break;
    //  case 4 :
@@ -134,22 +134,22 @@ void Features::featureFind(Mat img2,int alg,int mhess){
 
 
  switch (alg){
-   case 1 :
+   case 0 :
 
          detector=new GoodFeaturesToTrackDetector( minHessian );
         break;
 
 
-   case 2 :
+   case 1 :
 
         detector=new SiftFeatureDetector( minHessian );
         break;
-   case 3 :
+   case 2 :
         detector=new SurfFeatureDetector( minHessian );
         break;
-     case 4 :
-          detector=new DenseFeatureDetector( minHessian );
-        break;
+     //case 4 :
+      //    detector=new DenseFeatureDetector( minHessian );
+       // break;
 
  }
 

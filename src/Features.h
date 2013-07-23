@@ -24,12 +24,12 @@ class Features
         virtual ~Features();
 
 
-        /// detection des point d'interet avec surf / parametre 1:harris 2:sift 3:surf  /  la valeur pour la matrice hessienne avec surf ou la valeu de maxcorner avec harris
-        void featureDetect(int=3,int=400);
+        /// detection des point d'interet avec surf / parametre 0:harris 1:sift 2:surf  /  la valeur pour la matrice hessienne avec surf ou la valeu de maxcorner avec harris
+        void featureDetect(int=2,int=400);
         /// detection de visage
         void faceDetect();
         /// comaraison de de l'image en parametre avec notre image/ image a comparer / parametre 1:harris 2:sift 3:surf  /  la valeur pour la matrice hessienne/
-        void featureFind(Mat,int=3,int=400);
+        void featureFind(Mat,int=2,int=400);
 
 
 

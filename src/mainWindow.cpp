@@ -81,7 +81,7 @@ MainWindow::MainWindow(){
 
   //Les connexion pour le menu caractérisation 
   connect(featureDetectAction, SIGNAL(triggered()), this, SLOT(featureDetectClicked()));
-
+  connect(faceDetectAction, SIGNAL(triggered()), this, SLOT(faceDetectClicked()));
   //Ajout des action du menu Segmentation
   splitAndMergeSegAction = segMenu->addAction("Split And Merge");
   growinRegionSegAction = segMenu->addAction("Growing Region");
@@ -112,6 +112,10 @@ MainWindow::MainWindow(){
   mFeature = new Features;
   featureDetectWidget = new feature::FeatureDetectWidget(this);
   sideBarWidgets.push_back(featureDetectWidget);
+
+  faceDetectWidget = new feature::FaceDetectWidget(this);
+
+  sideBarWidgets.push_back(faceDetectWidget);
 
   m = new Morphologie;
   erosionWidget = new morphologie::ErosionWidget(this);
@@ -162,6 +166,9 @@ void MainWindow::updateImage(){
   else if(this->currentWidget >= SPLIT_AND_MERGE_WIDGET && this->currentWidget <= THRESHOLDING_WIDGET)
     img = new QImage(Mat2QImage(mSegmentation->dst));
 
+
+
+
   imageDispLabel->setPixmap(QPixmap::fromImage(*img));
   }
 
@@ -186,6 +193,9 @@ void MainWindow::loadWidget(int widget){
       break;
     case FEATURE_DETECT_WIDGET:
       featureDetectWidget->show();
+      break;
+     case FACE_DETECT_WIDGET:
+      faceDetectWidget->show();
       break;
     case EROSION_WIDGET:
       erosionWidget->show();
@@ -242,8 +252,18 @@ void MainWindow::featureDetectClicked(){
     return;
   if(mFeature->img.empty())
     mFeature->img = this->src;
-  
+    
   loadWidget(FEATURE_DETECT_WIDGET);
+
+}
+
+void MainWindow::faceDetectClicked(){
+  if(!checkImageLoaded())
+    return;
+  if(mFeature->img.empty())
+    mFeature->img = this->src;
+  
+  loadWidget(FACE_DETECT_WIDGET);
 
 }
 

@@ -295,9 +295,6 @@ void MainWindow::bruitClicked(){
 
 }
 
-<<<<<<< HEAD
-  void MainWindow::featureDetectClicked(){
-=======
 void MainWindow::gaussienClicked(){
   if(!checkImageLoaded())
     return;
@@ -353,7 +350,6 @@ void MainWindow::bilateralClicked(){
 }
 
 void MainWindow::featureDetectClicked(){
->>>>>>> 8d0a75c95fb7b9421c709f35ed14cf460f278cc2
   if(!checkImageLoaded())
     return;
 

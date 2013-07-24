@@ -114,7 +114,7 @@ MainWindow::MainWindow(){
   imageDispLabel->setStyleSheet(QString("QLabel { background: #687074}"));
 
 
-  mFiltre = new Filtre;
+  mFiltre = new Filtre(src);
   bruitWidget = new filtre::BruitageWidget(this);
   sideBarWidgets.push_back(bruitWidget);
   gaussienWidget = new filtre::GaussienWidget(this);
@@ -275,8 +275,6 @@ bool MainWindow::checkImageLoaded(){
 void MainWindow::bruitClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
 
   loadWidget(BRUIT_WIDGET);
 
@@ -285,8 +283,6 @@ void MainWindow::bruitClicked(){
 void MainWindow::gaussienClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
 
   loadWidget(GAUSSIEN_WIDGET);
 }
@@ -294,8 +290,6 @@ void MainWindow::gaussienClicked(){
 void MainWindow::medianClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
   
   loadWidget(MEDIAN_WIDGET);
 }
@@ -303,8 +297,6 @@ void MainWindow::medianClicked(){
 void MainWindow::blurClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
   
   loadWidget(BLUR_WIDGET);
 }
@@ -312,8 +304,6 @@ void MainWindow::blurClicked(){
 void MainWindow::boxClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
 
   loadWidget(BOX_WIDGET);
 }
@@ -321,8 +311,6 @@ void MainWindow::boxClicked(){
 void MainWindow::sep2DClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
 
   loadWidget(SEP_2D_WIDGET);
 }
@@ -330,8 +318,6 @@ void MainWindow::sep2DClicked(){
 void MainWindow::laplacienClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
 
   loadWidget(LAPLACIEN_WIDGET);
 }
@@ -339,14 +325,11 @@ void MainWindow::laplacienClicked(){
 void MainWindow::filtre2DClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
+  loadWidget(FILTRE_2D_WIDGET);
 }
 void MainWindow::bilateralClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
 
   loadWidget(BILATERAL_WIDGET);
 }

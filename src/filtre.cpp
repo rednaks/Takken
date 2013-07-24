@@ -16,11 +16,11 @@ Filtre::Filtre(Mat &img,Mat outt):image(img){
 out=outt;
 }
 
-void Filtre::bilateralFiltre(int diametre, double sigmaColor,double sigmaSpace){
+void Filtre::bilateralFiltre(double sigmaColor,double sigmaSpace){
 out=image.clone();
 Mat img=image.clone();
 
-  bilateralFilter(img,out,diametre,sigmaColor,sigmaSpace);
+  bilateralFilter(img,out,30,sigmaColor,sigmaSpace);
 }
 
 void Filtre::blurFiltre(Size ksize){

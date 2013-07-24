@@ -15,7 +15,7 @@ Mat getImage(){return image;};
 Mat getOut(){return out;};
 void setImage(Mat img){image=img;};
 void setOut(Mat outt){out=outt;};
-void bilateralFiltre(int diametre, double sigmaColor,double sigmaSpace);
+void bilateralFiltre(double sigmaColor,double sigmaSpace);
 void blurFiltre(Size ksize);
 void medianFiltre(int noyau);
 void boxFiltre(cv::Size ksize);

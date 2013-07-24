@@ -157,8 +157,6 @@ class MedianWidget:public QWidget {
         QSlider *noyauSlider;
         QLabel *noyauLabel;
         MainWindow *parent;
-
-        int value;
   };
 /************************************************************************/
 /******************** Gaussien Widget  ***********************************/

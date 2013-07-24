@@ -121,6 +121,8 @@ public:
 
     Features *mFeature;
     feature::FeatureDetectWidget *featureDetectWidget;
+    feature::FaceDetectWidget *faceDetectWidget;
+
 
     Morphologie *m;
     morphologie::ErosionWidget *erosionWidget;
@@ -152,6 +154,7 @@ public slots:
 
     //Slots pour la caractérisation
     void featureDetectClicked();
+    void faceDetectClicked();
 
     //Slots pour la morphologie
     void erosionClicked();

@@ -226,7 +226,7 @@ void Features::featureFind(Mat img2,int alg,int mhess){
 
 
 
-Features::Features()
+Features::Features(Mat &src):img(src)
 {
 
 }

@@ -28,9 +28,9 @@ using namespace cv;
 class Features
 {
     public:
-        Mat img;
+        Mat &img;
         Mat out;
-        Features();
+        Features(Mat &);
 
         virtual ~Features();
 

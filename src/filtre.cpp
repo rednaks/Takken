@@ -8,12 +8,11 @@ using namespace std;
 using namespace cv;
 
 
-Filtre::Filtre(){
+Filtre::Filtre(Mat& aImage):image(aImage){
 
 }
 
-Filtre::Filtre(Mat img,Mat outt){
-image=img;
+Filtre::Filtre(Mat &img,Mat outt):image(img){
 out=outt;
 }
 

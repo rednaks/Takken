@@ -114,7 +114,7 @@ MainWindow::MainWindow(){
   imageDispLabel->setStyleSheet(QString("QLabel { background: #687074}"));
 
 
-  mFiltre = new Filtre;
+  mFiltre = new Filtre(src);
   bruitWidget = new filtre::BruitageWidget(this);
   sideBarWidgets.push_back(bruitWidget);
   gaussienWidget = new filtre::GaussienWidget(this);
@@ -138,10 +138,9 @@ MainWindow::MainWindow(){
   sideBarWidgets.push_back(featureDetectWidget);
 
   faceDetectWidget = new feature::FaceDetectWidget(this);
-
   sideBarWidgets.push_back(faceDetectWidget);
 
-  m = new Morphologie;
+  m = new Morphologie(src);
   erosionWidget = new morphologie::ErosionWidget(this);
   sideBarWidgets.push_back(erosionWidget);
   dilatationWidget = new morphologie::DilatationWidget(this);
@@ -285,8 +284,6 @@ bool MainWindow::checkImageLoaded(){
 void MainWindow::bruitClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
 
   loadWidget(BRUIT_WIDGET);
 
@@ -295,8 +292,6 @@ void MainWindow::bruitClicked(){
 void MainWindow::gaussienClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
 
   loadWidget(GAUSSIEN_WIDGET);
 }
@@ -304,8 +299,6 @@ void MainWindow::gaussienClicked(){
 void MainWindow::medianClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
   
   loadWidget(MEDIAN_WIDGET);
 }
@@ -313,8 +306,6 @@ void MainWindow::medianClicked(){
 void MainWindow::blurClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
   
   loadWidget(BLUR_WIDGET);
 }
@@ -322,8 +313,6 @@ void MainWindow::blurClicked(){
 void MainWindow::boxClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
 
   loadWidget(BOX_WIDGET);
 }
@@ -331,8 +320,6 @@ void MainWindow::boxClicked(){
 void MainWindow::sep2DClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
 
   loadWidget(SEP_2D_WIDGET);
 }
@@ -340,8 +327,6 @@ void MainWindow::sep2DClicked(){
 void MainWindow::laplacienClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
 
   loadWidget(LAPLACIEN_WIDGET);
 }
@@ -349,14 +334,11 @@ void MainWindow::laplacienClicked(){
 void MainWindow::filtre2DClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
+  loadWidget(FILTRE_2D_WIDGET);
 }
 void MainWindow::bilateralClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFiltre->image.empty())
-    mFiltre->image = this->src;
 
   loadWidget(BILATERAL_WIDGET);
 }
@@ -385,9 +367,6 @@ void MainWindow::erosionClicked(){
   if(!checkImageLoaded())
     return;
 
-  if(m->src.empty())
-    m->src = this->src;
-
   loadWidget(EROSION_WIDGET);
 
 }
@@ -396,9 +375,6 @@ void MainWindow::dilatationClicked(){
   if(!checkImageLoaded())
     return;
 
-  if(m->src.empty())
-    m->src = this->src;
-
   loadWidget(DILATATION_WIDGET);
 
 }
@@ -406,9 +382,6 @@ void MainWindow::dilatationClicked(){
 void MainWindow::ouvertureClicked(){
   if(!checkImageLoaded())
     return;
-
-  if(m->src.empty())
-    m->src = this->src;
 
   loadWidget(OUVERTURE_WIDGET);
 
@@ -428,9 +401,6 @@ void MainWindow::fermetureClicked(){
 void MainWindow::gradientClicked(){
   if(!checkImageLoaded())
     return;
-
-  if(m->src.empty())
-    m->src = this->src;
 
   loadWidget(GRADIENT_WIDGET);
 

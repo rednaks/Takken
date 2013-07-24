@@ -109,7 +109,9 @@ BilateralWidget::~BilateralWidget(){}
 
 void BilateralWidget::updateVal(int v){
     printf("Val : %d\n",v);
-    this->parent->mFiltre->bilateralFiltre(diametreSlider->value(),sigmaColorSlider->value(),sigmaSpaceSlider->value());
+   double s= static_cast <double> (sigmaColorSlider->value());
+   double m=static_cast <double> (sigmaSpaceSlider->value());
+    this->parent->mFiltre->bilateralFiltre(diametreSlider->value(),s,m);
     this->parent->updateImage();
 }
 /******************** END Bilateral Widget  ***********************************/

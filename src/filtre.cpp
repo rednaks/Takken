@@ -25,38 +25,45 @@ void Filtre::bilateralFiltre(int diametre, double sigmaColor,double sigmaSpace){
 
 void Filtre::blurFiltre(Size ksize){
 
-  blur(image,image,ksize,Point(-1, -1));
-
+  blur(image,out,ksize,Point(-1, -1));
+  image=out;
 }
 
 void Filtre::boxFiltre(cv::Size ksize){
 
-    boxFilter(image,image,-1,ksize,Point(-1, -1),true);
+    boxFilter(image,out,-1,ksize,Point(-1, -1),true);
+    image=out;
 }
 
 void Filtre::medianFiltre(int noyau){
 
-    medianBlur(image,image,noyau);
+    medianBlur(image,out,noyau);
+    image=out;
 
 }
 
 void Filtre::gaussienFiltre(Size ksize,double sigmaX,double sigmaY){
-    GaussianBlur(image,image,ksize,sigmaX,sigmaY);
+    GaussianBlur(image,out,ksize,sigmaX,sigmaY);
+    image=out;
 }
 
 void Filtre::sepFilter2DFiltre(int noyau_lignes,int noyau_colonnes){
-    sepFilter2D(image,image,-1,noyau_lignes,noyau_colonnes,Point(-1,-1), 0);
+    sepFilter2D(image,out,-1,noyau_lignes,noyau_colonnes,Point(-1,-1), 0);
+    image=out;
 }
 
 void Filtre::filter2DFiltre(int kernel){
-filter2D(image, image, -1, kernel, Point(-1,-1), 0, BORDER_DEFAULT );
+filter2D(image, out, -1, kernel, Point(-1,-1), 0, BORDER_DEFAULT );
+image=out;
 }
 
 void Filtre::LaplacienFiltre(Size noyau_gaussien,int taille_noyau){
-GaussianBlur(image,image,noyau_gaussien,0,0,BORDER_DEFAULT);
-cvtColor(image,image,CV_RGB2GRAY);
-Laplacian(image,image,-1,taille_noyau,1,0,BORDER_DEFAULT);
-convertScaleAbs(image,image);
+    Mat out2,out1,out3;
+GaussianBlur(image,out1,noyau_gaussien,0,0,BORDER_DEFAULT);
+cvtColor(out1,out2,CV_RGB2GRAY);
+Laplacian(out2,out3,-1,taille_noyau,1,0,BORDER_DEFAULT);
+convertScaleAbs(out3,out);
+image=out;
 }
 
 void Filtre::bruit_sel_poivre(int n){

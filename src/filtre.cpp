@@ -18,7 +18,7 @@ out=outt;
 }
 
 void Filtre::bilateralFiltre(int diametre, double sigmaColor,double sigmaSpace){
-out=image;
+out=image.clone();
 Mat img=image.clone();
 
   bilateralFilter(ima,out,diametre,sigmaColor,sigmaSpace);
@@ -26,7 +26,7 @@ Mat img=image.clone();
 }
 
 void Filtre::blurFiltre(Size ksize){
- out=image;
+ out=image.clone();
 Mat img=image.clone();
 
   blur(img,out,ksize,Point(-1, -1));
@@ -35,7 +35,7 @@ Mat img=image.clone();
 
 void Filtre::boxFiltre(cv::Size ksize){
 
-   out=image;
+   out=image.clone();
    Mat img=image.clone();
 
     boxFilter(img,out,-1,ksize,Point(-1, -1),true);
@@ -43,7 +43,7 @@ void Filtre::boxFiltre(cv::Size ksize){
 }
 
 void Filtre::medianFiltre(int noyau){
-    out =image;
+    out =image.clone();
     Mat img=image.clone();
 
     medianBlur(img,out,noyau);
@@ -52,7 +52,7 @@ void Filtre::medianFiltre(int noyau){
 }
 
 void Filtre::gaussienFiltre(Size ksize,double sigmaX,double sigmaY){
-    out =image;
+    out =image.clone();
     Mat img=image.clone();
 
     GaussianBlur(img,out,ksize,sigmaX,sigmaY);
@@ -60,7 +60,7 @@ void Filtre::gaussienFiltre(Size ksize,double sigmaX,double sigmaY){
 }
 
 void Filtre::sepFilter2DFiltre(int noyau_lignes,int noyau_colonnes){
-    out =image;
+    out =image.clone();
     Mat img=image.clone();
 
     sepFilter2D(img,out,-1,noyau_lignes,noyau_colonnes,Point(-1,-1), 0);
@@ -68,7 +68,7 @@ void Filtre::sepFilter2DFiltre(int noyau_lignes,int noyau_colonnes){
 }
 
 void Filtre::filter2DFiltre(int kernel){
-    out =image;
+    out =image.clone();
     Mat img=image.clone();
 
 filter2D(img, out, -1, kernel, Point(-1,-1), 0, BORDER_DEFAULT );
@@ -76,7 +76,7 @@ out=img;
 }
 
 void Filtre::LaplacienFiltre(Size noyau_gaussien,int taille_noyau){
-    out =image;
+    out =image.clone();
     Mat img=image.clone();
     Mat out2,out1,out3;
 GaussianBlur(img,out1,noyau_gaussien,0,0,BORDER_DEFAULT);

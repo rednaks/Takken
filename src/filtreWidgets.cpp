@@ -182,7 +182,9 @@ printf("Val : %d\n",v);
   noyauSlider->setValue(v);
   this->parent->mFiltre->medianFiltre(v);
   this->parent->updateImage();
-}
+
+  }
+
 
 
 /******************** END  Median Widget  ***********************************/

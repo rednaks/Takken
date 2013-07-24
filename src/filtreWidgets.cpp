@@ -185,8 +185,6 @@ printf("Val : %d\n",v);
 
   }
 
-
-
 /******************** END  Median Widget  ***********************************/
 
 /******************** BEGIN boxFiltre Widget ***********************************/
@@ -368,7 +366,7 @@ SepFilter2DWidget::SepFilter2DWidget(MainWindow* parent){
 this->parent=parent;
 noyauLigneSlider= new QSlider;
 noyauLigneSlider->setOrientation(Qt::Horizontal);
-noyauLigneSlider->setMinimum(1);
+noyauLigneSlider->setMinimum(2);
 noyauLigneSlider->setMaximum(20);
 connect(noyauLigneSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
@@ -376,8 +374,8 @@ noyauLigneLabel = new QLabel (QString::fromUtf8("noyau des lignes :"));
 
 noyauColonneSlider = new QSlider;
 noyauColonneSlider->setOrientation(Qt::Horizontal);
-noyauColonneSlider->setMinimum(0);
-noyauColonneSlider->setMaximum(100);
+noyauColonneSlider->setMinimum(2);
+noyauColonneSlider->setMaximum(20);
 connect(noyauColonneSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 noyauColonneLabel = new QLabel(QString::fromUtf8("noyau des colonnes :"));

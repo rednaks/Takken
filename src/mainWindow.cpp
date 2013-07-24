@@ -137,7 +137,7 @@ MainWindow::MainWindow(){
   featureDetectWidget = new feature::FeatureDetectWidget(this);
   sideBarWidgets.push_back(featureDetectWidget);
 
-  m = new Morphologie;
+  m = new Morphologie(src);
   erosionWidget = new morphologie::ErosionWidget(this);
   sideBarWidgets.push_back(erosionWidget);
   dilatationWidget = new morphologie::DilatationWidget(this);
@@ -365,9 +365,6 @@ void MainWindow::erosionClicked(){
   if(!checkImageLoaded())
     return;
 
-  if(m->src.empty())
-    m->src = this->src;
-
   loadWidget(EROSION_WIDGET);
 
 }
@@ -376,9 +373,6 @@ void MainWindow::dilatationClicked(){
   if(!checkImageLoaded())
     return;
 
-  if(m->src.empty())
-    m->src = this->src;
-
   loadWidget(DILATATION_WIDGET);
 
 }
@@ -386,9 +380,6 @@ void MainWindow::dilatationClicked(){
 void MainWindow::ouvertureClicked(){
   if(!checkImageLoaded())
     return;
-
-  if(m->src.empty())
-    m->src = this->src;
 
   loadWidget(OUVERTURE_WIDGET);
 
@@ -408,9 +399,6 @@ void MainWindow::fermetureClicked(){
 void MainWindow::gradientClicked(){
   if(!checkImageLoaded())
     return;
-
-  if(m->src.empty())
-    m->src = this->src;
 
   loadWidget(GRADIENT_WIDGET);
 

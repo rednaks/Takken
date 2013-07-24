@@ -94,7 +94,7 @@ morphologyEx( src, dst, operation, element );
 
 
 
-Morphologie::Morphologie()
+Morphologie::Morphologie(cv::Mat& aImage):src(aImage)
 {
 erosion_elem=0 ;
 erosion_size=0;

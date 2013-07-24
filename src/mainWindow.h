@@ -138,7 +138,7 @@ public:
     Features *mFeature;
     feature::FeatureDetectWidget *featureDetectWidget;
     feature::FaceDetectWidget *faceDetectWidget;
-
+    feature::FeatureFindWidget *featureFindWidget;
 
     Morphologie *m;
     morphologie::ErosionWidget *erosionWidget;
@@ -179,7 +179,7 @@ public slots:
     //Slots pour la caractérisation
     void featureDetectClicked();
     void faceDetectClicked();
-
+    void featureFindClicked();
     //Slots pour la morphologie
     void erosionClicked();
     void dilatationClicked();

@@ -66,18 +66,10 @@ void BruitageWidget::updateVal(int v){
 /******************** BEGIN Bilateral Widget ***********************************/
 BilateralWidget::BilateralWidget(MainWindow* parent){
 this->parent=parent;
-diametreSlider= new QSlider;
-diametreSlider->setOrientation(Qt::Horizontal);
-diametreSlider->setMinimum(1);
-diametreSlider->setMaximum(10);
-connect(diametreSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
-
-diametreLabel = new QLabel (QString::fromUtf8("Diametre :"));
-
 sigmaColorSlider = new QSlider;
 sigmaColorSlider->setOrientation(Qt::Horizontal);
 sigmaColorSlider->setMinimum(0);
-sigmaColorSlider->setMaximum(100);
+sigmaColorSlider->setMaximum(500);
 connect(sigmaColorSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 sigmaColorLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
@@ -86,14 +78,12 @@ sigmaColorLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
 sigmaSpaceSlider = new QSlider;
 sigmaSpaceSlider->setOrientation(Qt::Horizontal);
 sigmaSpaceSlider->setMinimum(0);
-sigmaSpaceSlider->setMaximum(100);
+sigmaSpaceSlider->setMaximum(500);
 connect(sigmaSpaceSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 sigmaSpaceLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
 
 QFormLayout *formLayout = new QFormLayout;
-  formLayout->addRow(diametreLabel, new QLabel(""));
-  formLayout->addRow(diametreSlider);
   formLayout->addRow(sigmaColorLabel, new QLabel(""));
   formLayout->addRow(sigmaColorSlider);
   formLayout->addRow(sigmaSpaceLabel, new QLabel(""));

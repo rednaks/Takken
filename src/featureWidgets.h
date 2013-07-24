@@ -57,6 +57,23 @@ namespace feature {
       void updateVal();
 
     };
+
+
+  class FeatureFindWidget: public QWidget{
+    Q_OBJECT
+    public:
+      FeatureFindWidget(MainWindow* =0);
+      ~FeatureFindWidget();
+    private:
+      QLabel *LoadLabel;
+      QPushButton *b;
+      MainWindow *parent;
+
+      public slots:
+      void updateVal();
+
+    };
+
   
 } // namespace feature
 

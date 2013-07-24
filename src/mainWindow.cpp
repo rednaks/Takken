@@ -91,6 +91,7 @@ MainWindow::MainWindow(){
   //Les connexion pour le menu caractérisation 
   connect(featureDetectAction, SIGNAL(triggered()), this, SLOT(featureDetectClicked()));
   connect(faceDetectAction, SIGNAL(triggered()), this, SLOT(faceDetectClicked()));
+  connect(featureFindAction, SIGNAL(triggered()), this, SLOT(featureFindClicked()));
   //Ajout des action du menu Segmentation
   splitAndMergeSegAction = segMenu->addAction("Split And Merge");
   growinRegionSegAction = segMenu->addAction("Growing Region");
@@ -133,12 +134,14 @@ MainWindow::MainWindow(){
   sideBarWidgets.push_back(bilateralWidget);
 
 
-  mFeature = new Features;
+  mFeature = new Features(src);
   featureDetectWidget = new feature::FeatureDetectWidget(this);
   sideBarWidgets.push_back(featureDetectWidget);
-
   faceDetectWidget = new feature::FaceDetectWidget(this);
   sideBarWidgets.push_back(faceDetectWidget);
+  featureFindWidget = new feature::FeatureFindWidget(this);
+  sideBarWidgets.push_back(featureFindWidget);
+  
 
   m = new Morphologie(src);
   erosionWidget = new morphologie::ErosionWidget(this);
@@ -183,7 +186,7 @@ void MainWindow::updateImage(){
   if(this->currentWidget >= BRUIT_WIDGET && this->currentWidget <= BILATERAL_WIDGET)
     img = new QImage(Mat2QImage(mFiltre->out));
   else if(this->currentWidget >= FEATURE_DETECT_WIDGET && this->currentWidget <= FEATURE_FIND_WIDGET)
-    img = new QImage(Mat2QImage(mFiltre->out));
+    img = new QImage(Mat2QImage(mFeature->out));
   else if(this->currentWidget >= EROSION_WIDGET && this->currentWidget <= GRADIENT_WIDGET)
     img = new QImage(Mat2QImage(m->dst));
   else if(this->currentWidget >= SPLIT_AND_MERGE_WIDGET && this->currentWidget <= THRESHOLDING_WIDGET)
@@ -238,8 +241,11 @@ void MainWindow::loadWidget(int widget){
     case FEATURE_DETECT_WIDGET:
       featureDetectWidget->show();
       break;
-     case FACE_DETECT_WIDGET:
+    case FACE_DETECT_WIDGET:
       faceDetectWidget->show();
+      break;
+    case FEATURE_FIND_WIDGET:
+      featureFindWidget->show();
       break;
     case EROSION_WIDGET:
       erosionWidget->show();
@@ -346,20 +352,29 @@ void MainWindow::bilateralClicked(){
 void MainWindow::featureDetectClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFeature->img.empty())
-    mFeature->img = this->src;
+
     
   loadWidget(FEATURE_DETECT_WIDGET);
 
 }
 
+
 void MainWindow::faceDetectClicked(){
   if(!checkImageLoaded())
     return;
-  if(mFeature->img.empty())
-    mFeature->img = this->src;
+
   
   loadWidget(FACE_DETECT_WIDGET);
+
+}
+
+
+void MainWindow::featureFindClicked(){
+  if(!checkImageLoaded())
+    return;
+  
+    
+  loadWidget(FEATURE_FIND_WIDGET);
 
 }
 

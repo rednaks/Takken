@@ -60,21 +60,22 @@ void FeatureDetectWidget::updateVal(int){
   precisionLabel->setText(QString("Precision : %1").arg(precisionSlider->value()));
   this->parent->mFeature->featureDetect(algoComboBox->currentIndex(), precisionSlider->value());
   this->parent->updateImage();
-  cv::imshow("Res", this->parent->mFeature->out);
+ 
 
 }
 /***********************  END featureDectect Widget ****************************/
 /************************ BEGIN faceDetect widget ****************************/
 
 FaceDetectWidget::FaceDetectWidget(MainWindow *parent){
- this->parent = parent;
+  this->parent = parent;
    
- b=new QPushButton;
- b->setText("Detect");
+  b=new QPushButton;
+  b->setText("Detect");
   connect(b, SIGNAL(clicked()), this, SLOT(updateVal()));
 
- QFormLayout *formLayout = new QFormLayout;
- formLayout->addRow(b);
+  QFormLayout *formLayout = new QFormLayout;
+  formLayout->addRow(new QLabel("Face Detect"), new QLabel(""));
+  formLayout->addRow(b);
 
   this->setLayout(formLayout);
   this->hide();
@@ -86,14 +87,43 @@ FaceDetectWidget::~FaceDetectWidget() { }
 void FaceDetectWidget::updateVal(){
   
   this->parent->mFeature->faceDetect();
-//  this->parent->updateImage();
+  this->parent->updateImage();
 
-  cv::imshow("Res", this->parent->mFeature->img);
 
 }
 
 /***********************  END faceDetect Widget ****************************/
 
 /************************ BEGIN featureFind widget ****************************/
+
+FeatureFindWidget::FeatureFindWidget(MainWindow *parent){
+  this->parent = parent;
+  LoadLabel= new QLabel(QString("2nd image")) ;
+  b=new QPushButton;
+  b->setText("Load");
+  connect(b, SIGNAL(clicked()), this, SLOT(updateVal()));
+
+  QFormLayout *formLayout = new QFormLayout;
+  formLayout->addRow(new QLabel("Feature Find"), new QLabel(""));
+  formLayout->addRow(LoadLabel);
+  formLayout->addRow(b);
+
+  this->setLayout(formLayout);
+  this->hide();
+  }
+
+FeatureFindWidget::~FeatureFindWidget() { }
+
+
+void FeatureFindWidget::updateVal(){
+  QString fname = QFileDialog::getOpenFileName(this, "Open File", "", tr("Images (*.jpg *.png)"));
+  if(fname.length() == 0)
+  return;
+  cv::Mat obj = cv::imread(fname.toStdString());
+  this->parent->mFeature->featureFind(obj);
+  this->parent->updateImage();
+  
+}
+
 /***********************  END featureFind Widget ****************************/
 

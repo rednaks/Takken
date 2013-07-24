@@ -11,7 +11,7 @@ using namespace cv;
 class   Morphologie{
 
     public:
-    Morphologie();
+    Morphologie(cv::Mat&);
     void Erosion(int , int);
     void Dilatation(int , int);
     void Ouverture(int,int);
@@ -20,7 +20,7 @@ class   Morphologie{
 
 
     public:
-Mat src; Mat dst;
+Mat &src; Mat dst;
 int erosion_elem ;
 int erosion_size ;
 int morph_operator ;

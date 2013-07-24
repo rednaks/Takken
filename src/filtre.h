@@ -7,10 +7,10 @@ using namespace cv;
 class Filtre{
 
 public:
-Mat image;
+Mat &image;
 Mat out;
-Filtre();
-Filtre(Mat,Mat);
+Filtre(Mat&);
+Filtre(Mat&,Mat);
 Mat getImage(){return image;};
 Mat getOut(){return out;};
 void setImage(Mat img){image=img;};

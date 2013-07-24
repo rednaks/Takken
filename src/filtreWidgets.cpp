@@ -252,7 +252,7 @@ sigmaYSlider = new QSlider;
 sigmaYSlider->setOrientation(Qt::Horizontal);
 sigmaYSlider->setMinimum(0);
 sigmaYSlider->setMaximum(10);
-connect(sigmaYSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal()));
+connect(sigmaYSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 sigmaYLabel = new QLabel(QString::fromUtf8("Deviation par rapport a y :"));
 

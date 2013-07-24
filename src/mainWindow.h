@@ -24,6 +24,14 @@
 #define MAIN_WINDOW_H
 
 #define BRUIT_WIDGET            0x01
+#define GAUSSIEN_WIDGET         0x02
+#define MEDIAN_WIDGET           0x03
+#define BLUR_WIDGET             0x04
+#define BOX_WIDGET              0x05
+#define SEP_2D_WIDGET           0x06
+#define LAPLACIEN_WIDGET        0x07
+#define FILTRE_2D_WIDGET        0x08
+#define BILATERAL_WIDGET        0x09
 #define FEATURE_DETECT_WIDGET   0x0A
 #define FACE_DETECT_WIDGET      0x0B
 #define FEATURE_FIND_WIDGET     0x0C
@@ -118,6 +126,14 @@ private:
 public:
     Filtre *mFiltre;
     filtre::BruitageWidget *bruitWidget;
+    filtre::GaussienWidget *gaussienWidget;
+    filtre::MedianWidget *medianWidget;
+    filtre::BlurWidget *blurWidget;
+    filtre::BoxFiltreWidget *boxFiltreWidget;
+    filtre::SepFilter2DWidget *sepFilter2DWidget;
+    filtre::LaplacienWidget *laplacientWidget;
+    filtre::BilateralWidget *bilateralWidget;
+
 
     Features *mFeature;
     feature::FeatureDetectWidget *featureDetectWidget;
@@ -151,6 +167,14 @@ public slots:
 
     //Slits pour les filtres
     void bruitClicked();
+    void gaussienClicked();
+    void medianClicked();
+    void blurClicked();
+    void boxClicked();
+    void sep2DClicked();
+    void laplacienClicked();
+    void filtre2DClicked();
+    void bilateralClicked();
 
     //Slots pour la caractérisation
     void featureDetectClicked();

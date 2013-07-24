@@ -21,7 +21,7 @@ void Filtre::bilateralFiltre(int diametre, double sigmaColor,double sigmaSpace){
 out=image.clone();
 Mat img=image.clone();
 
-  bilateralFilter(ima,out,diametre,sigmaColor,sigmaSpace);
+  bilateralFilter(img,out,diametre,sigmaColor,sigmaSpace);
   out=img;
 }
 

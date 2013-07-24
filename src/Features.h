@@ -15,7 +15,7 @@
 
 
 #include <opencv2/highgui/highgui_c.h>
-//#include <opencv2/nonfree/features2d.hpp>
+#include <opencv2/nonfree/features2d.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
 #include <iostream>
 #include <stdio.h>

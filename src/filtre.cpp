@@ -18,52 +18,72 @@ out=outt;
 }
 
 void Filtre::bilateralFiltre(int diametre, double sigmaColor,double sigmaSpace){
+out=image;
+Mat img=image.clone();
 
-  bilateralFilter(image,out,diametre,sigmaColor,sigmaSpace);
-  image = out;
+  bilateralFilter(ima,out,diametre,sigmaColor,sigmaSpace);
+  out=img;
 }
 
 void Filtre::blurFiltre(Size ksize){
+ out=image;
+Mat img=image.clone();
 
-  blur(image,out,ksize,Point(-1, -1));
-  image=out;
+  blur(img,out,ksize,Point(-1, -1));
+  out=img;
 }
 
 void Filtre::boxFiltre(cv::Size ksize){
 
-    boxFilter(image,out,-1,ksize,Point(-1, -1),true);
-    image=out;
+   out=image;
+   Mat img=image.clone();
+
+    boxFilter(img,out,-1,ksize,Point(-1, -1),true);
+    out=img;
 }
 
 void Filtre::medianFiltre(int noyau){
+    out =image;
+    Mat img=image.clone();
 
-    medianBlur(image,out,noyau);
-    image=out;
+    medianBlur(img,out,noyau);
+    out=img;
 
 }
 
 void Filtre::gaussienFiltre(Size ksize,double sigmaX,double sigmaY){
-    GaussianBlur(image,out,ksize,sigmaX,sigmaY);
-    image=out;
+    out =image;
+    Mat img=image.clone();
+
+    GaussianBlur(img,out,ksize,sigmaX,sigmaY);
+    out=img;
 }
 
 void Filtre::sepFilter2DFiltre(int noyau_lignes,int noyau_colonnes){
-    sepFilter2D(image,out,-1,noyau_lignes,noyau_colonnes,Point(-1,-1), 0);
-    image=out;
+    out =image;
+    Mat img=image.clone();
+
+    sepFilter2D(img,out,-1,noyau_lignes,noyau_colonnes,Point(-1,-1), 0);
+    out=img;
 }
 
 void Filtre::filter2DFiltre(int kernel){
-filter2D(image, out, -1, kernel, Point(-1,-1), 0, BORDER_DEFAULT );
-image=out;
+    out =image;
+    Mat img=image.clone();
+
+filter2D(img, out, -1, kernel, Point(-1,-1), 0, BORDER_DEFAULT );
+out=img;
 }
 
 void Filtre::LaplacienFiltre(Size noyau_gaussien,int taille_noyau){
+    out =image;
+    Mat img=image.clone();
     Mat out2,out1,out3;
-GaussianBlur(image,out1,noyau_gaussien,0,0,BORDER_DEFAULT);
+GaussianBlur(img,out1,noyau_gaussien,0,0,BORDER_DEFAULT);
 cvtColor(out1,out2,CV_RGB2GRAY);
 Laplacian(out2,out3,-1,taille_noyau,1,0,BORDER_DEFAULT);
 convertScaleAbs(out3,out);
-image=out;
+out=img;
 }
 
 void Filtre::bruit_sel_poivre(int n){

@@ -26,14 +26,14 @@ using namespace feature;
 
 /************************ BEGIN featureDetect  widget ****************************/
 FeatureDetectWidget::FeatureDetectWidget(MainWindow *parent){
-  this->parent = parent;
+   this->parent = parent;
 
   algoComboBox = new QComboBox;
   algoComboBox->addItem(QString("Harris"));
   algoComboBox->addItem(QString("SIFT"));
   algoComboBox->addItem(QString("SURF"));
   connect(algoComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateVal(int)));
-
+   
   algoLabel = new QLabel(QString("Algo :"));
 
   precisionSlider = new QSlider;
@@ -43,7 +43,7 @@ FeatureDetectWidget::FeatureDetectWidget(MainWindow *parent){
   connect(precisionSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
   precisionLabel = new QLabel(QString("Precision : %1").arg(precisionSlider->value()));
-
+ 
   QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(new QLabel("Feature Detect"), new QLabel(""));
   formLayout->addRow(algoLabel, algoComboBox);
@@ -64,10 +64,36 @@ void FeatureDetectWidget::updateVal(int){
 
 }
 /***********************  END featureDectect Widget ****************************/
+/************************ BEGIN faceDetect widget ****************************/
 
-/************************ BEGIN FaceDetect widget ****************************/
-/***********************  END FaceDetect Widget ****************************/
+FaceDetectWidget::FaceDetectWidget(MainWindow *parent){
+ this->parent = parent;
+   
+ b=new QPushButton;
+ b->setText("Detect");
+  connect(b, SIGNAL(clicked()), this, SLOT(updateVal()));
 
-/************************ BEGIN FeatureFind widget ****************************/
-/***********************  END FeatureFind Widget ****************************/
+ QFormLayout *formLayout = new QFormLayout;
+ formLayout->addRow(b);
+
+  this->setLayout(formLayout);
+  this->hide();
+  }
+
+FaceDetectWidget::~FaceDetectWidget() { }
+
+
+void FaceDetectWidget::updateVal(){
+  
+  this->parent->mFeature->faceDetect();
+//  this->parent->updateImage();
+
+  cv::imshow("Res", this->parent->mFeature->img);
+
+}
+
+/***********************  END faceDetect Widget ****************************/
+
+/************************ BEGIN featureFind widget ****************************/
+/***********************  END featureFind Widget ****************************/
 

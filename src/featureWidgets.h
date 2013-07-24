@@ -43,6 +43,21 @@ namespace feature {
       void updateVal(int);
   };
 
+  
+  class FaceDetectWidget: public QWidget{
+    Q_OBJECT
+    public:
+      FaceDetectWidget(MainWindow* =0);
+      ~FaceDetectWidget();
+    private:
+      QPushButton *b;
+      MainWindow *parent;
+
+      public slots:
+      void updateVal();
+
+    };
+  
 } // namespace feature
 
 #endif

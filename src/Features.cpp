@@ -55,8 +55,8 @@ void Features::featureDetect(int alg,int mhess){
 
 
 
-string face_cascade_name = "features/haarcascade_frontalface_alt.xml";
-string eyes_cascade_name = "features/haarcascade_eye_tree_eyeglasses.xml";
+string face_cascade_name = "../features/haarcascade_frontalface_alt.xml";
+string eyes_cascade_name = "../features/haarcascade_eye_tree_eyeglasses.xml";
 CascadeClassifier face_cascade;
 CascadeClassifier eyes_cascade;
 string window_name = "Capture - Face detection";
@@ -104,8 +104,9 @@ void Features::faceDetect(){
 
   if( !face_cascade.load( face_cascade_name ) ){ printf("--(!)Error loading\n");  };
   if( !eyes_cascade.load( eyes_cascade_name ) ){ printf("--(!)Error loading\n");  };
-  detectAndDisplay( img );
   out=img;
+  detectAndDisplay( out );
+  
 
 }
 
@@ -134,7 +135,7 @@ void Features::featureFind(Mat img2,int alg,int mhess){
 
    case 1 :
 
-        detector=new SiftFeatureDetector();
+        detector=new SiftFeatureDetector(  );
         break;
    case 2 :
         detector=new SurfFeatureDetector( minHessian );

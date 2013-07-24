@@ -59,8 +59,6 @@ namespace filtre {
         public slots:
             void updateVal(int);
         private:
-            QSlider *diametreSlider;
-            QLabel *diametreLabel;
             QSlider *sigmaColorSlider;
             QLabel *sigmaColorLabel;
             QSlider *sigmaSpaceSlider;

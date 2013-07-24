@@ -362,7 +362,7 @@ printf("Val : %d\n",v);
 
 /******************** END Filtre2D Widget  ***********************************/
 /******************** BEGIN SepFilter Widget ***********************************/
-sepFilter2DWidget::sepFilter2DWidget(MainWindow* parent){
+SepFilter2DWidget::SepFilter2DWidget(MainWindow* parent){
 this->parent=parent;
 noyauLigneSlider= new QSlider;
 noyauLigneSlider->setOrientation(Qt::Horizontal);
@@ -392,9 +392,9 @@ QFormLayout *formLayout = new QFormLayout;
 
 }
 
-sepFilter2DWidget::~sepFilter2DWidget(){}
+SepFilter2DWidget::~SepFilter2DWidget(){}
 
-void sepFilter2DWidget::updateVal(int v){
+void SepFilter2DWidget::updateVal(int v){
     printf("Val : %d\n",v);
     this->parent->mFiltre->sepFilter2DFiltre(noyauLigneSlider->value(),noyauColonneSlider->value());
     this->parent->updateImage();

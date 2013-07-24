@@ -124,13 +124,13 @@ namespace filtre {
   };
 /************************************************************************/
 /******************** sepFilter2D Widget  ***********************************/
- class  sepFilter2DWidget :public QWidget{
+ class  SepFilter2DWidget :public QWidget{
     Q_OBJECT
 
 
         public:
-            sepFilter2DWidget(MainWindow * =0);
-            ~sepFilter2DWidget();
+            SepFilter2DWidget(MainWindow * =0);
+            ~SepFilter2DWidget();
 
         public slots:
             void updateVal(int);

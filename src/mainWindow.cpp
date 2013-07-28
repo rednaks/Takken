@@ -109,10 +109,9 @@ MainWindow::MainWindow(){
   //Associer la barre de menu à la fenetre
   setMenuBar(menuBar);
 
-  imageDispLabel = new QLabel;
-  imageDispLabel->setAlignment(Qt::AlignCenter);
-  imageDispLabel->setMinimumWidth(600);
-  imageDispLabel->setStyleSheet(QString("QLabel { background: #687074}"));
+  mImageScene = new GraphicScene;
+  mImageScene->setMinimumWidth(600);
+  mImageScene->setAlignment(Qt::AlignCenter);
 
 
   mFiltre = new Filtre(src);
@@ -161,7 +160,7 @@ MainWindow::MainWindow(){
 
   splitter = new QSplitter;
   splitter->setOrientation(Qt::Horizontal);
-  splitter->addWidget(imageDispLabel);
+  splitter->addWidget(mImageScene);
   for(std::vector<QWidget*>::iterator iter = sideBarWidgets.begin(); iter != sideBarWidgets.end(); iter++)
     splitter->addWidget(*iter);
 
@@ -195,7 +194,7 @@ void MainWindow::updateImage(){
 
 
 
-  imageDispLabel->setPixmap(QPixmap::fromImage(*img));
+  mImageScene->setImage(*img);
   }
 
 void MainWindow::openImage(){
@@ -204,7 +203,7 @@ void MainWindow::openImage(){
     return;
   src = cv::imread(fname.toStdString());
   QImage img(Mat2QImage(src));
-  imageDispLabel->setPixmap(QPixmap::fromImage(img));
+  mImageScene->setImage(img);
 }
 
 void MainWindow::loadWidget(int widget){

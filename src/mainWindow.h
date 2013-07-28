@@ -49,6 +49,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <vector>
+#include "graphicScene.h"
 #include "filtre.h"
 #include "filtreWidgets.h"
 #include "morphologieWidgets.h"
@@ -119,7 +120,7 @@ private:
     QSplitter *splitter;
 
     cv::Mat src;
-    QLabel *imageDispLabel; // Image container
+    GraphicScene *mImageScene; //Image Container
     unsigned int currentWidget;
 
 

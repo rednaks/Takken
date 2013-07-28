@@ -15,7 +15,11 @@
 
 
 #include <opencv2/highgui/highgui_c.h>
-#include <opencv2/nonfree/features2d.hpp>
+#if CV_MAJOR_VERSION == 2
+  #if CV_MINOR_VERSION > 3
+    #include <opencv2/nonfree/features2d.hpp>
+  #endif
+#endif
 #include <opencv2/calib3d/calib3d.hpp>
 #include <iostream>
 #include <stdio.h>

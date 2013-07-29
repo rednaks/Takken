@@ -23,7 +23,7 @@
 #define GRAPHIC_SCENE_H
 
 #include <QGraphicsView>
-
+#include "splashItem.h"
 
 class GraphicScene: public QGraphicsView {
   Q_OBJECT
@@ -34,9 +34,14 @@ public:
 
 private:
     QGraphicsScene *mScene;
+    SplashItem *mSplash;
+    bool mSplashVisible;
 
 public:
     void setImage(const QImage &);
+    void setSplashText(const QString &);
+    void showSplash();
+    void hideSplash();
 
 };
 

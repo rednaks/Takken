@@ -36,6 +36,7 @@ namespace morphologie {
 
     public slots:
       void updateVal(int);
+      void aboutClicked();
 
     private:
       QComboBox *elemComboBox;
@@ -43,6 +44,9 @@ namespace morphologie {
 
       QSlider *sizeSlider;
       QLabel *sizeLabel;
+
+      QString *mEroDoc;
+      QPushButton *mAboutPushButton;
 
       MainWindow *parent;
 

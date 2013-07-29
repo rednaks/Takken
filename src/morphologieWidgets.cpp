@@ -45,9 +45,25 @@ ErosionWidget::ErosionWidget(MainWindow *parent){
   sizeLabel = new QLabel(QString("Taille : %1").arg(sizeSlider->value()));
   connect(sizeSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
+  mAboutPushButton = new QPushButton("About");
+  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
+
+
   QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(elemLabel, elemComboBox);
   formLayout->addRow(sizeSlider, sizeLabel);
+  formLayout->addRow(new QLabel(""), mAboutPushButton);
+
+  mEroDoc = new QString(QString::fromUtf8("Cette opération permet d'éliminer les éléments" 
+                                          "qui sont dans votre image ne pouvant pas contenir l'élément structurant"
+                                          "(une forme géométrique carré, rectangle, cercle , disque )"
+                                          "qui définit la façon dont votre image sera affectée et modifiée."
+                                          "Pour réaliser une érosion , vous aurez besoin :"
+                                          "-> de définir l'élément struturant de base(carré,rectangle,ellipse)"
+                                          "à partir d'un widget."
+                                          "-> de définir la proportion d'érosion que vous voulez appliquer"
+                                          "sur votre image grace à"
+                                          "un autre widget celui ci qui sera gradué de 0 à 21."));
 
 
   this->setLayout(formLayout);
@@ -62,6 +78,11 @@ void ErosionWidget::updateVal(int v){
   this->parent->m->Erosion(elemComboBox->currentIndex(), sizeSlider->value());
   this->parent->updateImage();
 
+}
+
+void ErosionWidget::aboutClicked(){
+  this->parent->setSplashText(*mEroDoc);
+  this->parent->showSplash();
 }
 
 /*********************** Erosion Widget END ******************************/

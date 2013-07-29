@@ -18,39 +18,27 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+#ifndef SPLASH_ITEM_H
 
-#include "graphicScene.h"
-#include <cstdio>
+#define SPLASH_ITEM_H
 
-GraphicScene::GraphicScene(){
-  mScene = new QGraphicsScene;
-  this->setScene(mScene);
-  mSplash = new SplashItem;
-  mSplashVisible = false;
-}
+#include <QGraphicsObject>
 
-GraphicScene::~GraphicScene(){ 
-  delete mScene;
-}
 
-void GraphicScene::setImage(const QImage &aImage){
-  mScene->clear();
-  mScene->addPixmap(QPixmap::fromImage(aImage));
-  mScene->setSceneRect(aImage.rect());
-}
+class SplashItem : public QGraphicsObject {
+  Q_OBJECT
 
-void GraphicScene::setSplashText(const QString &aString){
-  mSplash->setText(aString);
-}
+public:
+    SplashItem();
+    ~SplashItem();
 
-void GraphicScene::showSplash(){
-  if(!mSplashVisible)
-    mScene->addItem(mSplash);
-  mSplashVisible = true;
-}
+private:
+    QString *text;
 
-void GraphicScene::hideSplash(){
-//  if(mSplashVisible)
-//    mScene->removeItem(mSplash);
-  mSplashVisible = false;
-}
+public:
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+    void setText(const QString &);
+
+};
+#endif

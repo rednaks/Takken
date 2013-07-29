@@ -196,7 +196,16 @@ void MainWindow::updateImage(){
 
   mImageScene->setImage(*img);
   delete img;
+  mImageScene->hideSplash();
   }
+
+void MainWindow::setSplashText(const QString &aString){
+  mImageScene->setSplashText(aString);
+}
+
+void MainWindow::showSplash(){
+  mImageScene->showSplash();
+}
 
 void MainWindow::openImage(){
   QString fname = QFileDialog::getOpenFileName(this, "Open File", "", tr("Images (*.jpg *.png)"));

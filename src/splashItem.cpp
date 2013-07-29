@@ -18,39 +18,42 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+#include "splashItem.h"
 
-#include "graphicScene.h"
+#include <QtGui>
 #include <cstdio>
 
-GraphicScene::GraphicScene(){
-  mScene = new QGraphicsScene;
-  this->setScene(mScene);
-  mSplash = new SplashItem;
-  mSplashVisible = false;
+SplashItem::SplashItem(){
+
+  text = new QString;
 }
 
-GraphicScene::~GraphicScene(){ 
-  delete mScene;
+SplashItem::~SplashItem(){
+  printf("Splash Destroyed\n");
 }
 
-void GraphicScene::setImage(const QImage &aImage){
-  mScene->clear();
-  mScene->addPixmap(QPixmap::fromImage(aImage));
-  mScene->setSceneRect(aImage.rect());
+QRectF SplashItem::boundingRect() const
+{
+  return QRectF(-10, -10, 400, 300);
 }
 
-void GraphicScene::setSplashText(const QString &aString){
-  mSplash->setText(aString);
+void SplashItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+  printf("Painting the splash");
+
+  painter->setPen(QPen(Qt::black,2));
+  painter->setBrush(QColor(245, 245, 255, 220));
+  painter->drawRoundRect(boundingRect(), 20, 20);
+
+  int flags = Qt::AlignTop | Qt::AlignLeft | Qt::TextWordWrap;
+  QRectF textRect = boundingRect().adjusted(10, 10, -10, -10);
+  QFont font;
+  font.setPixelSize(18);
+  painter->setPen(Qt::black);
+  painter->setFont(font);
+  painter->drawText(textRect, flags, *text);
 }
 
-void GraphicScene::showSplash(){
-  if(!mSplashVisible)
-    mScene->addItem(mSplash);
-  mSplashVisible = true;
-}
-
-void GraphicScene::hideSplash(){
-//  if(mSplashVisible)
-//    mScene->removeItem(mSplash);
-  mSplashVisible = false;
+void SplashItem::setText(const QString &aString)
+{
+  *text = aString;
 }

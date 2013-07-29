@@ -162,6 +162,8 @@ private:
     
 public:
     void updateImage();
+    void setSplashText(const QString&);
+    void showSplash();
 
 public slots:
     void openImage();

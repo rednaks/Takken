@@ -18,32 +18,27 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+#ifndef SPLASH_ITEM_H
 
-#ifndef GRAPHIC_SCENE_H
-#define GRAPHIC_SCENE_H
+#define SPLASH_ITEM_H
 
-#include <QGraphicsView>
-#include "splashItem.h"
+#include <QGraphicsObject>
 
-class GraphicScene: public QGraphicsView {
+
+class SplashItem : public QGraphicsObject {
   Q_OBJECT
 
 public:
-    GraphicScene();
-    ~GraphicScene();
+    SplashItem();
+    ~SplashItem();
 
 private:
-    QGraphicsScene *mScene;
-    SplashItem *mSplash;
-    bool mSplashVisible;
+    QString *text;
 
 public:
-    void setImage(const QImage &);
-    void setSplashText(const QString &);
-    void showSplash();
-    void hideSplash();
-    bool splashIsVisible();
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+    void setText(const QString &);
 
 };
-
 #endif

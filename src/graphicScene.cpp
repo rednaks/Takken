@@ -21,9 +21,12 @@
 
 #include "graphicScene.h"
 #include <cstdio>
+
 GraphicScene::GraphicScene(){
   mScene = new QGraphicsScene;
   this->setScene(mScene);
+  mSplash = new SplashItem;
+  mSplashVisible = false;
 }
 
 GraphicScene::~GraphicScene(){ 
@@ -34,4 +37,24 @@ void GraphicScene::setImage(const QImage &aImage){
   mScene->clear();
   mScene->addPixmap(QPixmap::fromImage(aImage));
   mScene->setSceneRect(aImage.rect());
+}
+
+void GraphicScene::setSplashText(const QString &aString){
+  mSplash->setText(aString);
+}
+
+void GraphicScene::showSplash(){
+  if(!mSplashVisible)
+    mScene->addItem(mSplash);
+  mSplashVisible = true;
+}
+
+void GraphicScene::hideSplash(){
+  if(mSplashVisible)
+    mScene->removeItem(mSplash);
+  mSplashVisible = false;
+}
+
+bool GraphicScene::splashIsVisible(){
+  return mSplashVisible;
 }

@@ -35,12 +35,16 @@ namespace feature {
       QComboBox *algoComboBox;
       QSlider *precisionSlider;
 
+      QString *mEroDoc;
+      QPushButton *mAboutPushButton;
+
       QLabel *algoLabel;
       QLabel *precisionLabel;
       MainWindow *parent;
 
     public slots:
       void updateVal(int);
+      void aboutClicked();
   };
 
   
@@ -50,11 +54,14 @@ namespace feature {
       FaceDetectWidget(MainWindow* =0);
       ~FaceDetectWidget();
     private:
+      QString *mEroDoc;
+      QPushButton *mAboutPushButton;
       QPushButton *b;
       MainWindow *parent;
 
       public slots:
       void updateVal();
+      void aboutClicked();
 
     };
 
@@ -65,13 +72,16 @@ namespace feature {
       FeatureFindWidget(MainWindow* =0);
       ~FeatureFindWidget();
     private:
+      QString *mEroDoc;
+      QPushButton *mAboutPushButton;
+
       QLabel *LoadLabel;
       QPushButton *b;
       MainWindow *parent;
 
       public slots:
       void updateVal();
-
+      void aboutClicked();
     };
 
   

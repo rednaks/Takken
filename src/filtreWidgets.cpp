@@ -78,7 +78,7 @@ sigmaColorLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
 sigmaSpaceSlider = new QSlider;
 sigmaSpaceSlider->setOrientation(Qt::Horizontal);
 sigmaSpaceSlider->setMinimum(0);
-sigmaSpaceSlider->setMaximum(500);
+sigmaSpaceSlider->setMaximum(200);
 connect(sigmaSpaceSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 sigmaSpaceLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
@@ -168,11 +168,14 @@ noyauLabel =new QLabel(QString::fromUtf8("Noyau:"));
 MedianWidget::~MedianWidget(){}
 
 void MedianWidget::updateVal(int v){
+    if(noyauSlider->value() % 2==1){
 printf("Val : %d\n",v);
-  noyauSlider->setValue(v);
-  this->parent->mFiltre->medianFiltre(v);
+  this->parent->mFiltre->medianFiltre( noyauSlider->value());
+  this->parent->updateImage();}
+  else{
+this->parent->mFiltre->medianFiltre( noyauSlider->value()+1);
   this->parent->updateImage();
-
+  }
   }
 
 /******************** END  Median Widget  ***********************************/

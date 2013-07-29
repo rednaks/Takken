@@ -129,6 +129,8 @@ MainWindow::MainWindow(){
   sideBarWidgets.push_back(sepFilter2DWidget);
   laplacientWidget = new filtre::LaplacienWidget(this);
   sideBarWidgets.push_back(laplacientWidget);
+  filtre2DWidget = new filtre::Filter2DWidget(this);
+  sideBarWidgets.push_back(filtre2DWidget);
   bilateralWidget = new filtre::BilateralWidget(this);
   sideBarWidgets.push_back(bilateralWidget);
 
@@ -234,6 +236,9 @@ void MainWindow::loadWidget(int widget){
       break;
     case LAPLACIEN_WIDGET:
       laplacientWidget->show();
+      break;
+    case FILTRE_2D_WIDGET:
+      filtre2DWidget->show();
       break;
     case BILATERAL_WIDGET:
       bilateralWidget->show();

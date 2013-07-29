@@ -133,6 +133,7 @@ public:
     filtre::BoxFiltreWidget *boxFiltreWidget;
     filtre::SepFilter2DWidget *sepFilter2DWidget;
     filtre::LaplacienWidget *laplacientWidget;
+    filtre::Filter2DWidget *filtre2DWidget;
     filtre::BilateralWidget *bilateralWidget;
 
 

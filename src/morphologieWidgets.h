@@ -61,13 +61,16 @@ namespace morphologie {
 
     public slots:
       void updateVal(int);
-
+      void aboutClicked();
     private:
       QComboBox *elemComboBox;
       QLabel *elemLabel;
 
       QSlider *sizeSlider;
       QLabel *sizeLabel;
+      
+      QString *mEroDoc;
+      QPushButton *mAboutPushButton;
 
       MainWindow *parent;
 
@@ -82,13 +85,16 @@ namespace morphologie {
 
     public slots:
       void updateVal(int);
-
+      void aboutClicked();
     private:
       QComboBox *elemComboBox;
       QLabel *elemLabel;
 
       QSlider *sizeSlider;
       QLabel *sizeLabel;
+
+      QString *mEroDoc;
+      QPushButton *mAboutPushButton;
 
       MainWindow *parent;
 
@@ -103,13 +109,16 @@ namespace morphologie {
 
     public slots:
       void updateVal(int);
-
+      void aboutClicked();
     private:
       QComboBox *elemComboBox;
       QLabel *elemLabel;
 
       QSlider *sizeSlider;
       QLabel *sizeLabel;
+
+      QString *mEroDoc;
+      QPushButton *mAboutPushButton;
 
       MainWindow *parent;
 
@@ -124,13 +133,16 @@ namespace morphologie {
 
     public slots:
       void updateVal(int);
-
+      void aboutClicked();
     private:
       QComboBox *elemComboBox;
       QLabel *elemLabel;
 
       QSlider *sizeSlider;
       QLabel *sizeLabel;
+
+      QString *mEroDoc;
+      QPushButton *mAboutPushButton;
 
       MainWindow *parent;
 

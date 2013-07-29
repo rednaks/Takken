@@ -69,10 +69,10 @@ this->parent=parent;
 sigmaColorSlider = new QSlider;
 sigmaColorSlider->setOrientation(Qt::Horizontal);
 sigmaColorSlider->setMinimum(0);
-sigmaColorSlider->setMaximum(500);
+sigmaColorSlider->setMaximum(200);
 connect(sigmaColorSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
-sigmaColorLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
+sigmaColorLabel = new QLabel(QString::fromUtf8("SigmaSpace :"));
 
 
 sigmaSpaceSlider = new QSlider;
@@ -149,7 +149,7 @@ this->parent = parent;
 noyauSlider = new QSlider;
 noyauSlider->setOrientation(Qt::Horizontal);
 noyauSlider->setMinimum(1);
-noyauSlider->setMaximum(41);
+noyauSlider->setMaximum(21);
 noyauSlider->setSingleStep(2);
 connect(noyauSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
@@ -226,7 +226,7 @@ this->parent=parent;
 noyauSlider= new QSlider;
 noyauSlider->setOrientation(Qt::Horizontal);
 noyauSlider->setMinimum(1);
-noyauSlider->setMaximum(41);
+noyauSlider->setMaximum(21);
 noyauSlider->setSingleStep(2);
 connect(noyauSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
@@ -271,7 +271,7 @@ void GaussienWidget::updateVal(int v){
     this->parent->mFiltre->gaussienFiltre(Size (noyauSlider->value(),noyauSlider->value()),sigmaXSlider->value(),sigmaYSlider->value());
     this->parent->updateImage();}
     else{
-    this->parent->mFiltre->gaussienFiltre(Size (noyauSlider->value()+1,noyauSlider->value()),sigmaXSlider->value(),sigmaYSlider->value());
+    this->parent->mFiltre->gaussienFiltre(Size (noyauSlider->value()+1,noyauSlider->value()+1),sigmaXSlider->value(),sigmaYSlider->value());
     this->parent->updateImage();}
     }
 }

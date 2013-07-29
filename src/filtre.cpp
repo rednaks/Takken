@@ -20,7 +20,7 @@ void Filtre::bilateralFiltre(double sigmaColor,double sigmaSpace){
 out=image.clone();
 Mat img=image.clone();
 
-  bilateralFilter(img,out,30,sigmaColor,sigmaSpace);
+  bilateralFilter(img,out,5,sigmaColor,sigmaSpace);
 }
 
 void Filtre::blurFiltre(Size ksize){

@@ -273,7 +273,7 @@ void GaussienWidget::updateVal(int v){
     else{
     this->parent->mFiltre->gaussienFiltre(Size (noyauSlider->value()+1,noyauSlider->value()+1),sigmaXSlider->value(),sigmaYSlider->value());
     this->parent->updateImage();}
-    }
+    
 }
 
 /******************** END Gaussien Widget  ***********************************/
@@ -327,8 +327,8 @@ this->parent->mFiltre->LaplacienFiltre(Size(noyauGaussSlider->value()+1,noyauGau
     else{
 this->parent->mFiltre->LaplacienFiltre(Size(noyauGaussSlider->value()+1,noyauGaussSlider->value()+1),noyauLaplaceSlider->value()+1);
     this->parent->updateImage();}
-    }
-    }
+
+    cv::imshow("Res", this->parent->mFiltre->out);
 
 }
 /******************** END Laplacien Widget  ***********************************/

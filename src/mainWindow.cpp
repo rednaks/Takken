@@ -195,6 +195,7 @@ void MainWindow::updateImage(){
 
 
   mImageScene->setImage(*img);
+  delete img;
   }
 
 void MainWindow::openImage(){

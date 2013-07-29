@@ -69,16 +69,16 @@ this->parent=parent;
 sigmaColorSlider = new QSlider;
 sigmaColorSlider->setOrientation(Qt::Horizontal);
 sigmaColorSlider->setMinimum(0);
-sigmaColorSlider->setMaximum(500);
+sigmaColorSlider->setMaximum(200);
 connect(sigmaColorSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
-sigmaColorLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
+sigmaColorLabel = new QLabel(QString::fromUtf8("SigmaSpace :"));
 
 
 sigmaSpaceSlider = new QSlider;
 sigmaSpaceSlider->setOrientation(Qt::Horizontal);
 sigmaSpaceSlider->setMinimum(0);
-sigmaSpaceSlider->setMaximum(500);
+sigmaSpaceSlider->setMaximum(200);
 connect(sigmaSpaceSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 sigmaSpaceLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
@@ -149,7 +149,7 @@ this->parent = parent;
 noyauSlider = new QSlider;
 noyauSlider->setOrientation(Qt::Horizontal);
 noyauSlider->setMinimum(1);
-noyauSlider->setMaximum(41);
+noyauSlider->setMaximum(21);
 noyauSlider->setSingleStep(2);
 connect(noyauSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
@@ -168,11 +168,14 @@ noyauLabel =new QLabel(QString::fromUtf8("Noyau:"));
 MedianWidget::~MedianWidget(){}
 
 void MedianWidget::updateVal(int v){
+    if(noyauSlider->value() % 2==1){
 printf("Val : %d\n",v);
-  noyauSlider->setValue(v);
-  this->parent->mFiltre->medianFiltre(v);
+  this->parent->mFiltre->medianFiltre( noyauSlider->value());
+  this->parent->updateImage();}
+  else{
+this->parent->mFiltre->medianFiltre( noyauSlider->value()+1);
   this->parent->updateImage();
-
+  }
   }
 
 /******************** END  Median Widget  ***********************************/
@@ -223,7 +226,7 @@ this->parent=parent;
 noyauSlider= new QSlider;
 noyauSlider->setOrientation(Qt::Horizontal);
 noyauSlider->setMinimum(1);
-noyauSlider->setMaximum(41);
+noyauSlider->setMaximum(21);
 noyauSlider->setSingleStep(2);
 connect(noyauSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
@@ -263,9 +266,14 @@ QFormLayout *formLayout = new QFormLayout;
 GaussienWidget::~GaussienWidget(){}
 
 void GaussienWidget::updateVal(int v){
+    if(noyauSlider->value() %2 ==1){
     printf("Val : %d\n",v);
     this->parent->mFiltre->gaussienFiltre(Size (noyauSlider->value(),noyauSlider->value()),sigmaXSlider->value(),sigmaYSlider->value());
-    this->parent->updateImage();
+    this->parent->updateImage();}
+    else{
+    this->parent->mFiltre->gaussienFiltre(Size (noyauSlider->value()+1,noyauSlider->value()+1),sigmaXSlider->value(),sigmaYSlider->value());
+    this->parent->updateImage();}
+    }
 }
 
 /******************** END Gaussien Widget  ***********************************/
@@ -306,9 +314,21 @@ QFormLayout *formLayout = new QFormLayout;
 LaplacienWidget::~LaplacienWidget(){}
 
 void LaplacienWidget::updateVal(int v){
+    if(noyauGaussSlider->value() %2 ==1 && noyauLaplaceSlider->value()%2==1){
     printf("Val : %d\n",v);
     this->parent->mFiltre->LaplacienFiltre(Size(noyauGaussSlider->value(),noyauGaussSlider->value()),noyauLaplaceSlider->value());
-    this->parent->updateImage();
+    this->parent->updateImage();}
+    else if (noyauGaussSlider->value() %2 ==1 && noyauLaplaceSlider->value()%2==0){
+this->parent->mFiltre->LaplacienFiltre(Size(noyauGaussSlider->value(),noyauGaussSlider->value()),noyauLaplaceSlider->value()+1);
+    this->parent->updateImage();}
+      else if (noyauGaussSlider->value() %2 ==0 && noyauLaplaceSlider->value()%2==1){
+this->parent->mFiltre->LaplacienFiltre(Size(noyauGaussSlider->value()+1,noyauGaussSlider->value()+1),noyauLaplaceSlider->value());
+    this->parent->updateImage();}
+    else{
+this->parent->mFiltre->LaplacienFiltre(Size(noyauGaussSlider->value()+1,noyauGaussSlider->value()+1),noyauLaplaceSlider->value()+1);
+    this->parent->updateImage();}
+    }
+    }
 
 }
 /******************** END Laplacien Widget  ***********************************/

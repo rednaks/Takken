@@ -70,11 +70,12 @@ filter2D(img, out, -1, kernel, Point(-1,-1), 0, BORDER_DEFAULT );
 void Filtre::LaplacienFiltre(Size noyau_gaussien,int taille_noyau){
     out =image.clone();
     Mat img=image.clone();
-    Mat out2,out1,out3;
+    Mat out2,out1,out3,out4;
 GaussianBlur(img,out1,noyau_gaussien,0,0,BORDER_DEFAULT);
 cvtColor(out1,out2,CV_RGB2GRAY);
 Laplacian(out2,out3,-1,taille_noyau,1,0,BORDER_DEFAULT);
-convertScaleAbs(out3,out);
+convertScaleAbs(out3,out4);
+cvtColor(out4,out,CV_GRAY2RGB);
 }
 
 void Filtre::bruit_sel_poivre(int n){

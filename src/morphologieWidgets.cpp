@@ -82,7 +82,10 @@ void ErosionWidget::updateVal(int v){
 
 void ErosionWidget::aboutClicked(){
   this->parent->setSplashText(*mEroDoc);
-  this->parent->showSplash();
+  if(this->parent->splashIsVisible())
+    this->parent->hideSplash();
+  else
+    this->parent->showSplash();
 }
 
 /*********************** Erosion Widget END ******************************/

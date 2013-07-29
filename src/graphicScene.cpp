@@ -50,7 +50,11 @@ void GraphicScene::showSplash(){
 }
 
 void GraphicScene::hideSplash(){
-//  if(mSplashVisible)
-//    mScene->removeItem(mSplash);
+  if(mSplashVisible)
+    mScene->removeItem(mSplash);
   mSplashVisible = false;
+}
+
+bool GraphicScene::splashIsVisible(){
+  return mSplashVisible;
 }

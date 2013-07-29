@@ -193,10 +193,14 @@ void MainWindow::updateImage(){
 
 
 
-
+  /*
+   * On doit retirer le splash de la mImage::mScene avant de
+   * de la repaindre, car repaindre la scène revient à dértuire tout
+   * les objects qui sont dans la scène
+   */
+  mImageScene->hideSplash(); 
   mImageScene->setImage(*img);
   delete img;
-  mImageScene->hideSplash();
   }
 
 void MainWindow::setSplashText(const QString &aString){
@@ -205,6 +209,14 @@ void MainWindow::setSplashText(const QString &aString){
 
 void MainWindow::showSplash(){
   mImageScene->showSplash();
+}
+
+void MainWindow::hideSplash(){
+  mImageScene->hideSplash();
+}
+
+bool MainWindow::splashIsVisible(){
+  return mImageScene->splashIsVisible();
 }
 
 void MainWindow::openImage(){

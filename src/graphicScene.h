@@ -42,6 +42,7 @@ public:
     void setSplashText(const QString &);
     void showSplash();
     void hideSplash();
+    bool splashIsVisible();
 
 };
 

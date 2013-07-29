@@ -164,6 +164,8 @@ public:
     void updateImage();
     void setSplashText(const QString&);
     void showSplash();
+    void hideSplash();
+    bool splashIsVisible();
 
 public slots:
     void openImage();

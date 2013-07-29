@@ -314,14 +314,14 @@ QFormLayout *formLayout = new QFormLayout;
 LaplacienWidget::~LaplacienWidget(){}
 
 void LaplacienWidget::updateVal(int v){
-    if(noyauGaussSlider->value() %2 ==1 && noyauLaplaceSlider%2==1){
+    if(noyauGaussSlider->value() %2 ==1 && noyauLaplaceSlider->value()%2==1){
     printf("Val : %d\n",v);
     this->parent->mFiltre->LaplacienFiltre(Size(noyauGaussSlider->value(),noyauGaussSlider->value()),noyauLaplaceSlider->value());
     this->parent->updateImage();}
-    else if (noyauGaussSlider->value() %2 ==1 && noyauLaplaceSlider%2==0){
+    else if (noyauGaussSlider->value() %2 ==1 && noyauLaplaceSlider->value()%2==0){
 this->parent->mFiltre->LaplacienFiltre(Size(noyauGaussSlider->value(),noyauGaussSlider->value()),noyauLaplaceSlider->value()+1);
     this->parent->updateImage();}
-      else if (noyauGaussSlider->value() %2 ==0 && noyauLaplaceSlider%2==1){
+      else if (noyauGaussSlider->value() %2 ==0 && noyauLaplaceSlider->value()%2==1){
 this->parent->mFiltre->LaplacienFiltre(Size(noyauGaussSlider->value()+1,noyauGaussSlider->value()+1),noyauLaplaceSlider->value());
     this->parent->updateImage();}
     else{

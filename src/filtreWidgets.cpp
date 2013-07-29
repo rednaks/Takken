@@ -69,7 +69,7 @@ this->parent=parent;
 sigmaColorSlider = new QSlider;
 sigmaColorSlider->setOrientation(Qt::Horizontal);
 sigmaColorSlider->setMinimum(0);
-sigmaColorSlider->setMaximum(200);
+sigmaColorSlider->setMaximum(100);
 connect(sigmaColorSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 sigmaColorLabel = new QLabel(QString::fromUtf8("SigmaSpace :"));
@@ -78,7 +78,7 @@ sigmaColorLabel = new QLabel(QString::fromUtf8("SigmaSpace :"));
 sigmaSpaceSlider = new QSlider;
 sigmaSpaceSlider->setOrientation(Qt::Horizontal);
 sigmaSpaceSlider->setMinimum(0);
-sigmaSpaceSlider->setMaximum(200);
+sigmaSpaceSlider->setMaximum(100);
 connect(sigmaSpaceSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
 sigmaSpaceLabel = new QLabel(QString::fromUtf8("SigmaColor :"));

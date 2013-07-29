@@ -39,7 +39,10 @@ namespace filtre {
 
       public slots:
           void updateVal(int);
+          void aboutClicked();
       private:
+        QString*mEroDoc;
+        QPushButton *mAboutPushButton;
         QSlider *densiteSlider;
         QSpinBox *densiteSpinBox;
         QLabel *densiteLabel;
@@ -58,7 +61,10 @@ namespace filtre {
 
         public slots:
             void updateVal(int);
+            void aboutClicked();
         private:
+            QString*mEroDoc;
+            QPushButton *mAboutPushButton;
             QSlider *sigmaColorSlider;
             QLabel *sigmaColorLabel;
             QSlider *sigmaSpaceSlider;
@@ -76,7 +82,10 @@ namespace filtre {
 
  public slots:
     void updateVal(int);
+    void aboutClicked();
  private:
+        QString*mEroDoc;
+        QPushButton *mAboutPushButton;
         QSlider *noyauSlider;
         QSpinBox *noyauSpinBox;
         QLabel *noyauLabel;
@@ -95,7 +104,10 @@ namespace filtre {
 
  public slots:
     void updateVal(int);
+    void aboutClicked();
  private:
+        QString*mEroDoc;
+        QPushButton *mAboutPushButton;
         QSlider *noyauSlider;
         QSpinBox *noyauSpinBox;
         QLabel *noyauLabel;
@@ -114,7 +126,10 @@ namespace filtre {
 
  public slots:
     void updateVal(int);
+    void aboutClicked();
  private:
+        QString*mEroDoc;
+        QPushButton *mAboutPushButton;
         QSlider *noyauSlider;
         QSpinBox *noyauSpinBox;
         QLabel *noyauLabel;
@@ -132,7 +147,10 @@ namespace filtre {
 
         public slots:
             void updateVal(int);
+            void aboutClicked();
         private:
+            QString*mEroDoc;
+            QPushButton *mAboutPushButton;
             QSlider *noyauLigneSlider;
             QLabel *noyauLigneLabel;
             QSlider *noyauColonneSlider;
@@ -151,7 +169,10 @@ class MedianWidget:public QWidget {
 
  public slots:
     void updateVal(int);
+    void aboutClicked();
  private:
+        QString*mEroDoc;
+        QPushButton *mAboutPushButton;
         QSlider *noyauSlider;
         QLabel *noyauLabel;
         MainWindow *parent;
@@ -168,7 +189,10 @@ class MedianWidget:public QWidget {
 
         public slots:
             void updateVal(int);
+            void aboutClicked();
         private:
+            QString*mEroDoc;
+           QPushButton *mAboutPushButton;
             QSlider *noyauSlider;
             QLabel *noyauLabel;
             QSlider *sigmaXSlider;
@@ -190,7 +214,10 @@ class MedianWidget:public QWidget {
 
         public slots:
             void updateVal(int);
+            void aboutClicked();
         private:
+            QString*mEroDoc;
+            QPushButton *mAboutPushButton;
             QSlider *noyauGaussSlider;
             QLabel *noyauGaussLabel;
             QSlider *noyauLaplaceSlider;

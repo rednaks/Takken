@@ -26,26 +26,25 @@
 SplashItem::SplashItem(){
 
   text = new QString;
+  mCenter = QPointF(QRectF(0, 0, 400, 300).center());
 }
 
-SplashItem::~SplashItem(){
-  printf("Splash Destroyed\n");
-}
+SplashItem::~SplashItem(){ }
 
 QRectF SplashItem::boundingRect() const
 {
-  return QRectF(-10, -10, 400, 300);
+  return QRectF(mCenter.x()-200, mCenter.y()-150, 400, 300);
 }
 
 void SplashItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-  printf("Painting the splash");
 
   painter->setPen(QPen(Qt::black,2));
-  painter->setBrush(QColor(245, 245, 255, 220));
-  painter->drawRoundRect(boundingRect(), 20, 20);
+  painter->setBrush(QColor(245, 245, 255, 200));
+  QRectF splashRect = boundingRect();
+  painter->drawRoundRect(splashRect, 0, 0);
 
   int flags = Qt::AlignTop | Qt::AlignLeft | Qt::TextWordWrap;
-  QRectF textRect = boundingRect().adjusted(10, 10, -10, -10);
+  QRectF textRect = splashRect.adjusted(10, 10, -10, -10);
   QFont font;
   font.setPixelSize(18);
   painter->setPen(Qt::black);
@@ -56,4 +55,8 @@ void SplashItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 void SplashItem::setText(const QString &aString)
 {
   *text = aString;
+}
+
+void SplashItem::setCenter(const QPointF &aCenter){
+  mCenter = aCenter;
 }

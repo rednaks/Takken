@@ -23,6 +23,7 @@
 #define GRAPHIC_SCENE_H
 
 #include <QGraphicsView>
+#include <QScrollBar>
 #include "splashItem.h"
 
 class GraphicScene: public QGraphicsView {
@@ -43,6 +44,11 @@ public:
     void showSplash();
     void hideSplash();
     bool splashIsVisible();
+    QRectF getVisibleScene();
+
+
+public slots:
+    void scrollMoved(int);
 
 };
 

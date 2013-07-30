@@ -34,11 +34,13 @@ public:
 
 private:
     QString *text;
+    QPointF mCenter;
 
 public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
     void setText(const QString &);
+    void setCenter(const QPointF&);
 
 };
 #endif

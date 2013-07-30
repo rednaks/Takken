@@ -27,6 +27,8 @@ GraphicScene::GraphicScene(){
   this->setScene(mScene);
   mSplash = new SplashItem;
   mSplashVisible = false;
+  connect(this->horizontalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(scrollMoved(int)));
+  connect(this->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(scrollMoved(int)));
 }
 
 GraphicScene::~GraphicScene(){ 
@@ -44,8 +46,10 @@ void GraphicScene::setSplashText(const QString &aString){
 }
 
 void GraphicScene::showSplash(){
-  if(!mSplashVisible)
+  if(!mSplashVisible){
+    mSplash->setCenter(getVisibleScene().center());
     mScene->addItem(mSplash);
+  }
   mSplashVisible = true;
 }
 
@@ -57,4 +61,20 @@ void GraphicScene::hideSplash(){
 
 bool GraphicScene::splashIsVisible(){
   return mSplashVisible;
+}
+
+QRectF GraphicScene::getVisibleScene(){
+  QRect viewport_rect(0,0, viewport()->width(), viewport()->height());
+  QRectF visible_scene = mapToScene(viewport_rect).boundingRect();
+
+  return visible_scene;
+}
+
+void GraphicScene::scrollMoved(int aValue){
+  if(mSplashVisible){
+    this->hideSplash();
+    this->showSplash();
+    update();
+  }
+
 }

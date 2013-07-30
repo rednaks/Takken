@@ -26,14 +26,14 @@
 SplashItem::SplashItem(){
 
   text = new QString;
-  mCenter = QPointF(QRectF(0, 0, 400, 300).center());
+  mCenter = QPointF(QRectF(0, 0, 400, 370).center());
 }
 
 SplashItem::~SplashItem(){ }
 
 QRectF SplashItem::boundingRect() const
 {
-  return QRectF(mCenter.x()-200, mCenter.y()-150, 400, 300);
+  return QRectF(mCenter.x()-200, mCenter.y()-150, 400, 340);
 }
 
 void SplashItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){

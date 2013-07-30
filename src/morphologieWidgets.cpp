@@ -77,9 +77,9 @@ void ErosionWidget::aboutClicked(){
                                           "(une forme géométrique carré, rectangle, cercle , disque )"
                                           "qui définit la façon dont votre image sera affectée et modifiée."
                                           "Pour réaliser une érosion , vous aurez besoin :"
-                                          "-> de définir l'élément struturant de base(carré,rectangle,ellipse)"
+                                          "\n-> de définir l'élément struturant de base(carré,rectangle,ellipse)"
                                           "à partir d'un widget."
-                                          "-> de définir la proportion d'érosion que vous voulez appliquer"
+                                          "\n-> de définir la proportion d'érosion que vous voulez appliquer"
                                           "sur votre image grace à"
                                           "un autre widget celui ci qui sera gradué de 0 à 21."));
 
@@ -139,8 +139,8 @@ void DilatationWidget::aboutClicked(){
 
   mEroDoc = new QString(QString::fromUtf8("Cette opération permet de redéfinir les contours et la grosseur  de votre image grace également à un élément structurant"
                                           "Pour réaliser une dilatation , vous aurez besoin :"
-                                          "-> de définir l'élément struturant de base(carré,rectangle,ellipse) à partir d'un widget."
-                                          "-> de définir la proportion de dilatation  que vous voulez appliquer sur votre image grace à "
+                                          "\n-> de définir l'élément struturant de base(carré,rectangle,ellipse) à partir d'un widget."
+                                          "\n-> de définir la proportion de dilatation  que vous voulez appliquer sur votre image grace à "
                                           "un autre widget celui ci qui sera gradué de 0 à 21."));
 
 
@@ -197,7 +197,7 @@ void OuvertureWidget::updateVal(int v){
 
 void OuvertureWidget::aboutClicked(){
 
-  mEroDoc = new QString(QString::fromUtf8("Cette opération est une érosion suivie par la suite d'une dilatation elle aura pour priorité d'éliminer les parties de l'image ne pouvant pas contenir votre élément sturcturant .Ceci permettra d'éliminer les paties inutiles de l'image. Pour réaliser une ouverture , vous aurez besoin : -> de définir la taille de l'ouvertue  que vous voulez appliquer sur votre image grace à un  widget celui ci qui sera gradué de 0 à 21."));
+  mEroDoc = new QString(QString::fromUtf8("Cette opération est une érosion suivie par la suite d'une dilatation elle aura pour priorité d'éliminer les parties de l'image ne pouvant pas contenir votre élément sturcturant .Ceci permettra d'éliminer les paties inutiles de l'image. Pour réaliser une ouverture , vous aurez besoin : \n-> de définir la taille de l'ouvertue  que vous voulez appliquer sur votre image grace à un  widget celui ci qui sera gradué de 0 à 21."));
 
 
 
@@ -307,7 +307,7 @@ void GradientWidget::updateVal(int v){
 
 void GradientWidget::aboutClicked(){
 
-  mEroDoc = new QString(QString::fromUtf8("cette opération vous permettra de ressortir les contours de vote image grace à un algorithme bien définit.-> Pour réaliser un gradient, il vous suffira juste d'utiliser le widget adéquat à cela."));
+  mEroDoc = new QString(QString::fromUtf8("cette opération vous permettra de ressortir les contours de vote image grace à un algorithme bien définit.\n-> Pour réaliser un gradient, il vous suffira juste d'utiliser le widget adéquat à cela."));
 
 
 

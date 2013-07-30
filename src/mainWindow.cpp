@@ -169,6 +169,7 @@ MainWindow::MainWindow(){
   setCentralWidget(splitter);
   //
   this->resize(800, 600);
+  this->setWindowTitle(QString("Takken - mVision"));
 }
 
 MainWindow::~MainWindow(){ 

@@ -29,7 +29,7 @@ MainWindow::MainWindow(){
   
   // Ajout des menu
   fileMenu = menuBar->addMenu(tr("&File"));
-  editMenu = menuBar->addMenu(tr("&Edit"));
+  //editMenu = menuBar->addMenu(tr("&Edit"));
   filtresMenu = menuBar->addMenu(tr("&Filtres"));
   caracterisationMenu = menuBar->addMenu(QString::fromUtf8("&Caractérisation"));
   morphMathMenu = menuBar->addMenu(QString::fromUtf8("&Morph. Mathématique"));
@@ -39,9 +39,9 @@ MainWindow::MainWindow(){
 
   //Ajout des actions du menu File
   openFileAction = fileMenu->addAction("Ouvrir");
-  saveFileAction = fileMenu->addAction("Save");
-  saveAsFileAction = fileMenu->addAction("Save As");
-  quitFileAction = fileMenu->addAction("Quit");
+  //saveFileAction = fileMenu->addAction("Save");
+  //saveAsFileAction = fileMenu->addAction("Save As");
+  //quitFileAction = fileMenu->addAction("Quit");
 
   //Les connexion
   connect(openFileAction, SIGNAL(triggered()), this, SLOT(openImage()));
@@ -93,8 +93,8 @@ MainWindow::MainWindow(){
   connect(faceDetectAction, SIGNAL(triggered()), this, SLOT(faceDetectClicked()));
   connect(featureFindAction, SIGNAL(triggered()), this, SLOT(featureFindClicked()));
   //Ajout des action du menu Segmentation
-  splitAndMergeSegAction = segMenu->addAction("Split And Merge");
-  growinRegionSegAction = segMenu->addAction("Growing Region");
+  //splitAndMergeSegAction = segMenu->addAction("Split And Merge");
+  //growinRegionSegAction = segMenu->addAction("Growing Region");
   thresholdingSegAction = segMenu->addAction("Thresholding");
 
   //Les connexion menu segmentation

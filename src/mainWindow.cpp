@@ -104,7 +104,12 @@ MainWindow::MainWindow(){
   
 
   //Ajout des action du menu Help
-  aboutHelpAction = helpMenu->addAction("About");
+  aboutHelpAction = helpMenu->addAction("About US");
+  aboutQtAction = helpMenu->addAction("About Qt");
+
+  //Les connexions menu help
+  connect(aboutHelpAction, SIGNAL(triggered()), this, SLOT(aboutUsClicked()));
+  connect(aboutQtAction, SIGNAL(triggered()), this, SLOT(aboutQtClicked()));
 
   //Associer la barre de menu à la fenetre
   setMenuBar(menuBar);
@@ -456,6 +461,14 @@ void MainWindow::thresholdingClicked(){
     mSegmentation->src = this->src;
 
   loadWidget(THRESHOLDING_WIDGET);
+}
+
+void MainWindow::aboutUsClicked(){
+  QMessageBox::about(this, QString("Takken"), QString::fromUtf8("<strong>mVision - Takken</strong> a été réalisé par :<br/><strong>Emna Fraj</strong><br/><strong>Amine Akrout</strong><br/><strong>Hermann Fotso</strong><br/><strong>Skander BM</strong>"));
+}
+
+void MainWindow::aboutQtClicked(){
+  QMessageBox::aboutQt(this);
 }
 
 void MainWindow::hideAllSideBarWidgets(){

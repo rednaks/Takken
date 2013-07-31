@@ -116,6 +116,7 @@ private:
 
     //Les actions pour le menu "Help"
     QAction *aboutHelpAction;
+    QAction *aboutQtAction;
 
     QSplitter *splitter;
 
@@ -195,6 +196,11 @@ public slots:
 
     //Slots pour la segmentation
     void thresholdingClicked();
+
+    //Slots pour le menu help
+    void aboutUsClicked();
+    void aboutQtClicked();
+
 
 };
 

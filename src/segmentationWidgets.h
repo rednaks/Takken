@@ -36,8 +36,11 @@ namespace segmentation {
 
     public slots:
       void updateVal(int);
+      void aboutClicked();
 
     private:
+      QString *mDoc;
+      QPushButton *mAboutPushButton;
       QSlider *minRSlider;
       QSlider *minGSlider;
       QSlider *minBSlider;

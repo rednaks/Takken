@@ -75,6 +75,9 @@ ThresholdingWidget::ThresholdingWidget(MainWindow *parent){
   mbValueLabel = new QLabel(QString("B : ")+maxBSlider->value());
   connect(maxBSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
+  mAboutPushButton = new QPushButton("About");
+  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
+
   QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(new QLabel("Min Values"), new QLabel(":"));
   formLayout->addRow(minRSlider, rValueLabel);
@@ -85,6 +88,7 @@ ThresholdingWidget::ThresholdingWidget(MainWindow *parent){
   formLayout->addRow(maxRSlider, mrValueLabel);
   formLayout->addRow(maxGSlider, mgValueLabel);
   formLayout->addRow(maxBSlider, mbValueLabel);
+  formLayout->addRow(new QLabel(""), mAboutPushButton);
 
 
   this->setLayout(formLayout);
@@ -106,4 +110,15 @@ void ThresholdingWidget::updateVal(int v){
   this->parent->updateImage();
   //cv::imshow("Testing Origin", this->parent->mSegmentation->src);
   //cv::imshow("Testing", this->parent->mSegmentation->dst);
+}
+
+void ThresholdingWidget::aboutClicked(){
+    mDoc = new QString(QString::fromUtf8("Thresholding ou seuillage, est une technique intuitive pour ségmenter une image selon les pixels. Ici on peut choisir l'intervalle de couleurs à prendre en compte."));
+
+  this->parent->setSplashText(*mDoc);
+  if(this->parent->splashIsVisible())
+    this->parent->hideSplash();
+  else
+    this->parent->showSplash();
+
 }

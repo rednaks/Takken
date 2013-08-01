@@ -30,4 +30,5 @@ Segmentation::~Segmentation() { }
 
 void Segmentation::thresholding(cv::Scalar sMin, cv::Scalar sMax){
   cv::inRange(src, sMin, sMax, dst);
+  cv::cvtColor(dst, dst, CV_GRAY2RGB);
 }

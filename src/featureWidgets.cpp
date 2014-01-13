@@ -25,15 +25,15 @@
 using namespace feature;
 
 /************************ BEGIN featureDetect  widget ****************************/
-FeatureDetectWidget::FeatureDetectWidget(MainWindow *parent){
-   this->parent = parent;
+FeatureDetectWidget::FeatureDetectWidget(MainWindow *parent)
+	:AbstractWidget(parent) {
 
   algoComboBox = new QComboBox;
   algoComboBox->addItem(QString("Harris"));
   algoComboBox->addItem(QString("SIFT"));
   algoComboBox->addItem(QString("SURF"));
   connect(algoComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateVal(int)));
-   
+
   algoLabel = new QLabel(QString("Algo :"));
 
   precisionSlider = new QSlider;
@@ -44,8 +44,6 @@ FeatureDetectWidget::FeatureDetectWidget(MainWindow *parent){
 
   precisionLabel = new QLabel(QString("Precision : %1").arg(precisionSlider->value()));
 
-  mAboutPushButton = new QPushButton("About");
-  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
  
   QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(new QLabel("Feature Detect"), new QLabel(""));
@@ -54,7 +52,8 @@ FeatureDetectWidget::FeatureDetectWidget(MainWindow *parent){
   formLayout->addRow(new QLabel(""), mAboutPushButton);
 
   
-
+	mDoc = new QString();
+	updateDoc();
   
   this->setLayout(formLayout);
   this->hide();
@@ -66,51 +65,42 @@ FeatureDetectWidget::~FeatureDetectWidget() { }
 void FeatureDetectWidget::updateVal(int){
   precisionLabel->setText(QString("Precision : %1").arg(precisionSlider->value()));
   this->parent->mFeature->featureDetect(algoComboBox->currentIndex(), precisionSlider->value());
+	updateDoc();
   this->parent->updateImage();
  }
 
-
- void FeatureDetectWidget::aboutClicked(){
+void FeatureDetectWidget::updateDoc(){
 
   switch(algoComboBox->currentIndex()){
   case 0:
-  mEroDoc = new QString(QString::fromUtf8("L’idée de Harris est la suivante : au niveau de ces pixels caractéristiques (qu’il nomme “corners” : coins, angles), l’intensité de l’image va varier de manière importante dans plusieurs directions. On va donc regarder la variation d’intensité de l’image autour de chaque pixel."));
+  *mDoc = (QString(QString::fromUtf8("L’idée de Harris est la suivante : au niveau de ces pixels caractéristiques (qu’il nomme “corners” : coins, angles), l’intensité de l’image va varier de manière importante dans plusieurs directions. On va donc regarder la variation d’intensité de l’image autour de chaque pixel.")));
   break;
   case 1:
-  mEroDoc = new QString(QString::fromUtf8("scale-invariant feature transform (SIFT), que l'on peut traduire par « transformation de caractéristiques visuelles invariante à l'échelle », est un algorithme utilisé dans le domaine de la vision par ordinateur pour détecter et identifier les éléments similaires entre différentes images numériques (éléments de paysages, objets, personnes, etc.). Il a été développé en 1999 par le chercheur David Lowe."));
+  *mDoc = (QString(QString::fromUtf8("scale-invariant feature transform (SIFT), que l'on peut traduire par « transformation de caractéristiques visuelles invariante à l'échelle », est un algorithme utilisé dans le domaine de la vision par ordinateur pour détecter et identifier les éléments similaires entre différentes images numériques (éléments de paysages, objets, personnes, etc.). Il a été développé en 1999 par le chercheur David Lowe.")));
   break;
   case 2:
-  mEroDoc = new QString(QString::fromUtf8("Speeded Up Robust Features (SURF),m’approche proposée utilise une approximation de la matrice hessienne afin de détecter les structures de types « blobs». Elle utilise des images intégrales afin de diminuer fortement les temps de calculs car elles permettent le calcul rapide des convolutions avec les approximations de types « box-filters ». "));
+  *mDoc = (QString(QString::fromUtf8("Speeded Up Robust Features (SURF),m’approche proposée utilise une approximation de la matrice hessienne afin de détecter les structures de types « blobs». Elle utilise des images intégrales afin de diminuer fortement les temps de calculs car elles permettent le calcul rapide des convolutions avec les approximations de types « box-filters ». ")));
   break;
   }
 
-  this->parent->setSplashText(*mEroDoc);
-  if(this->parent->splashIsVisible())
-    this->parent->hideSplash();
-  else
-    this->parent->showSplash();
 }
 
 /***********************  END featureDectect Widget ****************************/
 /************************ BEGIN faceDetect widget ****************************/
 
-FaceDetectWidget::FaceDetectWidget(MainWindow *parent){
-  this->parent = parent;
+FaceDetectWidget::FaceDetectWidget(MainWindow *parent):AbstractWidget(parent) {
    
   b=new QPushButton;
   b->setText("Detect");
-  connect(b, SIGNAL(clicked()), this, SLOT(updateVal()));
-
-   mAboutPushButton = new QPushButton("About");
-  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
- 
-
+  connect(b, SIGNAL(clicked()), this, SLOT(updateVal(int)));
 
 
   QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(new QLabel("Face Detect"), new QLabel(""));
   formLayout->addRow(b);
    formLayout->addRow(new QLabel(""), mAboutPushButton);
+
+  mDoc = new QString(QString::fromUtf8("Un classificateur Haar est une approche de l'apprentissage automatique pour la détection d'objet visuel développé à l'origine par Viola et Jones. Il était initialement prévu pour la reconnaissance faciale, mais peut être utilisé pour n'importe quel objet. La puissance du classificateur Haar, c'est qu'il va rapidement rejeter les régions qui ont très peu de chances de contenir l'objet. Elle le fait en faisant usage de la cascade de classificateurs. Dans cette cascade, les premières étapes seront rapidement rejeter la majorité des faux régions et la détection d'objets peuvent se déplacer vers d'autres régions. Les étapes ultérieures nécessitent toutefois des efforts de plus en plus de calcul afin de rejeter la région. "));
 
   this->setLayout(formLayout);
   this->hide();
@@ -119,7 +109,7 @@ FaceDetectWidget::FaceDetectWidget(MainWindow *parent){
 FaceDetectWidget::~FaceDetectWidget() { }
 
 
-void FaceDetectWidget::updateVal(){
+void FaceDetectWidget::updateVal(int){
   
   this->parent->mFeature->faceDetect();
   this->parent->updateImage();
@@ -127,38 +117,25 @@ void FaceDetectWidget::updateVal(){
 
 }
 
- void FaceDetectWidget::aboutClicked(){
-
-
-  mEroDoc = new QString(QString::fromUtf8("Un classificateur Haar est une approche de l'apprentissage automatique pour la détection d'objet visuel développé à l'origine par Viola et Jones. Il était initialement prévu pour la reconnaissance faciale, mais peut être utilisé pour n'importe quel objet. La puissance du classificateur Haar, c'est qu'il va rapidement rejeter les régions qui ont très peu de chances de contenir l'objet. Elle le fait en faisant usage de la cascade de classificateurs. Dans cette cascade, les premières étapes seront rapidement rejeter la majorité des faux régions et la détection d'objets peuvent se déplacer vers d'autres régions. Les étapes ultérieures nécessitent toutefois des efforts de plus en plus de calcul afin de rejeter la région. "));
-
-
-  this->parent->setSplashText(*mEroDoc);
-  if(this->parent->splashIsVisible())
-    this->parent->hideSplash();
-  else
-    this->parent->showSplash();
-}
 
 /***********************  END faceDetect Widget ****************************/
 
 /************************ BEGIN featureFind widget ****************************/
 
-FeatureFindWidget::FeatureFindWidget(MainWindow *parent){
-  this->parent = parent;
+FeatureFindWidget::FeatureFindWidget(MainWindow *parent):AbstractWidget(parent) {
   LoadLabel= new QLabel(QString("2nd image")) ;
   b=new QPushButton;
   b->setText("Load");
-  connect(b, SIGNAL(clicked()), this, SLOT(updateVal()));
+  connect(b, SIGNAL(clicked()), this, SLOT(updateVal(int)));
 
-  mAboutPushButton = new QPushButton("About");
-  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
 
   QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(new QLabel("Feature Find"), new QLabel(""));
   formLayout->addRow(LoadLabel);
   formLayout->addRow(b);
   formLayout->addRow(new QLabel(""), mAboutPushButton);
+
+  mDoc = new QString(QString::fromUtf8("L'analyse locale d'une image et qui caractérisent le contenu visuel de cette image de la façon la plus indépendante possible de l'échelle (« zoom » et résolution du capteur), du cadrage, de l'angle d'observation et de l'exposition (luminosité)."));
 
   this->setLayout(formLayout);
   this->hide();
@@ -167,7 +144,7 @@ FeatureFindWidget::FeatureFindWidget(MainWindow *parent){
 FeatureFindWidget::~FeatureFindWidget() { }
 
 
-void FeatureFindWidget::updateVal(){
+void FeatureFindWidget::updateVal(int){
   QString fname = QFileDialog::getOpenFileName(this, "Open File", "", tr("Images (*.jpg *.png)"));
   if(fname.length() == 0)
   return;
@@ -175,19 +152,6 @@ void FeatureFindWidget::updateVal(){
   this->parent->mFeature->featureFind(obj);
   this->parent->updateImage();
   
-}
-
-void FeatureFindWidget::aboutClicked(){
-
-
-  mEroDoc = new QString(QString::fromUtf8("L'analyse locale d'une image et qui caractérisent le contenu visuel de cette image de la façon la plus indépendante possible de l'échelle (« zoom » et résolution du capteur), du cadrage, de l'angle d'observation et de l'exposition (luminosité)."));
-
-
-  this->parent->setSplashText(*mEroDoc);
-  if(this->parent->splashIsVisible())
-    this->parent->hideSplash();
-  else
-    this->parent->showSplash();
 }
 
 /***********************  END featureFind Widget ****************************/

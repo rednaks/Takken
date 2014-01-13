@@ -22,11 +22,12 @@
 #ifndef FEATURE_WIDGETS_H
 #define FEATURE_WIDGETS_H
 
-#include <QtGui>
+#include "abstractWidget.h"
+
 class MainWindow;
 
 namespace feature {
-  class FeatureDetectWidget: public QWidget{
+  class FeatureDetectWidget: public AbstractWidget {
     Q_OBJECT
     public:
       FeatureDetectWidget(MainWindow* =0);
@@ -34,54 +35,42 @@ namespace feature {
     private:
       QComboBox *algoComboBox;
       QSlider *precisionSlider;
-
-      QString *mEroDoc;
-      QPushButton *mAboutPushButton;
-
       QLabel *algoLabel;
       QLabel *precisionLabel;
-      MainWindow *parent;
 
     public slots:
       void updateVal(int);
-      void aboutClicked();
+
+		public:
+			void updateDoc();
   };
 
   
-  class FaceDetectWidget: public QWidget{
+  class FaceDetectWidget: public AbstractWidget {
     Q_OBJECT
     public:
       FaceDetectWidget(MainWindow* =0);
       ~FaceDetectWidget();
     private:
-      QString *mEroDoc;
-      QPushButton *mAboutPushButton;
       QPushButton *b;
-      MainWindow *parent;
 
       public slots:
-      void updateVal();
-      void aboutClicked();
+      void updateVal(int);
 
     };
 
 
-  class FeatureFindWidget: public QWidget{
+  class FeatureFindWidget: public AbstractWidget {
     Q_OBJECT
     public:
       FeatureFindWidget(MainWindow* =0);
       ~FeatureFindWidget();
     private:
-      QString *mEroDoc;
-      QPushButton *mAboutPushButton;
-
       QLabel *LoadLabel;
       QPushButton *b;
-      MainWindow *parent;
 
       public slots:
-      void updateVal();
-      void aboutClicked();
+      void updateVal(int);
     };
 
   

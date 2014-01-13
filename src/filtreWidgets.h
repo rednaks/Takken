@@ -22,6 +22,7 @@
 #ifndef FILTRE_WIDGETS_H
 #define FILTRE_WIDGETS_H
 
+#include "abstractWidget.h"
 #include <QtGui>
 
 class MainWindow;
@@ -30,7 +31,7 @@ namespace filtre {
 
 /******************** SEL_POIVRE Widget  ***********************************/
 
-    class BruitageWidget: public QWidget {
+    class BruitageWidget: public AbstractWidget {
       Q_OBJECT
 
       public:
@@ -39,19 +40,16 @@ namespace filtre {
 
       public slots:
           void updateVal(int);
-          void aboutClicked();
+
       private:
-        QString*mEroDoc;
-        QPushButton *mAboutPushButton;
         QSlider *densiteSlider;
         QSpinBox *densiteSpinBox;
         QLabel *densiteLabel;
-        MainWindow *parent;
 
     };
 /************************************************************************/
 /******************** Bilateral Widget  ***********************************/
-    class  BilateralWidget :public QWidget{
+    class  BilateralWidget :public AbstractWidget {
     Q_OBJECT
 
 
@@ -61,19 +59,16 @@ namespace filtre {
 
         public slots:
             void updateVal(int);
-            void aboutClicked();
+
         private:
-            QString*mEroDoc;
-            QPushButton *mAboutPushButton;
             QSlider *sigmaColorSlider;
             QLabel *sigmaColorLabel;
             QSlider *sigmaSpaceSlider;
             QLabel *sigmaSpaceLabel;
-            MainWindow *parent;
     };
 /************************************************************************/
 /******************** Blur Widget  ***********************************/
-  class BlurWidget:public QWidget {
+  class BlurWidget:public AbstractWidget {
   Q_OBJECT
 
  public:
@@ -82,20 +77,17 @@ namespace filtre {
 
  public slots:
     void updateVal(int);
-    void aboutClicked();
+
  private:
-        QString*mEroDoc;
-        QPushButton *mAboutPushButton;
         QSlider *noyauSlider;
         QSpinBox *noyauSpinBox;
         QLabel *noyauLabel;
-        MainWindow *parent;
   };
 
 /************************************************************************/
 /******************** BoxFilter Widget  ***********************************/
 
-   class BoxFiltreWidget:public QWidget {
+   class BoxFiltreWidget:public AbstractWidget {
   Q_OBJECT
 
  public:
@@ -104,20 +96,17 @@ namespace filtre {
 
  public slots:
     void updateVal(int);
-    void aboutClicked();
+
  private:
-        QString*mEroDoc;
-        QPushButton *mAboutPushButton;
         QSlider *noyauSlider;
         QSpinBox *noyauSpinBox;
         QLabel *noyauLabel;
-        MainWindow *parent;
   };
 
 /************************************************************************/
 /******************** Filter2D Widget  ***********************************/
 
-   class Filter2DWidget:public QWidget {
+   class Filter2DWidget:public AbstractWidget {
   Q_OBJECT
 
  public:
@@ -126,18 +115,14 @@ namespace filtre {
 
  public slots:
     void updateVal(int);
-    void aboutClicked();
  private:
-        QString*mEroDoc;
-        QPushButton *mAboutPushButton;
         QSlider *noyauSlider;
         QSpinBox *noyauSpinBox;
         QLabel *noyauLabel;
-        MainWindow *parent;
   };
 /************************************************************************/
 /******************** sepFilter2D Widget  ***********************************/
- class  SepFilter2DWidget :public QWidget{
+ class  SepFilter2DWidget :public AbstractWidget{
     Q_OBJECT
 
 
@@ -147,20 +132,17 @@ namespace filtre {
 
         public slots:
             void updateVal(int);
-            void aboutClicked();
+
         private:
-            QString*mEroDoc;
-            QPushButton *mAboutPushButton;
             QSlider *noyauLigneSlider;
             QLabel *noyauLigneLabel;
             QSlider *noyauColonneSlider;
             QLabel *noyauColonneLabel;
-            MainWindow *parent;
     };
 /************************************************************************/
 
 /******************** Median Widget  ***********************************/
-class MedianWidget:public QWidget {
+class MedianWidget:public AbstractWidget {
   Q_OBJECT
 
  public:
@@ -169,17 +151,14 @@ class MedianWidget:public QWidget {
 
  public slots:
     void updateVal(int);
-    void aboutClicked();
+
  private:
-        QString*mEroDoc;
-        QPushButton *mAboutPushButton;
         QSlider *noyauSlider;
         QLabel *noyauLabel;
-        MainWindow *parent;
   };
 /************************************************************************/
 /******************** Gaussien Widget  ***********************************/
- class  GaussienWidget :public QWidget{
+ class  GaussienWidget :public AbstractWidget{
     Q_OBJECT
 
 
@@ -189,22 +168,19 @@ class MedianWidget:public QWidget {
 
         public slots:
             void updateVal(int);
-            void aboutClicked();
+
         private:
-            QString*mEroDoc;
-           QPushButton *mAboutPushButton;
             QSlider *noyauSlider;
             QLabel *noyauLabel;
             QSlider *sigmaXSlider;
             QLabel *sigmaXLabel;
             QSlider *sigmaYSlider;
             QLabel *sigmaYLabel;
-            MainWindow *parent;
     };
 /************************************************************************/
 
 /******************** Laplacien Widget  ***********************************/
- class  LaplacienWidget :public QWidget{
+ class  LaplacienWidget :public AbstractWidget{
     Q_OBJECT
 
 
@@ -214,15 +190,12 @@ class MedianWidget:public QWidget {
 
         public slots:
             void updateVal(int);
-            void aboutClicked();
+
         private:
-            QString*mEroDoc;
-            QPushButton *mAboutPushButton;
             QSlider *noyauGaussSlider;
             QLabel *noyauGaussLabel;
             QSlider *noyauLaplaceSlider;
             QLabel *noyauLaplaceLabel;
-            MainWindow *parent;
     };
 /************************************************************************/
 } // end namespace filtre

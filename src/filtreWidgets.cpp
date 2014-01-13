@@ -25,9 +25,8 @@
 using namespace filtre;
 
 /******************** Begin Bruitage Widget *****************************/
-BruitageWidget::BruitageWidget(MainWindow* parent){
+BruitageWidget::BruitageWidget(MainWindow* parent):AbstractWidget(parent) {
 
-  this->parent = parent;
   densiteSlider = new QSlider;
   densiteSlider->setOrientation(Qt::Horizontal);
   densiteSlider->setMinimum(0);
@@ -42,8 +41,6 @@ BruitageWidget::BruitageWidget(MainWindow* parent){
   densiteLabel = new QLabel(QString::fromUtf8("Densité :"));
 
 
-   mAboutPushButton = new QPushButton("About");
-  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
 
 
   QFormLayout *formLayout = new QFormLayout;
@@ -52,6 +49,7 @@ BruitageWidget::BruitageWidget(MainWindow* parent){
   formLayout->addRow(new QLabel(""), mAboutPushButton);
 
 
+  mDoc = new QString(QString::fromUtf8("Le bruit impulsionnel, également appelé sel et poivre, est une dégradation de l'image sous la forme de pixels noirs et blancs répartis au hasard.Il consiste à mettre, aléatoirement, plusieurs pixels aux valeurs 255 ou 0 (valeurs extrêmes de l’intervalle des niveaux de gris). "));
   this->setLayout(formLayout);
   this->hide();
 
@@ -68,24 +66,11 @@ void BruitageWidget::updateVal(int v){
 
 }
 
-void BruitageWidget::aboutClicked(){
-
-
-  mEroDoc = new QString(QString::fromUtf8("Le bruit impulsionnel, également appelé sel et poivre, est une dégradation de l'image sous la forme de pixels noirs et blancs répartis au hasard.Il consiste à mettre, aléatoirement, plusieurs pixels aux valeurs 255 ou 0 (valeurs extrêmes de l’intervalle des niveaux de gris). "));
-
-
-  this->parent->setSplashText(*mEroDoc);
-  if(this->parent->splashIsVisible())
-    this->parent->hideSplash();
-  else
-    this->parent->showSplash();
-}
 
 /******************** END Bruitage Widget *****************************/
 
 /******************** BEGIN Bilateral Widget ***********************************/
-BilateralWidget::BilateralWidget(MainWindow* parent){
-this->parent=parent;
+BilateralWidget::BilateralWidget(MainWindow* parent):AbstractWidget(parent){
 sigmaColorSlider = new QSlider;
 sigmaColorSlider->setOrientation(Qt::Horizontal);
 sigmaColorSlider->setMinimum(0);
@@ -104,8 +89,6 @@ connect(sigmaSpaceSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)))
 sigmaSpaceLabel = new QLabel(QString::fromUtf8("SigmaColor :"));
 
 
-   mAboutPushButton = new QPushButton("About");
-  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
 
 
 QFormLayout *formLayout = new QFormLayout;
@@ -115,6 +98,7 @@ QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(sigmaSpaceSlider);
   formLayout->addRow(new QLabel(""), mAboutPushButton);
 
+  mDoc = new QString(QString::fromUtf8("Le filtre bilatéral peut réduire les bruits indésirables tout en gardant les bords assez pointus contrairement au filtre gaussien. Cependant, il est très lent comparé à la plupart des filtres.On l’utilise généralement pour éviter le lissage des contours résultant de l’application de quelques filtres."));
 
   this->setLayout(formLayout);
   this->hide();
@@ -131,25 +115,10 @@ void BilateralWidget::updateVal(int v){
 }
 
 
-
-void BilateralWidget::aboutClicked(){
-
-
-  mEroDoc = new QString(QString::fromUtf8("Le filtre bilatéral peut réduire les bruits indésirables tout en gardant les bords assez pointus contrairement au filtre gaussien. Cependant, il est très lent comparé à la plupart des filtres.On l’utilise généralement pour éviter le lissage des contours résultant de l’application de quelques filtres."));
-
-
-  this->parent->setSplashText(*mEroDoc);
-  if(this->parent->splashIsVisible())
-    this->parent->hideSplash();
-  else
-    this->parent->showSplash();
-}
-
 /******************** END Bilateral Widget  ***********************************/
 
 /******************** BEGIN Blur Widget ***********************************/
-BlurWidget::BlurWidget(MainWindow* parent){
-this->parent = parent;
+BlurWidget::BlurWidget(MainWindow* parent):AbstractWidget(parent){
 noyauSlider = new QSlider;
 noyauSlider->setOrientation(Qt::Horizontal);
 noyauSlider->setMinimum(1);
@@ -165,8 +134,6 @@ connect(noyauSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 noyauLabel =new QLabel(QString::fromUtf8("Noyau:"));
 
 
-   mAboutPushButton = new QPushButton("About");
-  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
 
 
 
@@ -175,6 +142,7 @@ noyauLabel =new QLabel(QString::fromUtf8("Noyau:"));
   formLayout->addRow(noyauSlider, noyauSpinBox);
   formLayout->addRow(new QLabel(""), mAboutPushButton);
 
+  mDoc = new QString(QString::fromUtf8("Le filtre Blur est un filtre uniforme, sa matrice n’est composée que des 1 multipliés par l’inverse du carré du noyau."));
 
   this->setLayout(formLayout);
   this->hide();
@@ -191,27 +159,11 @@ printf("Val : %d\n",v);
 }
 
 
-
-void BlurWidget::aboutClicked(){
-
-
-  mEroDoc = new QString(QString::fromUtf8("Le filtre Blur est un filtre uniforme, sa matrice n’est composée que des 1 multipliés par l’inverse du carré du noyau."));
-
-
-  this->parent->setSplashText(*mEroDoc);
-  if(this->parent->splashIsVisible())
-    this->parent->hideSplash();
-  else
-    this->parent->showSplash();
-}
-
-
 /******************** END Blur Widget  ***********************************/
 
 /******************** BEGIN Median Widget ***********************************/
 
-MedianWidget::MedianWidget(MainWindow* parent){
-this->parent = parent;
+MedianWidget::MedianWidget(MainWindow* parent):AbstractWidget(parent) {
 noyauSlider = new QSlider;
 noyauSlider->setOrientation(Qt::Horizontal);
 noyauSlider->setMinimum(1);
@@ -222,8 +174,6 @@ connect(noyauSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 noyauLabel =new QLabel(QString::fromUtf8("Noyau:"));
 
 
-   mAboutPushButton = new QPushButton("About");
-  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
 
 
 
@@ -233,6 +183,7 @@ noyauLabel =new QLabel(QString::fromUtf8("Noyau:"));
   formLayout->addRow(new QLabel(""), mAboutPushButton);
 
 
+  mDoc = new QString(QString::fromUtf8("Le filtre médian est utilisé pour atténuer des pixels d'une valeur très différente de leur entourage.Il prend dans le voisinage la valeur la moins extrême. Pour cela, on crée une liste des valeurs du voisinage, puis on trie cette liste et on prend la valeur qui se trouve au milieu de la liste. Cette valeur médiane est la plus éloignée des deux extrêmes.Ce filtre est particulièrement efficace lorsqu’il s’agit d’éliminer les bruits impulsionnels"));
 
   this->setLayout(formLayout);
   this->hide();
@@ -252,27 +203,10 @@ this->parent->mFiltre->medianFiltre( noyauSlider->value()+1);
   }
 
 
-
-void MedianWidget::aboutClicked(){
-
-
-  mEroDoc = new QString(QString::fromUtf8("Le filtre médian est utilisé pour atténuer des pixels d'une valeur très différente de leur entourage.Il prend dans le voisinage la valeur la moins extrême. Pour cela, on crée une liste des valeurs du voisinage, puis on trie cette liste et on prend la valeur qui se trouve au milieu de la liste. Cette valeur médiane est la plus éloignée des deux extrêmes.Ce filtre est particulièrement efficace lorsqu’il s’agit d’éliminer les bruits impulsionnels"));
-
-
-  this->parent->setSplashText(*mEroDoc);
-  if(this->parent->splashIsVisible())
-    this->parent->hideSplash();
-  else
-    this->parent->showSplash();
-}
-
-
-
 /******************** END  Median Widget  ***********************************/
 
 /******************** BEGIN boxFiltre Widget ***********************************/
-BoxFiltreWidget::BoxFiltreWidget(MainWindow* parent){
-this->parent = parent;
+BoxFiltreWidget::BoxFiltreWidget(MainWindow* parent):AbstractWidget(parent) {
 noyauSlider = new QSlider;
 noyauSlider->setOrientation(Qt::Horizontal);
 noyauSlider->setMinimum(1);
@@ -288,8 +222,6 @@ connect(noyauSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 noyauLabel =new QLabel(QString::fromUtf8("Noyau:"));
 
 
-   mAboutPushButton = new QPushButton("About");
-  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
 
 
 
@@ -299,6 +231,7 @@ noyauLabel =new QLabel(QString::fromUtf8("Noyau:"));
      formLayout->addRow(new QLabel(""), mAboutPushButton);
 
 
+  mDoc = new QString(QString::fromUtf8("Le BoxFilter est  semblable au filtre Blur à un paramètre prés.Une fois le paramètre « normalize » initialisé à « true »,  le boxfilter devient identique au filtre blur. Autrement, le noyau n’a plus aucun effet, et la matrice n’est composée que des 1."));
 
   this->setLayout(formLayout);
   this->hide();
@@ -315,28 +248,11 @@ printf("Val : %d\n",v);
 }
 
 
-
-void BoxFiltreWidget::aboutClicked(){
-
-
-  mEroDoc = new QString(QString::fromUtf8("Le BoxFilter est  semblable au filtre Blur à un paramètre prés.Une fois le paramètre « normalize » initialisé à « true »,  le boxfilter devient identique au filtre blur. Autrement, le noyau n’a plus aucun effet, et la matrice n’est composée que des 1."));
-
-
-  this->parent->setSplashText(*mEroDoc);
-  if(this->parent->splashIsVisible())
-    this->parent->hideSplash();
-  else
-    this->parent->showSplash();
-}
-
-
-
 /******************** END boxFiltre Widget  ***********************************/
 
 /******************** BEGIN Gaussien Widget ***********************************/
 
-GaussienWidget::GaussienWidget(MainWindow* parent){
-this->parent=parent;
+GaussienWidget::GaussienWidget(MainWindow* parent):AbstractWidget(parent) {
 noyauSlider= new QSlider;
 noyauSlider->setOrientation(Qt::Horizontal);
 noyauSlider->setMinimum(1);
@@ -364,8 +280,6 @@ connect(sigmaYSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 sigmaYLabel = new QLabel(QString::fromUtf8("Deviation par rapport a y :"));
 
 
-   mAboutPushButton = new QPushButton("About");
-  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
 
 
 QFormLayout *formLayout = new QFormLayout;
@@ -377,6 +291,7 @@ QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(sigmaYSlider);
    formLayout->addRow(new QLabel(""), mAboutPushButton);
 
+  mDoc = new QString(QString::fromUtf8("Le filtre Gaussien est un filtre isotrope (trop lissant ne préservant pas les contours) avec des propriétés mathématiques bien précises. Les pixels prés du centre ont un effet ou un poids plus important que ceux qui sont situés plus loin. Il faut noter que plus le sigma est grand, plus la cloche Gaussienne est large et plus le flou appliqué à l'image sera marqué.Le filtre gaussien est un filtre séparable."));
 
   this->setLayout(formLayout);
   this->hide();
@@ -398,27 +313,10 @@ void GaussienWidget::updateVal(int v){
 }
 
 
-
-void GaussienWidget::aboutClicked(){
-
-
-  mEroDoc = new QString(QString::fromUtf8("Le filtre Gaussien est un filtre isotrope (trop lissant ne préservant pas les contours) avec des propriétés mathématiques bien précises. Les pixels prés du centre ont un effet ou un poids plus important que ceux qui sont situés plus loin. Il faut noter que plus le sigma est grand, plus la cloche Gaussienne est large et plus le flou appliqué à l'image sera marqué.Le filtre gaussien est un filtre séparable."));
-
-
-  this->parent->setSplashText(*mEroDoc);
-  if(this->parent->splashIsVisible())
-    this->parent->hideSplash();
-  else
-    this->parent->showSplash();
-}
-
-
-
 /******************** END Gaussien Widget  ***********************************/
 
 /******************** BEGIN Laplacien Widget ***********************************/
-LaplacienWidget::LaplacienWidget(MainWindow* parent){
-this->parent=parent;
+LaplacienWidget::LaplacienWidget(MainWindow* parent):AbstractWidget(parent) {
 noyauGaussSlider= new QSlider;
 noyauGaussSlider->setOrientation(Qt::Horizontal);
 noyauGaussSlider->setMinimum(1);
@@ -438,8 +336,6 @@ connect(noyauLaplaceSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)
 noyauLaplaceLabel = new QLabel(QString::fromUtf8("noyau laplacien :"));
 
 
-   mAboutPushButton = new QPushButton("About");
-  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
 
 QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(noyauGaussLabel, new QLabel(""));
@@ -448,6 +344,7 @@ QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(noyauLaplaceSlider);
   formLayout->addRow(new QLabel(""), mAboutPushButton);
 
+  mDoc = new QString(QString::fromUtf8("Le filtre Laplacien est un filtre de convolution particulier utilisé pour mettre en valeur les détails qui ont une variation rapide de luminosité. Le Laplacien est donc idéal pour rendre visible les contours des objets"));
 
   this->setLayout(formLayout);
   this->hide();
@@ -477,26 +374,10 @@ this->parent->mFiltre->LaplacienFiltre(Size(noyauGaussSlider->value()+1,noyauGau
 }
 
 
-
-void LaplacienWidget::aboutClicked(){
-
-
-  mEroDoc = new QString(QString::fromUtf8("Le filtre Laplacien est un filtre de convolution particulier utilisé pour mettre en valeur les détails qui ont une variation rapide de luminosité. Le Laplacien est donc idéal pour rendre visible les contours des objets"));
-
-
-  this->parent->setSplashText(*mEroDoc);
-  if(this->parent->splashIsVisible())
-    this->parent->hideSplash();
-  else
-    this->parent->showSplash();
-}
-
-
 /******************** END Laplacien Widget  ***********************************/
 
 /******************** BEGIN Filtre2D Widget ***********************************/
-Filter2DWidget::Filter2DWidget(MainWindow* parent){
-this->parent = parent;
+Filter2DWidget::Filter2DWidget(MainWindow* parent):AbstractWidget(parent) {
 noyauSlider = new QSlider;
 noyauSlider->setOrientation(Qt::Horizontal);
 noyauSlider->setMinimum(1);
@@ -512,8 +393,6 @@ connect(noyauSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 noyauLabel =new QLabel(QString::fromUtf8("Noyau:"));
 
 
-   mAboutPushButton = new QPushButton("About");
-  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
 
   QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(noyauLabel, new QLabel(""));
@@ -521,6 +400,7 @@ noyauLabel =new QLabel(QString::fromUtf8("Noyau:"));
      formLayout->addRow(new QLabel(""), mAboutPushButton);
 
 
+  mDoc = new QString(QString::fromUtf8("Le Filter2D applique un filtre linéaire arbitraire à l’image. Sa fonction calcule en effet la corrélation, contrairement au reste des filtres linéaires calculant la convolution."));
 
   this->setLayout(formLayout);
   this->hide();
@@ -537,24 +417,9 @@ printf("Val : %d\n",v);
 }
 
 
-
-void Filter2DWidget::aboutClicked(){
-
-
-  mEroDoc = new QString(QString::fromUtf8("Le Filter2D applique un filtre linéaire arbitraire à l’image. Sa fonction calcule en effet la corrélation, contrairement au reste des filtres linéaires calculant la convolution."));
-
-
-  this->parent->setSplashText(*mEroDoc);
-  if(this->parent->splashIsVisible())
-    this->parent->hideSplash();
-  else
-    this->parent->showSplash();
-}
-
 /******************** END Filtre2D Widget  ***********************************/
 /******************** BEGIN SepFilter Widget ***********************************/
-SepFilter2DWidget::SepFilter2DWidget(MainWindow* parent){
-this->parent=parent;
+SepFilter2DWidget::SepFilter2DWidget(MainWindow* parent):AbstractWidget(parent) {
 noyauLigneSlider= new QSlider;
 noyauLigneSlider->setOrientation(Qt::Horizontal);
 noyauLigneSlider->setMinimum(2);
@@ -572,8 +437,6 @@ connect(noyauColonneSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)
 noyauColonneLabel = new QLabel(QString::fromUtf8("noyau des colonnes :"));
 
 
-   mAboutPushButton = new QPushButton("About");
-  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
 
 QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(noyauLigneLabel, new QLabel(""));
@@ -582,6 +445,7 @@ QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(noyauColonneSlider);
      formLayout->addRow(new QLabel(""), mAboutPushButton);
 
+  mDoc = new QString(QString::fromUtf8("Ce filtre applique un filtre linéaire séparable. Il traite séparément les lignes et les colonnes. Les lignes sont filtrées par le premier noyau, le deuxième noyau  filtre des colonnes.Ce qui diminue largement le nombre d’opérations et donc le temps d’exécution."));
 
   this->setLayout(formLayout);
   this->hide();
@@ -597,18 +461,5 @@ void SepFilter2DWidget::updateVal(int v){
 }
 
 
-
-void SepFilter2DWidget::aboutClicked(){
-
-
-  mEroDoc = new QString(QString::fromUtf8("Ce filtre applique un filtre linéaire séparable. Il traite séparément les lignes et les colonnes. Les lignes sont filtrées par le premier noyau, le deuxième noyau  filtre des colonnes.Ce qui diminue largement le nombre d’opérations et donc le temps d’exécution."));
-
-
-  this->parent->setSplashText(*mEroDoc);
-  if(this->parent->splashIsVisible())
-    this->parent->hideSplash();
-  else
-    this->parent->showSplash();
-}
 /******************** END SepFilter Widget  ***********************************/
 

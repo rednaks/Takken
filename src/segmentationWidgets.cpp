@@ -21,15 +21,11 @@
 
 #include "mainWindow.h"
 #include "segmentationWidgets.h"
-#include <string>
-#include <opencv2/core/core.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
 
 using namespace segmentation;
 
-ThresholdingWidget::ThresholdingWidget(MainWindow *parent){
+ThresholdingWidget::ThresholdingWidget(MainWindow *parent):AbstractWidget(parent) {
 
-  this->parent = parent;
   minRSlider = new QSlider;
   minRSlider->setOrientation(Qt::Horizontal);
   minRSlider->setMinimum(0);
@@ -75,9 +71,6 @@ ThresholdingWidget::ThresholdingWidget(MainWindow *parent){
   mbValueLabel = new QLabel(QString("B : ")+maxBSlider->value());
   connect(maxBSlider, SIGNAL(valueChanged(int)), this, SLOT(updateVal(int)));
 
-  mAboutPushButton = new QPushButton("About");
-  connect(mAboutPushButton, SIGNAL(clicked()), this, SLOT(aboutClicked()));
-
   QFormLayout *formLayout = new QFormLayout;
   formLayout->addRow(new QLabel("Min Values"), new QLabel(":"));
   formLayout->addRow(minRSlider, rValueLabel);
@@ -90,6 +83,7 @@ ThresholdingWidget::ThresholdingWidget(MainWindow *parent){
   formLayout->addRow(maxBSlider, mbValueLabel);
   formLayout->addRow(new QLabel(""), mAboutPushButton);
 
+  mDoc = new QString(QString::fromUtf8("Thresholding ou seuillage, est une technique intuitive pour ségmenter une image selon les pixels. Ici on peut choisir l'intervalle de couleurs à prendre en compte."));
 
   this->setLayout(formLayout);
   this->hide();
@@ -108,17 +102,5 @@ void ThresholdingWidget::updateVal(int v){
   mbValueLabel->setText(QString("B :%1").arg(maxBSlider->value()));
    this->parent->mSegmentation->thresholding(cv::Scalar(minBSlider->value(), minGSlider->value(), minRSlider->value()), cv::Scalar(maxBSlider->value(), maxGSlider->value(), maxRSlider->value()));
   this->parent->updateImage();
-  //cv::imshow("Testing Origin", this->parent->mSegmentation->src);
-  //cv::imshow("Testing", this->parent->mSegmentation->dst);
 }
 
-void ThresholdingWidget::aboutClicked(){
-    mDoc = new QString(QString::fromUtf8("Thresholding ou seuillage, est une technique intuitive pour ségmenter une image selon les pixels. Ici on peut choisir l'intervalle de couleurs à prendre en compte."));
-
-  this->parent->setSplashText(*mDoc);
-  if(this->parent->splashIsVisible())
-    this->parent->hideSplash();
-  else
-    this->parent->showSplash();
-
-}

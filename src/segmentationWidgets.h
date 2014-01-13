@@ -21,13 +21,16 @@
 #ifndef SEGMENTATION_WIDGETS_H
 #define SEGMENTATION_WIDGETS_H
 
-#include <QtGui>
+#include "abstractWidget.h"
+#include <string>
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 
 class MainWindow;
 
 namespace segmentation {
 
-  class ThresholdingWidget: public QWidget {
+  class ThresholdingWidget: public AbstractWidget {
     Q_OBJECT
 
     public:
@@ -36,11 +39,8 @@ namespace segmentation {
 
     public slots:
       void updateVal(int);
-      void aboutClicked();
 
     private:
-      QString *mDoc;
-      QPushButton *mAboutPushButton;
       QSlider *minRSlider;
       QSlider *minGSlider;
       QSlider *minBSlider;
@@ -60,7 +60,6 @@ namespace segmentation {
       QLabel *mrValueLabel;
       QLabel *mgValueLabel;
       QLabel *mbValueLabel;
-      MainWindow *parent;
 
   };
 }// namespace segmentation

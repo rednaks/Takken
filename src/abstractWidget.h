@@ -63,7 +63,7 @@ class AbstractWidget: public QWidget {
 		 */
 		virtual void aboutClicked() const;
 
-	private:
+	protected:
 		QString *mDoc;
 		QPushButton *mAboutPushButton;
 		MainWindow *parent;

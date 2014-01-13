@@ -20,5 +20,5 @@ unix {
   LIBS += -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml -lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect -lopencv_contrib -lopencv_legacy -lopencv_flann
 } 
 # Input
-SOURCES += main.cpp mainWindow.cpp filtre.cpp filtreWidgets.cpp Features.cpp featureWidgets.cpp Morphologie.cpp morphologieWidgets.cpp  segmentation.cpp segmentationWidgets.cpp graphicScene.cpp splashItem.cpp
-HEADERS += mainWindow.h filtre.h filtreWidgets.h Features.h featureWidgets.h Morphologie.h morphologieWidgets.h segmentation.h segmentationWidgets.h graphicScene.h splashItem.h
+SOURCES += main.cpp mainWindow.cpp abstractWidget.cpp filtre.cpp filtreWidgets.cpp Features.cpp featureWidgets.cpp Morphologie.cpp morphologieWidgets.cpp  segmentation.cpp segmentationWidgets.cpp graphicScene.cpp splashItem.cpp
+HEADERS += mainWindow.h abstractWidget.h filtre.h filtreWidgets.h Features.h featureWidgets.h Morphologie.h morphologieWidgets.h segmentation.h segmentationWidgets.h graphicScene.h splashItem.h

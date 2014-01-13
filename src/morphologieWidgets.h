@@ -21,13 +21,17 @@
 #ifndef MORPHOLOGIE_WIDGETS_H
 #define MORPHOLOGIE_WIDGETS_H
 
-#include <QtGui>
+#include "abstractWidget.h"
+#include <string>
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+
 
 class MainWindow;
 
 namespace morphologie {
 
-  class ErosionWidget: public QWidget {
+  class ErosionWidget: public AbstractWidget {
     Q_OBJECT
 
     public:
@@ -36,23 +40,16 @@ namespace morphologie {
 
     public slots:
       void updateVal(int);
-      void aboutClicked();
 
     private:
       QComboBox *elemComboBox;
       QLabel *elemLabel;
-
       QSlider *sizeSlider;
       QLabel *sizeLabel;
 
-      QString *mEroDoc;
-      QPushButton *mAboutPushButton;
-
-      MainWindow *parent;
-
   };
 
-  class DilatationWidget: public QWidget {
+  class DilatationWidget: public AbstractWidget {
     Q_OBJECT
 
     public:
@@ -61,22 +58,16 @@ namespace morphologie {
 
     public slots:
       void updateVal(int);
-      void aboutClicked();
+
     private:
       QComboBox *elemComboBox;
       QLabel *elemLabel;
-
       QSlider *sizeSlider;
       QLabel *sizeLabel;
-      
-      QString *mEroDoc;
-      QPushButton *mAboutPushButton;
-
-      MainWindow *parent;
 
   };
 
-  class OuvertureWidget: public QWidget {
+  class OuvertureWidget: public AbstractWidget {
     Q_OBJECT
 
     public:
@@ -85,22 +76,16 @@ namespace morphologie {
 
     public slots:
       void updateVal(int);
-      void aboutClicked();
+
     private:
       QComboBox *elemComboBox;
       QLabel *elemLabel;
-
       QSlider *sizeSlider;
       QLabel *sizeLabel;
 
-      QString *mEroDoc;
-      QPushButton *mAboutPushButton;
-
-      MainWindow *parent;
-
   };
 
-  class FermetureWidget: public QWidget {
+  class FermetureWidget: public AbstractWidget {
     Q_OBJECT
 
     public:
@@ -109,22 +94,16 @@ namespace morphologie {
 
     public slots:
       void updateVal(int);
-      void aboutClicked();
+
     private:
       QComboBox *elemComboBox;
       QLabel *elemLabel;
-
       QSlider *sizeSlider;
       QLabel *sizeLabel;
 
-      QString *mEroDoc;
-      QPushButton *mAboutPushButton;
-
-      MainWindow *parent;
-
   };
 
-   class GradientWidget: public QWidget {
+   class GradientWidget: public AbstractWidget {
     Q_OBJECT
 
     public:
@@ -133,18 +112,12 @@ namespace morphologie {
 
     public slots:
       void updateVal(int);
-      void aboutClicked();
+
     private:
       QComboBox *elemComboBox;
       QLabel *elemLabel;
-
       QSlider *sizeSlider;
       QLabel *sizeLabel;
-
-      QString *mEroDoc;
-      QPushButton *mAboutPushButton;
-
-      MainWindow *parent;
 
   };
 
